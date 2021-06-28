@@ -1,0 +1,12 @@
+@import "./variables";
+@import "./resets";
+@import "bootstrap/scss/bootstrap.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap");
+// @import url("http://fonts.cdnfonts.com/css/georgia");
+@import url("http://fonts.cdnfonts.com/css/bergamo-std");
+
+*,
+html {
+  //   font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Poppins", sans-serif;
+}
