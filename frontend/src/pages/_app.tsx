@@ -3,6 +3,7 @@ import { ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "styled-components";
 import { theme } from "utils/theme";
 import "../styles/index.scss";
+import "@fortawesome/fontawesome-free/css/all.css";
 import "../styles/style.scss";
 import Nprogress from "nprogress";
 import axios from "axios";
@@ -13,6 +14,7 @@ import React, { Fragment } from "react";
 import Head from "next/head";
 import { RecoilRoot } from "recoil";
 import cookie from "js-cookie";
+import "aos/dist/aos.css";
 if (process.browser) {
   require("bootstrap/dist/js/bootstrap");
 }
