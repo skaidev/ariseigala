@@ -20,6 +20,7 @@ const MagazineHeader = (): JSX.Element => {
           <button
             className="btn d-block d-md-none text-white border border-white"
             onClick={() => setMinMenu((c) => !c)}
+            role="button"
           >
             <i className="fas fa-bars"></i>
           </button>

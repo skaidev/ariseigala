@@ -1,9 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import MagazineLayout from "Layout/MagazineLayout";
-import React, { useState } from "react";
-// import AOS from "aos";
+import React, { useEffect, useState } from "react";
+import AOS from "aos";
+import Title from "react-vanilla-tilt";
 const index = (): JSX.Element => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    AOS.init({
+      duration: 2500,
+    });
+  }, []);
+
+  const options = {
+    scale: 2,
+    max: 35,
+    reverse: true,
+  };
   const [ads, setAds] = useState(true);
   return (
     <MagazineLayout>
@@ -26,7 +38,9 @@ const index = (): JSX.Element => {
                 </button>
               </div>
               <div className="right">
-                <img src="./images/book.png" alt="" />
+                <Title options={options}>
+                  <img src="./images/book.png" alt="" />
+                </Title>
               </div>
             </div>
             <div className="container">
@@ -39,7 +53,7 @@ const index = (): JSX.Element => {
               <h1 className="mb-5 fw-bold">January: New Releases</h1>
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 {Card.map((card) => (
-                  <div className="col" key={card}>
+                  <div className="col" key={card} data-aos="zoom-in-up">
                     <div className="card  border-0 h-100">
                       <img
                         src="./images/book.png"
@@ -61,7 +75,7 @@ const index = (): JSX.Element => {
             </div>
           </section>
           {ads && (
-            <section className="ads py-4">
+            <section className="ads py-4" data-aos="zoom-in-up">
               <div className="container ads_ position-relative">
                 <i
                   className="fas fa-times-circle fw-light fa-3x position-absolute rounded-circle"
@@ -78,7 +92,7 @@ const index = (): JSX.Element => {
               <h1 className="mb-5 fw-bold">February: New Releases</h1>
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 {Card.map((card) => (
-                  <div className="col" key={card}>
+                  <div className="col" data-aos="zoom-in-up" key={card}>
                     <div className="card  border-0 h-100">
                       <img
                         src="./images/book.png"

@@ -6,8 +6,20 @@
     }
     .right {
       flex: 1;
-      img {
-        width: 100%;
+      div {
+        width: 100% !important;
+        min-height: inherit !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent;
+        line-height: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        img {
+          width: 100%;
+          transform-style: preserve-3d;
+        }
       }
     }
   }
