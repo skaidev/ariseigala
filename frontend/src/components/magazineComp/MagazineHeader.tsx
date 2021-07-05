@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import "aos";
 import Logo from "components/logo/Logo";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -11,9 +10,9 @@ const MagazineHeader = (): JSX.Element => {
   return (
     <header className=" bg-dark">
       <div className="container">
-        <nav className="navbar border-bottom border-white">
+        <nav className="navbar border-bottom border-white" role="navigation">
           <Link href="/magazine">
-            <a className="navbar-brand p-0">
+            <a className="navbar-brand p-0" aria-label="logo">
               <Logo />
             </a>
           </Link>
@@ -21,8 +20,9 @@ const MagazineHeader = (): JSX.Element => {
             className="btn d-block d-md-none text-white border border-white"
             onClick={() => setMinMenu((c) => !c)}
             role="button"
+            aria-label="open menu"
           >
-            <i className="fas fa-bars"></i>
+            <i className="fas fa-bars" aria-hidden="true"></i>
           </button>
           <div className="d-none d-md-flex">
             <ul className="d-flex ">

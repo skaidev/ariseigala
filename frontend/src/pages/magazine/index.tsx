@@ -1,16 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import MagazineLayout from "Layout/MagazineLayout";
-import React, { useEffect, useState } from "react";
-import AOS from "aos";
+import React, { useState } from "react";
 import Title from "react-vanilla-tilt";
-const index = (): JSX.Element => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    AOS.init({
-      duration: 2500,
-    });
-  }, []);
 
+const index = (): JSX.Element => {
   const options = {
     scale: 2,
     max: 35,
