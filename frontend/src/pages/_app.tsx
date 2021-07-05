@@ -16,6 +16,7 @@ import { RecoilRoot } from "recoil";
 import cookie from "js-cookie";
 import "aos/dist/aos.css";
 import AOS from "aos";
+// import "bulma/css/bulma.min.css";
 
 if (process.browser) {
   require("bootstrap/dist/js/bootstrap");
