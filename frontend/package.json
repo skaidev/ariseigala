@@ -37,6 +37,7 @@
     "@types/cookie": "^0.4.0",
     "@types/js-cookie": "^2.2.6",
     "@types/nprogress": "^0.2.0",
+    "@types/pdf-viewer-reactjs": "^2.2.1",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
     "@types/styled-components": "^5.1.10",

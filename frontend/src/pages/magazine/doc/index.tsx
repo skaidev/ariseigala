@@ -1,18 +1,39 @@
-import React from "react";
 import PDFViewer from "pdf-viewer-reactjs";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
+const handleNav = () => {
+  const btn = document.querySelectorAll(".button");
+  btn.forEach((e) => {
+    if (e.textContent.includes("keyboard_arrow_left")) {
+      e.innerHTML = `<i class="fas fa-caret-left"></i>`;
+    }
+    if (e.textContent.includes("keyboard_arrow_right")) {
+      e.innerHTML = `<i class="fas fa-caret-right"></i>`;
+    }
+    if (e.textContent.includes("zoom_in")) {
+      e.innerHTML = `<i class="fas fa-search-plus"></i>`;
+    }
+    if (e.textContent.includes("zoom_out")) {
+      e.innerHTML = `<i class="fas fa-search-minus"></i>`;
+    }
+  });
+};
 const ExamplePDFViewer = (): JSX.Element => {
-  // PropTypes.shape({});
-  // url = "https://arxiv.orgclear/pdf/quant-ph/0410100.pdf";
+  useEffect(() => {
+    handleNav();
+  }, []);
   return (
     <PDFWRAPPER>
       <PDFViewer
         document={{
-          url: "",
-          // hideRotation: true,
+          url: "https://arxiv.org/pdf/quant-ph/0410100.pdf",
         }}
-        hideRotation={true}
+        hideRotation
+        scaleStep={0.3}
+        // scale={1.2}
+        minScale={1.5}
+        // maxScale={3}
       />
     </PDFWRAPPER>
   );
@@ -21,52 +42,49 @@ const ExamplePDFViewer = (): JSX.Element => {
 export default ExamplePDFViewer;
 
 const PDFWRAPPER = styled.div`
-  /* div {
+  div {
     div {
       div {
         div:nth-of-type(2) {
-          background: red;
+          background: white;
+          color: black;
           div {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: column;
             div:nth-of-type(1) {
+              flex: 1;
               display: flex;
-              /* justify-content: center; */
-  /* align-items: center;
+              flex-direction: row;
+              justify-content: flex-end;
+              gap: 1.5rem;
               button {
+                border: 0;
+                font-weight: bold;
+                font-size: 1.5rem;
+                color: black;
+              }
+
+              button:nth-of-type(2) {
                 display: none;
               }
-              button:nth-of-type(3) {
-                display: block;
-                position: relative;
-                width: 0;
-                height: 0;
-                background: none;
+            }
+            div:nth-of-type(3) {
+              flex: 1;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              gap: 3rem;
+              align-items: center;
+              button {
                 border: 0;
-
-                color: transparent;
-                &::after {
-                  content: "";
-                  font-size: 100px;
-                  color: black;
-                  top: 0;
-                  right: -100%;
-                  position: absolute;
-                  width: 50px;
-                  height: 50px;
-                  background: url("./svg/search-plus-solid.svg") no-repeat;
-                }
+                background: transparent;
+                color: black;
+                font-size: 3rem;
               }
-            }
-            div:nth-of-type(2) {
-              display: none;
-            }
-            div:nth-of-type(5) {
-              display: none;
             }
           }
         }
       }
     }
-  } */
+  }
 `;
