@@ -4,7 +4,7 @@
         margin-top: 9rem;
     
         .main {
-            border: 1px solid red;
+            // border: 1px solid red;
             // min-width: 500px;
             h1 {
                 font-size: 3rem;
@@ -13,6 +13,8 @@
             }
     
             p {
+                margin-top: 2rem;
+                margin-left: 0.8rem;
                 font-size: 0.87rem;
                 line-height: 1.4rem;
                 text-align: justify;
@@ -26,6 +28,8 @@
     
             .btn {
                 margin-top: 30px;
+                font-size: 1.12rem;
+                padding: 0.9rem 1.87rem;
             }
     
             .articles_section{
@@ -36,10 +40,10 @@
                     margin-bottom: 1.8rem;
     
                     .articles_img {
-                        border: 1px solid #000;
+                        // border: 1px solid #000;
                         border-radius: 15px;
-                        width: 220px;
-                        height: 185x;
+                        width: 240px;
+                        height: 193px;
                     }
                     .article-text {
                         margin-left: 0.75rem;
@@ -65,7 +69,7 @@
         
     }
     .latest {
-        margin-top: 100px;
+        margin-top: 13rem;
        
         .latest-post-container {
             display: flex;
@@ -74,26 +78,33 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-
-                .btn {
-                    margin-top: 30px;
-                }
+                border: 1px solid red;
+                width: 61.1rem;
 
                 .latest-post-section {
                     display: flex;
+
+                    .latest-item {
+                        border: 1px solid #000;
+                    
+                    }
+                }
+                .btn {
+                    margin-top: 2.9rem;
+                    padding: 0.9rem 1.87rem;
                 }
             }
-            .advertisement {
-                height: 500px;
-                width: 350px;
+            .advertisement-img-box {
+                height: 562px;
+                width: 283px;
                 background-color: #000;
-                margin-top: 20px;
+                margin-top: 2.46rem;
+                margin-left: 2.5rem;
             }
         }
         
     }
-    .entertainment {
-        margin-top: 100px;
+    .entertainment-section {
         border: 1px solid red;
         display: flex;
         justify-content: space-between;
@@ -101,15 +112,48 @@
         .entertainment-left-section {
             border: 1px solid rgb(94, 12, 12);
             width: 45%;
+
+            h3 {
+                font-size: 2rem;
+                margin-top: 2rem;
+            }
         }
 
         .entertainment-right-section {
             border: 1px solid blue;
             width: 45%;
+
+            .entertainment-articles {
+                display: flex;
+                margin-bottom: 1.5rem;
+                
+                p {
+                    width: 20rem;
+                    margin-left: 10px;
+                }
+            }
         }
     }
     .culture-tourism {
         margin-top: 100px;
+
+        .culture-tourism-top-section {
+            h3 {
+                margin-bottom: 2rem;
+            }
+            p {
+                margin-top: 1.6rem;
+            }
+
+            .btn {
+                font-weight: 700;
+                min-width: 10rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-left: 55rem;
+            }
+        }
 
         .culture-tourism-bottom-section {
             display: flex;
@@ -117,6 +161,11 @@
 
             .culture-tourism-content {
                 display: flex;
+
+                hr {
+                    border: 3px solid yellow;
+                    width: 9rem;
+                }
             }
 
             .advertisement {

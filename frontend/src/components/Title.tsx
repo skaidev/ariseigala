@@ -1,15 +1,16 @@
 import React from "react";
 
 
-const HeaderComp = ({title}): JSX.Element => {
+const TitleComp = ({title}): JSX.Element => {
   return (
    
-        <div className="container">
-          <span className='line'></span>
-          <h3 className=''>{title}</h3>
-          <span className='line'></span>
+        <div className="title-container">
+          <div className='div-title-line'>
+            <h3 className='serif fw-700'>{title}</h3>
+          </div>
+          {/* <div className='div-line'></div> */}
         </div>
   );
 };
 
-export default HeaderComp;
+export default TitleComp;
