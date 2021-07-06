@@ -9,15 +9,15 @@ const MagazineFooter = (): JSX.Element => {
           <img src="./images/logo.png" alt="" className="d-block" />
           <div className="d-flex text-warning fs-5 justify-content-between">
             <i className="fab fa-instagram"></i>
-            <i className="fab fa-youtube"></i>
-            <i className="fab fa-facebook"></i>
-            <i className="fab fa-twitter"></i>
+            <i className="fab fa-youtube ms-1"></i>
+            <i className="fab fa-facebook ms-1"></i>
+            <i className="fab fa-twitter ms-1"></i>
           </div>
         </div>
       </div>
       <hr />
       <div className="py-2">
-        <div className="row py-2 d-block d-lg-flex container mx-auto mb-2">
+        <div className="row d-none py-2 d-sm-block d-lg-flex container mx-auto mb-2">
           <div className="col">News</div>
           <div className="col">Culture and tourism</div>
           <div className="col">Education</div>

@@ -1,3 +1,4 @@
+import MagazineFooter from "components/magazineComp/MagazineFooter";
 import Head from "next/head";
 import PDFViewer from "pdf-viewer-reactjs";
 import React from "react";
@@ -6,7 +7,7 @@ import styled from "styled-components";
 const ExamplePDFViewer = (): JSX.Element => {
   const url = "https://arxiv.org/pdf/quant-ph/0410100.pdf";
   return (
-    <PDFWRAPPER className="py-3">
+    <PDFWRAPPER className="py-5 ">
       <Head>
         <link
           rel="stylesheet"
@@ -19,7 +20,7 @@ const ExamplePDFViewer = (): JSX.Element => {
       </Head>
       <PDFViewer
         document={{
-          url,
+          url: "https://www.zok.com/pdf/msds/44-ZOK_27_SDS4524.pdf",
         }}
         hideRotation
         scaleStep={0.3}
@@ -27,6 +28,7 @@ const ExamplePDFViewer = (): JSX.Element => {
         minScale={1.5}
         maxScale={4}
       />
+      <MagazineFooter />
     </PDFWRAPPER>
   );
 };
@@ -34,6 +36,7 @@ const ExamplePDFViewer = (): JSX.Element => {
 export default ExamplePDFViewer;
 
 const PDFWRAPPER = styled.div`
+  min-height: 100vh;
   div {
     div {
       div {
