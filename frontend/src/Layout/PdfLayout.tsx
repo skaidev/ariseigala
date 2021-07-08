@@ -1,4 +1,3 @@
-import HeaderComp from "components/HeaderComp";
 import MagazineFooter from "components/magazineComp/MagazineFooter";
 import PdfHeader from "components/PdfHeader";
 import React from "react";

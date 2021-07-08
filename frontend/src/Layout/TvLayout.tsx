@@ -1,0 +1,17 @@
+import MagazineFooter from "components/magazineComp/MagazineFooter";
+import React from "react";
+
+const PdfLayout = ({
+  children,
+}: {
+  children: React.ReactChild;
+}): JSX.Element => {
+  return (
+    <div id="article-layout">
+      <main>{children}</main>
+      <MagazineFooter />
+    </div>
+  );
+};
+
+export default PdfLayout;

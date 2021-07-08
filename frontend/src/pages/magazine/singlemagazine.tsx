@@ -3,9 +3,7 @@ import PdfLayout from "Layout/PdfLayout";
 import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import styled from "styled-components";
-/////
-// const url = "https://arxiv.org/pdf/quant-ph/0410100.pdf";
-// https://arxiv.org/pdf/quant-ph/0410100.pdf
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const preventLeftClick = () => {
   /*To Prevent right click on screen*/
@@ -28,6 +26,7 @@ const Test = (): JSX.Element => {
     }
   };
   useEffect(() => preventLeftClick(), []);
+
   useEffect(() => {
     let state = true;
     if (state) {
@@ -45,7 +44,7 @@ const Test = (): JSX.Element => {
   const [menu, setMenu] = useState(false);
   const [content, setContent] = useState([]);
   const [url, setUrl] = useState(null);
-  const [] = useState(true);
+  // setUrl(typeof data === "string" ? data : "");
   // console.log(url);
 
   /*When document gets loaded successfully*/
@@ -99,15 +98,15 @@ const Test = (): JSX.Element => {
                   <div
                     id={e}
                     key={e}
-                    className={`mb-1 content-bar g-2 d-flex py-1 ${
+                    className={`mb-1 content-bar align-items-start g-2 d-flex py-1 ${
                       pageNumber === e ? "gray" : ""
                     }`}
                     onClick={() => pageNum(e)}
                   >
                     <div className="left">
                       <div className="pe-2">
-                        <p className="">
-                          A in nunc purus urna nulla eu gravida quisque.{" "}
+                        <p className="fw-bold mb-0">
+                          - A in nunc purus urna nulla eu gravida quisque.
                         </p>
                         <p>
                           Nisl, ac eget ac nibh. Vel dui auctor ultricies
@@ -115,7 +114,7 @@ const Test = (): JSX.Element => {
                         </p>
                       </div>
                     </div>
-                    <div className="right d-flex justify-content-center align-items-center bg-primary">
+                    <div className="right d-flex justify-content-center align-items-center px-1">
                       <b className="fs-5">{e}</b>
                     </div>
                   </div>
