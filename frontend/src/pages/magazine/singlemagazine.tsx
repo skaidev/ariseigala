@@ -1,9 +1,10 @@
+import { useFetch } from "function/Fetch";
 import PdfLayout from "Layout/PdfLayout";
 import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import styled from "styled-components";
 /////
-const url = "https://arxiv.org/pdf/quant-ph/0410100.pdf";
+// const url = "https://arxiv.org/pdf/quant-ph/0410100.pdf";
 // https://arxiv.org/pdf/quant-ph/0410100.pdf
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const preventLeftClick = () => {
@@ -14,16 +15,28 @@ const preventLeftClick = () => {
 };
 
 const Test = (): JSX.Element => {
-  const getPdf = (e) => {
-    const doc = e.target.files[0];
-    const data = [];
-    data.push(doc);
-    const urlDoc = window.URL.createObjectURL(
-      new Blob(data, { type: "application/pdf" })
-    );
-    setLocalUrl(urlDoc);
+  const data = useFetch("https://research.nhm.org/pdfs/10840/10840.pdf");
+  const getPdf = async (e) => {
+    try {
+      const doc = await e.target.files[0];
+      const file = [];
+      file.push(doc);
+      const urlDoc = await window.URL.createObjectURL(new Blob(file));
+      setLocalUrl(urlDoc);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => preventLeftClick(), []);
+  useEffect(() => {
+    let state = true;
+    if (state) {
+      setUrl(typeof data === "string" ? data : "");
+    }
+    return () => {
+      state = false;
+    };
+  }, [data]);
 
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -31,6 +44,9 @@ const Test = (): JSX.Element => {
   const [localUrl, setLocalUrl] = useState(null);
   const [menu, setMenu] = useState(false);
   const [content, setContent] = useState([]);
+  const [url, setUrl] = useState(null);
+  const [] = useState(true);
+  // console.log(url);
 
   /*When document gets loaded successfully*/
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
@@ -56,6 +72,7 @@ const Test = (): JSX.Element => {
   function nextPage() {
     changePage(1);
   }
+  /* Set content */
   function pageNum(num: { num: number }) {
     setPageNumber(Number(num));
     setMenu(false);
