@@ -23,7 +23,10 @@ const TvHeader = (): JSX.Element => {
               {minMenu ? (
                 <i className="fas fa-times animate__animated animate__rotateIn"></i>
               ) : (
-                <i className="fas fa-bars" aria-hidden="true"></i>
+                <i
+                  className="fas fa-bars animate__animated animate__flipInX"
+                  aria-hidden="true"
+                ></i>
               )}
             </button>
             <div className="d-none tv-header-nav-items d-md-flex">
