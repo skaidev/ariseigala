@@ -17,7 +17,7 @@ import cookie from "js-cookie";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import "animate.css";
-import "video-react/dist/video-react.css";
+
 // import "bulma/css/bulma.min.css";
 
 if (process.browser) {
