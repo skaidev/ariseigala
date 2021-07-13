@@ -18,8 +18,6 @@ import "aos/dist/aos.css";
 import AOS from "aos";
 import "animate.css";
 
-// import "bulma/css/bulma.min.css";
-
 if (process.browser) {
   require("bootstrap/dist/js/bootstrap");
 }

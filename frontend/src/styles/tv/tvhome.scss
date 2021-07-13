@@ -14,6 +14,17 @@
         @media screen and (max-width: 991px) {
           flex: 1;
         }
+        .video-container {
+          position: relative;
+          // overflow: hidden;
+          &-covered {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.349);
+            z-index: 10000000;
+          }
+        }
         .comment-section {
           gap: 3rem;
           .profile-pic {

@@ -2,9 +2,12 @@
 import TvLayout from "Layout/TvLayout";
 import React from "react";
 import styled from "styled-components";
-import { ReactVideo } from "reactjs-media";
 
 const Tv = (): JSX.Element => {
+  /**
+ @Obtain controls
+ **/
+
   return (
     <TvLayout>
       <Tvwrapper>
@@ -29,13 +32,11 @@ const Tv = (): JSX.Element => {
             <div className="tv-body-main-video d-flex flex-column flex-lg-row">
               <div className="left">
                 <div className="video-container bg-dark py-3">
-                  <ReactVideo
-                    src="https://custom-react-video-player.vercel.app/video/tears-of-steel-battle-clip-medium.mp4"
-                    poster="images/umvhu-AQDPA6DB4EX-Full-Image_GalleryCover-en-US-1492588913366._UY500_UX667_RI_VaEQ8wbkqY5SsPqVMk4J1L3OfBknQmZew_TTW_.png"
-                    primaryColor="orange"
-
-                    // other props
-                  />
+                  <figure>
+                    <video controls>
+                      <source src="" />
+                    </video>
+                  </figure>
                 </div>
                 <div className="video-title">
                   <div className="border-bottom py-2 border-dark">
@@ -148,3 +149,5 @@ const Tvwrapper = styled.div`
 // https://media.w3.org/2010/05/sintel/trailer_hd.mp4
 
 const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+// https://www.youtube.com/watch?v=ysz5S6PUM-U
+// "http://iandevlin.github.io/mdn/video-player/video/tears-of-steel-battle-clip-medium.mp4"
