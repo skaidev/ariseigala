@@ -8,7 +8,7 @@ const Tv = (): JSX.Element => {
  @Obtain controls
  **/
 
-  const updateProgress = (e) => {
+  const updateProgress = (e: { e: undefined }) => {
     console.log(e);
     console.log();
   };
