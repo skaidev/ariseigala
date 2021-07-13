@@ -8,6 +8,11 @@ const Tv = (): JSX.Element => {
  @Obtain controls
  **/
 
+  const updateProgress = (e) => {
+    console.log(e);
+    console.log();
+  };
+
   return (
     <TvLayout>
       <Tvwrapper>
