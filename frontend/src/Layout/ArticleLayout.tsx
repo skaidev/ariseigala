@@ -1,5 +1,7 @@
+import FooterComp from "components/FooterComp";
 import HeaderComp from "components/HeaderComp";
 import React from "react";
+import styled from "styled-components";
 
 const ArticleLayout = ({
   children,
@@ -7,12 +9,18 @@ const ArticleLayout = ({
   children: React.ReactChild;
 }): JSX.Element => {
   return (
-    <div id="article-layout">
+    <Main id="article-layout">
       <HeaderComp />
       <main>{children}</main>
-      <footer>Footer</footer>
-    </div>
+      <FooterComp />
+    </Main>
   );
 };
 
 export default ArticleLayout;
+
+const Main = styled.div`
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+`;

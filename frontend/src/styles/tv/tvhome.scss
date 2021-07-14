@@ -17,12 +17,23 @@
         .video-container {
           position: relative;
           // overflow: hidden;
-          &-covered {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.349);
-            z-index: 10000000;
+          figure {
+            .video-controls {
+              &-progress {
+                height: 15px;
+                overflow: hidden;
+                display: flex;
+                padding: 0;
+                input[type="range"] {
+                  -webkit-appearance: none;
+                  transition-duration: 1s;
+                  z-index: 10000000000 !important;
+                  height: inherit;
+                  flex: 1;
+                  background: transparent !important;
+                }
+              }
+            }
           }
         }
         .comment-section {

@@ -1,18 +1,62 @@
 /* eslint-disable @next/next/no-img-element */
 import TvLayout from "Layout/TvLayout";
-import React from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 
 const Tv = (): JSX.Element => {
-  /**
- @Obtain controls
- **/
+  const [currentVidTime, setCurrentVidTime] = useState(null);
+  const [vidDurationTime, setVidDurationTime] = useState(null);
+  const [range, setRange] = useState({
+    max: "",
+    value: "0",
+  });
+  const [play_pause, setPlay_Pause] = useState(false);
 
-  const updateProgress = (e: { e: undefined }) => {
-    console.log(e);
-    console.log();
+  const vidRef = useRef();
+
+  const updateProgress = (e): void => {
+    const { duration, currentTime } = e.target;
+    const currentHrs = Math.floor(currentTime / 3600);
+    const durationHrs = Math.floor(duration / 3600);
+    const currentMin = Math.floor(currentTime / 60);
+    const currentSec = Math.floor(currentTime - currentMin * 60);
+    const durationMin = Math.floor(duration / 60);
+    const durationSec = Math.floor(duration - durationMin * 60);
+    setCurrentVidTime(
+      `${currentHrs > 0 ? currentHrs + ":" : ""}${currentMin}:${currentSec}`
+    );
+    setVidDurationTime(
+      `${durationHrs > 0 ? durationHrs + ":" : ""}${durationMin}:${durationSec}`
+    );
   };
-
+  const setProgress = (e) => {
+    const { duration, currentTime } = e.target;
+    setRange({
+      ...range,
+      max: String(Math.floor(duration)),
+      value: String(Math.floor(currentTime)),
+    });
+  };
+  const customProgress = (e) => {
+    const video = document.getElementById("video");
+    const {currentTime,duration} = video
+  
+    const { value } = e.target;
+    Math.floor(currentTime )
+   
+  };
+  const controlPlayPause = () => {
+    const video = document.getElementById("video");
+    const vidState = video.paused || video.ended;
+    if (vidState) {
+      video.play();
+      setPlay_Pause(true);
+    }
+    if (!vidState) {
+      video.pause();
+      setPlay_Pause(false);
+    }
+  };
   return (
     <TvLayout>
       <Tvwrapper>
@@ -30,7 +74,7 @@ const Tv = (): JSX.Element => {
                   type="button"
                   aria-label="search"
                 >
-                  <i className="fas fa-search " aria-hidden="true"></i>
+                  <i className="fas fa-search" aria-hidden="true"></i>
                 </button>
               </form>
             </div>
@@ -38,9 +82,67 @@ const Tv = (): JSX.Element => {
               <div className="left">
                 <div className="video-container bg-dark py-3">
                   <figure>
-                    <video controls>
-                      <source src="" />
+                    <video
+                      controls
+                      onTimeUpdate={(e) => {
+                        updateProgress(e);
+                        setProgress(e);
+                      }}
+                      className="w-100"
+                      ref={vidRef}
+                      id="video"
+                    >
+                      <source src="video/tears-of-steel-battle-clip-medium.mp4" />
                     </video>
+                    <div className="container  video-controls">
+                      <div
+                        className="mb-1 video-controls-progress bg-light rounded-0 position-relative"
+                        onClick={setProgress}
+                      >
+                        {/* <progress
+                          id="file"
+                          value={range.value}
+                          max={range.max}
+                          className="d-block w-100 m-0 progress rounded-0 position-absolute"
+                          onClick={(e) => console.log(e.target.value)}
+                        ></progress> */}
+                        <input
+                          type="range"
+                          className="form-range m-0 mb-2"
+                          value={range.value}
+                          min="0"
+                          max={range.max}
+                          step="any"
+                          id="customRange3"
+                          onChange={customProgress}
+                          onDrag={() => console.log("yes")}
+                        />
+                      </div>
+                      <div className="d-flex align-items-center">
+                        <div className="d-flex">
+                          <button className="btn text-white">
+                            <i className="fas fa-step-backward"></i>
+                          </button>
+                          <button
+                            className="btn text-white"
+                            onClick={controlPlayPause}
+                          >
+                            {!play_pause ? (
+                              <i className="fas fa-play"></i>
+                            ) : (
+                              <i className="fas fa-pause"></i>
+                            )}
+                          </button>
+                          <button className="btn text-white">
+                            <i className="fas fa-step-forward"></i>
+                          </button>
+                        </div>
+                        <div className="text-white">
+                          {currentVidTime}/{vidDurationTime}
+                        </div>
+                        <div></div>
+                      </div>
+                    </div>
                   </figure>
                 </div>
                 <div className="video-title">
