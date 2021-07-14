@@ -2,12 +2,30 @@ import ArticleLayout from "Layout/ArticleLayout";
 import Image from 'next/image';
 import Icon from '../components/Icon';
 import TitleComp from '../components/Title';
+import Link from 'next/link';
+import NewsLetterComp from '../components/Newsletter';
 // import '../styles/articlespage.scss';
 
 export default function Home(): JSX.Element {
   return (
     <ArticleLayout>
       <div className="container">
+              <section className='advertisement_section'>
+              <ul className="nav">
+                {navItems.map(({ link, title }, i) => (
+                  <li className="nav-item" key={i}>
+                    <Link href={link}>
+                      <a className="nav-link">{title}</a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+                  <div className="advertisement-content">
+                     <Image src="/images/Rectangle-27.png" alt="advert-image" width={1000} height={350} />
+                  </div>
+
+                  {/* <button className="btn btn-dark">Load more articles</button> */}
+              </section> 
         <div className="container article-head">
           <div className="main">
               <h1 className='serif fw-700'>Alhaji Yahaya Bello, receives man of the year.</h1>
@@ -49,9 +67,9 @@ export default function Home(): JSX.Element {
         
                     <div className="latest-post-container">
                       <div className='latest-post-content'>
-                        <div className='latest-post-section'>
+                        <div className='row'>
                             {latestPosts.map(({img_path, img_alt, postExcerpt, postWriter}, i) => (
-                            <div className="latest-item" key={i}>
+                            <div className="latest-item col-md-4" key={i}>
                                 <Image src={img_path} alt={img_alt} width="300" height='231' />
                                 <p> {postExcerpt} </p>
                                 <p className='post-writer'>By {postWriter}</p>
@@ -165,14 +183,9 @@ export default function Home(): JSX.Element {
                         ))}
                   </div>
               </section>
+              <NewsLetterComp />
 
-              <section className='advertisement_section'>
-                  <div className="advertisement-content">
-                     <Image src="/images/Rectangle-27.png" alt="advert-image" width={1000} height={350} />
-                  </div>
-
-                  <button className="btn btn-dark">Load more articles</button>
-              </section> 
+             
         
         </div>
      
@@ -241,4 +254,17 @@ const entertainmentPosts = [
     alt: "article-image",
     articleExcerpt: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam quisquam delectus molestiae, quam nulla odit. ", 
     }
+];
+
+
+const navItems = [
+  { title: "News", link: "/" },
+  { title: "Culture and tourism", link: "/" },
+  { title: "Education", link: "/" },
+  { title: "Entertainment", link: "/" },
+  { title: "Opinion", link: "/" },
+  { title: "Politics", link: "/" },
+  { title: "Business", link: "/" },
+  { title: "Religion", link: "/" },
+  { title: "Technology", link: "/" },
 ];

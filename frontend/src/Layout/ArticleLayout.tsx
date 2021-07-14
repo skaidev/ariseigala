@@ -1,5 +1,6 @@
 import HeaderComp from "components/HeaderComp";
 import React from "react";
+import FooterComp from 'components/FooterComp';
 
 const ArticleLayout = ({
   children,
@@ -10,7 +11,7 @@ const ArticleLayout = ({
     <div id="article-layout">
       <HeaderComp />
       <main>{children}</main>
-      <footer>Footer</footer>
+      <FooterComp />
     </div>
   );
 };
