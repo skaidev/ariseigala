@@ -3,11 +3,11 @@ import React from "react";
 
 const NewsLetterComp = (): JSX.Element => {
   return (
-    <section className='bg-dark hh-50 my-5'>
-        <div className="container text-light p-5 text-center">
+    <section className='bg-dark hh-629 mt-120 d-flex align-items-center'>
+        <div className="container text-light p-5 text-center border">
            <div className="inner w-75 mx-auto">
-              <h3 className='serif fw-700'>Subscribe to our daily newsletter</h3>
-              <p> Lorem ipsum dolor sit amet consectetur, 
+              <h3 className='georgia fw-700'>Subscribe to our daily newsletter</h3>
+              <p className='poppins lh-base'> Lorem ipsum dolor sit amet consectetur, 
                   adipisicing elit. Ratione tempora nemo 
                   incidunt nulla perspiciatis beatae, alias, 
                   aut minima ab sed facilis recusandae aperiam 

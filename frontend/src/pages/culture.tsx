@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image"; 
-import TitleComp from '../components/Title';                                   
+import {TitleComp} from '../components/Title';                                   
 import ArticleLayout from "Layout/ArticleLayout";
 import NewsLetterComp from '../components/Newsletter';
 import AdvertisementComp from '../components/Advertisement';
@@ -50,7 +50,7 @@ const HeadingPostGallery = (): JSX.Element => {
       )
 };
 
-const PostGallery = (): JSX.Element => {
+export const PostGallery = (): JSX.Element => {
     return (
             <div className="container row mb-4">
                 {postsGallery.map(({img_path, img_alt, postExcerpt, postWriter}, i) => (
@@ -72,7 +72,7 @@ const CultureComp = (): JSX.Element => {
   return (
     <ArticleLayout>
           <main className='culture_tourism_container'>
-        <TitleComp title='Culture and Tourism' className='mt-5'/>
+        <TitleComp title='Culture and Tourism' />
         
         <section className='container'>
             <HeadingPostGallery />
@@ -81,13 +81,13 @@ const CultureComp = (): JSX.Element => {
         <AdvertisementComp text='Advertisement' />
 
         <section className='container post_gallery my-6'>
-            <TitleComp title='Sub-heading' className='serif mt-5'/>
+            <TitleComp title='Sub-heading'/>
             <PostGallery />
             <PostGallery />
         </section>
         
         <section className='container post_gallery my-6'>
-            <TitleComp title='Sub-heading' className='serif wf-700'/>
+            <TitleComp title='Sub-heading' />
             <PostGallery />
             <PostGallery />
         </section>
@@ -95,7 +95,7 @@ const CultureComp = (): JSX.Element => {
         <AdvertisementComp text='Advertisement' />
 
         <section className='container post_gallery my-6'>
-            <TitleComp title='Sub-heading' className='serif wf-700'/>
+            <TitleComp title='Sub-heading' />
             <PostGallery />
             <PostGallery />
         </section>

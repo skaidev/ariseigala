@@ -23,6 +23,7 @@ const HeaderComp = (): JSX.Element => {
           </ul>
         </div>
       </nav>
+      <hr className='container'/>
     </header>
   );
 };
