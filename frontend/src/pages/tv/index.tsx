@@ -33,17 +33,16 @@ const Tv = (): JSX.Element => {
     const { duration, currentTime } = e.target;
     setRange({
       ...range,
-      max: String(Math.floor(duration)),
-      value: String(Math.floor(currentTime)),
+      max: String(duration),
+      value: String(currentTime),
     });
   };
   const customProgress = (e) => {
     const video = document.getElementById("video");
-    const {currentTime,duration} = video
-  
+    const { currentTime, duration } = video;
+
     const { value } = e.target;
-    Math.floor(currentTime )
-   
+    console.log((currentTime / duration) * 100 + ":" + value);
   };
   const controlPlayPause = () => {
     const video = document.getElementById("video");
@@ -112,10 +111,8 @@ const Tv = (): JSX.Element => {
                           value={range.value}
                           min="0"
                           max={range.max}
-                          step="any"
                           id="customRange3"
                           onChange={customProgress}
-                          onDrag={() => console.log("yes")}
                         />
                       </div>
                       <div className="d-flex align-items-center">

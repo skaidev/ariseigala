@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+import Advertisement from "components/Advertisement";
+import SubscribeComp from "components/SubscribeComp";
 import ArticleLayout from "Layout/ArticleLayout";
 import styled from "styled-components";
 
@@ -7,9 +9,7 @@ export default function Home(): JSX.Element {
     <ArticleLayout>
       <>
         <MainArticleWrapper className="container">
-          <section className="section-1 py-2 w-75 mb-3 mx-auto d-flex align-items-center justify-content-center">
-            <h1 className="fw-bold text-white">Adverisement</h1>
-          </section>
+          <Advertisement />
           <section className="section-2 py-3 mb-4">
             <div className="section-2-container text-justify d-flex flex-column flex-md-row">
               <div className="left text-justify">
@@ -296,41 +296,7 @@ export default function Home(): JSX.Element {
                 Load more articles
               </button>
             </article>
-            <article className="article-3 py-5 bg-dark text-white">
-              <div className="container">
-                <h1 className="georgia text-center mb-3">
-                  Subscribe to our daily newsletter
-                </h1>
-                <p className="p-0 mb-3 text-center">
-                  Sit vestibulum facilisis at at egestas malesuada dignissim.
-                  Eget in semper et ultrices leo scelerisque dui diam. Ut
-                  posuere sagittis volutpat pretium egestas aliquet. Nibh
-                  condimentum mattis pharetra fringilla et. At varius nibh et
-                  congue turpis justo, at sed. Magna euismod ultricies quam
-                  integer egestas orci. Luctus eget vivamus libero tellus ipsum
-                  nec amet. Dolor vel orci, a fermentum at amet. Sit velit ipsum
-                  amet fringilla integer quis est lorem. Lacus nisi, faucibus
-                  elit vitae eu netus. Aliquam etiam egestas urna arcu.
-                </p>
-                <form className="row d-flex g-3 w-75 mx-auto">
-                  <div className="col-auto col-md-7">
-                    <input
-                      type="email"
-                      className="form-control fw-bold py-3 bg-dark text-light border-3 "
-                      placeholder="cx@gmail.com"
-                    />
-                  </div>
-                  <div className="col-auto">
-                    <button
-                      type="submit"
-                      className="btn btn-light fw-bold mb-3 px-5 py-3 "
-                    >
-                      Subscribe
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </article>
+            <SubscribeComp />
           </div>
         </SecondArticleWrapper>
       </>
@@ -339,11 +305,6 @@ export default function Home(): JSX.Element {
 }
 
 const MainArticleWrapper = styled.div`
-  .section-1 {
-    min-height: 16.375rem;
-    background: url("images/Rectangle 27.png") no-repeat;
-    background-size: cover;
-  }
   .section-2 {
     &-container {
       gap: 3rem;
