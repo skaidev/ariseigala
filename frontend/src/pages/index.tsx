@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import Advertisement from "components/Advertisement";
+import ArticleRightView from "components/articles/ArticleRightView";
 import SubscribeComp from "components/SubscribeComp";
 import ArticleLayout from "Layout/ArticleLayout";
 import styled from "styled-components";
+import { articles } from "utils/fakeArticles";
 
 export default function Home(): JSX.Element {
 	return (
@@ -11,13 +13,15 @@ export default function Home(): JSX.Element {
 				<MainArticleWrapper className="container">
 					<Advertisement />
 					<section className="section-2 py-3 mb-4">
-						<div className="section-2-container text-justify d-flex flex-column flex-md-row">
-							<div className="left text-justify">
-								<p>Alhaji Yahaya Bello, recieves man of the year.</p>
+						<div className="section-2-container  d-flex flex-column flex-md-row">
+							<div className="left ">
+								<p className="big-head">
+									Alhaji Yahaya Bello, recieves man of the year.
+								</p>
 								<div className="left-position-relative">
 									<img loading="lazy" src="images/Rectangle 4.png" alt="" />
 								</div>
-								<p className="p-0 lh-md">
+								<p className="p-0">
 									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non
 									pharetra lacinia ut varius phasellus commodo etiam tellus.
 									Risus nulla quisque integer aliquam amet, venenatis. Tempor
@@ -37,25 +41,8 @@ export default function Home(): JSX.Element {
 							</div>
 							<div className="right">
 								<div className="row right-row mb-3 row-cols-1 g-4">
-									{num.slice(7).map((e) => (
-										<div className="col right-row-col" key={e}>
-											<div className="card border-0 right-card py-0 d-flex flex-column flex-md-row">
-												<div className="card-img right-card-img w-100">
-													<img loading="lazy" src="images/Frame 2.png" alt="" />
-												</div>
-												<div className="right-card-body ms-md-1 card-body  p-0 ps-1">
-													<p className="card-title fw-bold p-0 fs-5">
-														Lorem ipsum dolor sit amet
-													</p>
-													<p>
-														Lorem ipsum dolor sit amet, consectetur adipiscing
-														elit. Pretium, volutpat justo consequat gravida
-														proin. Est rutrum risus nisl purus lobortis egestas
-														arcu purus.
-													</p>
-												</div>
-											</div>
-										</div>
+									{articles.slice(0, 3).map((article, i) => (
+										<ArticleRightView key={i} article={article} />
 									))}
 								</div>
 								<button className="btn btn-dark mx-auto d-block px-4 py-2">
@@ -73,8 +60,8 @@ export default function Home(): JSX.Element {
 						<div className="section-3-container d-flex flex-column flex-md-row">
 							<div className="left">
 								<div className="left-row row mb-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-									{num.slice(7).map((e) => (
-										<div className="col left-row-col" key={e}>
+									{articles.slice(0, 7).map((article, i) => (
+										<div className="col left-row-col" key={i}>
 											<div className="card left-card  border-0">
 												<div className="card-img left-card-img">
 													<img
@@ -123,10 +110,10 @@ export default function Home(): JSX.Element {
 								</p>
 							</div>
 							<div className="right">
-								{num.slice(7).map((e) => (
+								{articles.slice(0, 7).map((article, i) => (
 									<div
 										className="entertainment-card mb-3 d-flex flex-column flex-md-row"
-										key={e}
+										key={i}
 									>
 										<div className="entertainment-card-left">
 											<img
@@ -197,8 +184,8 @@ export default function Home(): JSX.Element {
 							<div className="section-5-main-card d-flex flex-column flex-md-row">
 								<div className="left">
 									<div className="left-row row mb-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-										{num.slice(7).map((e) => (
-											<div className="col left-row-col" key={e}>
+										{articles.slice(0, 7).map((article, i) => (
+											<div className="col left-row-col" key={i}>
 												<div className="card left-card  border-0">
 													<div className="card-img left-card-img">
 														<img
@@ -270,8 +257,8 @@ export default function Home(): JSX.Element {
 						</article>
 						<article className="container mb-5 article-2 py-1">
 							<div className="row article-2-row mb-5 row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-								{num.slice(7).map((e) => (
-									<div className="col article-2-row-col" key={e}>
+								{articles.slice(0, 7).map((article, i) => (
+									<div className="col article-2-row-col" key={i}>
 										<div className="card article-2-card border-0">
 											<div className="card-img article-2-card-img mb-1 overflow-hidden">
 												<img
@@ -543,4 +530,3 @@ const SecondArticleWrapper = styled.div`
 		}
 	}
 `;
-const num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

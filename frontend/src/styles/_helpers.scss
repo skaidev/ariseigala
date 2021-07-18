@@ -1,29 +1,39 @@
 .georgia {
-  font-family: Georgia;
-  // font-family: "Bergamo Std";
+	font-family: Georgia;
+	// font-family: "Bergamo Std";
 }
 
 .serif {
-  font-family: serif;
+	font-family: serif;
 }
 
 .poppins {
-  font-family: "Poppins", sans-serif;
+	font-family: "Poppins", sans-serif;
 }
 
 .fw-700 {
-  font-weight: 700;
+	font-weight: 700;
+}
+.big-head {
+	font-weight: 700;
+	font-size: 3rem;
+	font-family: serif;
+	line-height: 45px;
+}
+
+.text-justify {
+	text-align: justify;
 }
 
 .mc {
-  width: 90%;
-  max-width: 1000000000000000000000000000px;
+	width: 90%;
+	max-width: 1000000000000000000000000000px;
 }
 .line {
-  height: 4px;
+	height: 4px;
 }
 .line-thin {
-  height: 2px;
+	height: 2px;
 }
 
 // .div {
