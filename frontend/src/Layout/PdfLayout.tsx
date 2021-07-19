@@ -1,5 +1,6 @@
 import MagazineFooter from "components/magazineComp/MagazineFooter";
-import PdfHeader from "components/PdfHeader";
+import PdfHeader from "components/pdfComp/PdfHeader";
+
 import React from "react";
 
 const PdfLayout = ({

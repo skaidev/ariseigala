@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Advertisement from "components/Advertisement";
-import SubscribeComp from "components/SubscribeComp";
+import SubscribeComp from "components/subscribeComp/SubscribeComp";
 import ArticleLayout from "Layout/ArticleLayout";
 import styled from "styled-components";
 
@@ -231,7 +231,7 @@ export default function Home(): JSX.Element {
           </section>
         </MainArticleWrapper>
         <SecondArticleWrapper className="section-6">
-          <div className="">
+          <div>
             <article className="article-1 py-1">
               <div className="d-flex mb-4 align-items-center justify-content-center">
                 <div className="line-thin px-5  p-0 bg-dark bg-gradients"></div>
@@ -439,11 +439,18 @@ const MainArticleWrapper = styled.div`
         position: relative;
         overflow-y: hidden;
         min-height: 35rem;
+        @media screen and (max-width: 768px) {
+          min-height: 20rem;
+        }
         img {
           position: absolute;
           height: 100%;
           width: 100%;
           object-fit: cover;
+          @media screen and (max-width: 768px) {
+            object-fit: contain;
+            min-height: inherit;
+          }
         }
       }
       &-card {

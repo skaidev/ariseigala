@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Advertisement from "components/Advertisement";
-import SubscribeComp from "components/SubscribeComp";
+import SubscribeComp from "components/subscribeComp/SubscribeComp";
 import ArticleLayout from "Layout/ArticleLayout";
 import React from "react";
 import styled from "styled-components";

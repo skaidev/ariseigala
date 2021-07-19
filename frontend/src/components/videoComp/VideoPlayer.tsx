@@ -1,43 +1,39 @@
 import React, { useEffect, useState } from "react";
 
-const VdeoPlayer = (): JSX.Element => {
-  const [currentVidTime, setCurrentVidTime] = useState("00");
-  const [vidDurationTime, setVidDurationTime] = useState("--");
+const VdeoPlayer = (videosrc): JSX.Element => {
+  const [currentVidTime, setCurrentVidTime] = useState({
+    hrs: 0,
+    min: 0,
+    sec: 0,
+  });
+  const [vidDurationTime, setVidDurationTime] = useState({
+    hrs: 0,
+    min: 0,
+    sec: 0,
+  });
   const [play_pause, setPlay_Pause] = useState(false);
   const [range, setRange] = useState({
     max: 0,
     value: 0,
   });
+  const [disabled, setDisabled] = useState(false);
   const [volumeVal, setVolumeVal] = useState(1);
   const [mute, setMute] = useState(false);
 
   // FOR THE VIDEO INITIAL RENDER STATE
   useEffect(() => {
     const vid = document.getElementById("video");
-    if (!vid.duration) {
-      setRange({ ...range, max: 0 });
+    if (!videosrc.videosrc) {
+      setDisabled(true);
+      return setRange({ ...range, max: 0 });
     } else {
       setRange({ ...range, max: vid.duration });
+      setDisabled(false);
+      setPlay_Pause(false);
     }
-    (() => {
-      const currentHrs = Math.floor(vid.currentTime / 3600);
-      const durationHrs = Math.floor(vid.duration / 3600);
-      const currentMin = Math.floor(vid.currentTime / 60);
-      const currentSec = Math.floor(vid.currentTime - currentMin * 60);
-      const durationMin = Math.floor(vid.duration / 60);
-      const durationSec = Math.floor(vid.duration - durationMin * 60);
 
-      setCurrentVidTime(
-        `${currentHrs > 0 ? currentHrs + ":" : ""}${currentMin}:${currentSec}`
-      );
-      setVidDurationTime(
-        `${
-          durationHrs > 0 ? durationHrs + ":" : ""
-        }${durationMin}:${durationSec}`
-      );
-    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [videosrc]);
   //KNOW WHEN THE USER  LEFT THE TAB
   useEffect(() => {
     const vid = document.getElementById("video");
@@ -48,6 +44,8 @@ const VdeoPlayer = (): JSX.Element => {
       }
     });
   }, []);
+  // LISTEN TO ALL VIDEO EVENT
+
   const updateTimeProgress = (e): void => {
     const { duration, currentTime, ended } = e.target;
     setRange({ ...range, max: duration, value: currentTime });
@@ -57,12 +55,18 @@ const VdeoPlayer = (): JSX.Element => {
     const currentSec = Math.floor(currentTime - currentMin * 60);
     const durationMin = Math.floor(duration / 60);
     const durationSec = Math.floor(duration - durationMin * 60);
-    setCurrentVidTime(
-      `${currentHrs > 0 ? currentHrs + ":" : ""}${currentMin}:${currentSec}`
-    );
-    setVidDurationTime(
-      `${durationHrs > 0 ? durationHrs + ":" : ""}${durationMin}:${durationSec}`
-    );
+    setCurrentVidTime({
+      ...currentVidTime,
+      hrs: currentHrs,
+      min: currentMin,
+      sec: currentSec,
+    });
+    setVidDurationTime({
+      ...vidDurationTime,
+      hrs: durationHrs,
+      min: durationMin,
+      sec: durationSec,
+    });
     if (ended) {
       setPlay_Pause(false);
     }
@@ -166,51 +170,89 @@ const VdeoPlayer = (): JSX.Element => {
     navigator.mediaSession.setActionHandler("play", controlPlayPause);
     navigator.mediaSession.setActionHandler("pause", controlPlayPause);
   }, []);
+  useEffect(() => {
+    const vid = document.getElementById("video");
+    vid.addEventListener("timeupdate", updateTimeProgress);
+    vid.addEventListener("volumechange", volumeChange);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div>
       <figure id="fullscreen">
         <video
           controls={false}
-          onTimeUpdate={updateTimeProgress}
           className="w-100"
           id="video"
-          onVolumeChange={volumeChange}
-        >
-          <source src="video/tears-of-steel-battle-clip-medium.mp4" />
-        </video>
+          src={videosrc.videosrc}
+          onLoad={updateTimeProgress}
+          onChange={updateTimeProgress}
+        />
+        {/* {video.map((e) => e)} */}
         <div className="container video-controls">
           <div className="video-progress">
             <input
               type="range"
               className="px-0 d-block w-100"
               min={0}
-              max={Number(range.max)}
+              max={range.max ? Number(range.max) : "0"}
               value={Number(range.value)}
               onChange={updatevidCurrentTime}
+              disabled={disabled}
             />
           </div>
           <div className="d-flex row row-cols-2 row-cols-md-4 video-btn align-items-center">
             <div className="d-flex col play-pause">
-              <button className="btn text-white" onClick={backWard}>
+              <button
+                disabled={disabled}
+                className="btn text-white"
+                onClick={backWard}
+              >
                 <i className="fas fa-step-backward"></i>
               </button>
-              <button className="btn text-white" onClick={controlPlayPause}>
+              <button
+                disabled={disabled}
+                className="btn text-white"
+                onClick={controlPlayPause}
+              >
                 {!play_pause ? (
                   <i className="fas fa-play"></i>
                 ) : (
                   <i className="fas fa-pause"></i>
                 )}
               </button>
-              <button className="btn text-white" onClick={fastFoward}>
+              <button
+                disabled={disabled}
+                className="btn text-white"
+                onClick={fastFoward}
+              >
                 <i className="fas fa-step-forward"></i>
               </button>
             </div>
             <div className="text-white btn d-flex justify-content-end justify-content-md-center col currenttime-duration">
-              {currentVidTime}/{vidDurationTime}
+              <time>
+                {currentVidTime.hrs === 0 ? "" : `${currentVidTime.hrs}:`}
+                {currentVidTime.min === 0 ? 0 : currentVidTime.min}:
+                {currentVidTime.sec}
+              </time>
+              /
+              {vidDurationTime.hrs || vidDurationTime.min >= 0 ? (
+                "0:0"
+              ) : (
+                <time>
+                  {vidDurationTime.hrs === 0 ? "" : `${vidDurationTime.hrs}:`}
+                  {vidDurationTime.min === 0 ? 0 : vidDurationTime.min}:
+                  {vidDurationTime.sec}
+                </time>
+              )}
             </div>
             <div className="volume col d-flex justify-content-start">
               <div className="vol-container text-white py-1 px-1 d-flex">
-                <button className="btn me-1 text-white" onClick={handleMute}>
+                <button
+                  disabled={disabled}
+                  className="btn me-1 text-white"
+                  onClick={handleMute}
+                >
                   {mute ? (
                     <i className="fas fa-volume-mute"></i>
                   ) : (
@@ -229,7 +271,11 @@ const VdeoPlayer = (): JSX.Element => {
               </div>
             </div>
             <div className="zoom-in-out col d-flex justify-content-end">
-              <button className="btn text-white" onClick={fullScreenMode}>
+              <button
+                disabled={disabled}
+                className="btn text-white"
+                onClick={fullScreenMode}
+              >
                 <i className="fas fa-expand"></i>
               </button>
             </div>

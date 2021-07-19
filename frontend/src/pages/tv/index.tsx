@@ -2,11 +2,30 @@
 import VideoPlayer from "components/videoComp/VideoPlayer";
 import TvLayout from "Layout/TvLayout";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 
 const Tv = (): JSX.Element => {
   const [src, setSrc] = useState("");
-
+  const [vidSrc, setVidSrc] = useState("");
+  const [showvid, setShowVid] = useState(false);
+  useEffect(() => {
+    (async () => {
+      if (src) {
+        const { url, ok } = await fetch(src);
+        if (!ok) {
+          setShowVid(false);
+          return false;
+        } else {
+          setVidSrc(url);
+          setShowVid(true);
+        }
+      }
+    })();
+    return () => {
+      setVidSrc("");
+    };
+  }, [src]);
   return (
     <TvLayout>
       <Tvwrapper>
@@ -31,7 +50,7 @@ const Tv = (): JSX.Element => {
             <div className="tv-body-main-video d-flex flex-column flex-lg-row">
               <div className="left">
                 <div className="video-container bg-dark py-3">
-                  {src && <VideoPlayer />}
+                  {showvid && <VideoPlayer videosrc={vidSrc} />}
                 </div>
                 <div className="video-title">
                   <div className="border-bottom py-2 border-dark">
@@ -110,10 +129,10 @@ const Tv = (): JSX.Element => {
                       <div className="card right-main-col-card bg-transparent border-0 d-flex flex-row">
                         <div className="img d-flex justify-content-end align-items-end">
                           <video
-                            src={card.src}
+                            src={`video/${card.src}`}
                             className="card-img"
                             id={card.ids}
-                            onClick={(e) => setSrc(e.target.id)}
+                            onClick={(e) => setSrc(e.target.src)}
                           />
                           <mark
                             className="bg-dark text-white mb-2 me-2"
@@ -158,17 +177,17 @@ const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 const Video = [
   {
     id: 1,
-    src: "http://localhost:3000/video/smile.mp4",
+    src: "sintel-short.mp4",
     ids: "smile",
   },
   {
     id: 2,
-    src: "http://localhost:3000/video/laugh.mp4",
+    src: "sintel-short.mp4",
     ids: "laugh",
   },
   {
     id: 3,
-    src: "http://iandevlin.github.io/mdn/video-player/video/tears-of-steel-battle-clip-medium.mp4",
+    src: "tears-of-steel-battle-clip-medium.mp4",
     ids: "tears-of-steel-battle-clip-medium",
   },
 ];
