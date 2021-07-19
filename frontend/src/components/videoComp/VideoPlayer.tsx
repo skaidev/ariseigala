@@ -1,16 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
-const VdeoPlayer = (videosrc): JSX.Element => {
-  const [currentVidTime, setCurrentVidTime] = useState({
-    hrs: 0,
-    min: 0,
-    sec: 0,
-  });
-  const [vidDurationTime, setVidDurationTime] = useState({
-    hrs: 0,
-    min: 0,
-    sec: 0,
-  });
+interface EventTarget {
+  addEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject,
+    useCapture?: boolean
+  ): void;
+  target: { duration: number; currentTime: number; ended: boolean };
+}
+
+interface Iindex {}
+
+const VdeoPlayer = ({
+  videosrc,
+  duration,
+  index,
+}: {
+  videosrc: string;
+  duration: string;
+  index: Iindex;
+}): JSX.Element => {
+  // STATES
+  console.log();
+
+  const [currentVidTime, setCurrentVidTime] = useState("--");
+  const [vidDurationTime, setVidDurationTime] = useState("--");
   const [play_pause, setPlay_Pause] = useState(false);
   const [range, setRange] = useState({
     max: 0,
@@ -22,8 +36,8 @@ const VdeoPlayer = (videosrc): JSX.Element => {
 
   // FOR THE VIDEO INITIAL RENDER STATE
   useEffect(() => {
-    const vid = document.getElementById("video");
-    if (!videosrc.videosrc) {
+    const vid = document.getElementById("video") as HTMLElement;
+    if (!videosrc) {
       setDisabled(true);
       return setRange({ ...range, max: 0 });
     } else {
@@ -31,12 +45,11 @@ const VdeoPlayer = (videosrc): JSX.Element => {
       setDisabled(false);
       setPlay_Pause(false);
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videosrc]);
   //KNOW WHEN THE USER  LEFT THE TAB
   useEffect(() => {
-    const vid = document.getElementById("video");
+    const vid = document.getElementById("video") as HTMLElement;
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "hidden") {
         vid.pause();
@@ -46,7 +59,7 @@ const VdeoPlayer = (videosrc): JSX.Element => {
   }, []);
   // LISTEN TO ALL VIDEO EVENT
 
-  const updateTimeProgress = (e): void => {
+  const updateTimeProgress = (e: EventTarget) => {
     const { duration, currentTime, ended } = e.target;
     setRange({ ...range, max: duration, value: currentTime });
     const currentHrs = Math.floor(currentTime / 3600);
@@ -55,24 +68,17 @@ const VdeoPlayer = (videosrc): JSX.Element => {
     const currentSec = Math.floor(currentTime - currentMin * 60);
     const durationMin = Math.floor(duration / 60);
     const durationSec = Math.floor(duration - durationMin * 60);
-    setCurrentVidTime({
-      ...currentVidTime,
-      hrs: currentHrs,
-      min: currentMin,
-      sec: currentSec,
-    });
-    setVidDurationTime({
-      ...vidDurationTime,
-      hrs: durationHrs,
-      min: durationMin,
-      sec: durationSec,
-    });
+    const formatedVidTime = `${currentHrs}:${currentMin}:${currentSec}`;
+    const formatedVidDuration = `${durationHrs}:${durationMin}:${durationSec}`;
+
+    setCurrentVidTime(formatedVidTime);
+    setVidDurationTime(formatedVidDuration);
     if (ended) {
       setPlay_Pause(false);
     }
   };
   const controlPlayPause = () => {
-    const video = document.getElementById("video");
+    const video = document.getElementById("video") as HTMLElement;
     const vidState = video.paused || video.ended;
     if (vidState) {
       video.play();
@@ -83,13 +89,13 @@ const VdeoPlayer = (videosrc): JSX.Element => {
       setPlay_Pause(false);
     }
   };
-  const updatevidCurrentTime = (e) => {
-    const video = document.getElementById("video");
+  const updatevidCurrentTime = (e: ChangeEvent<HTMLInputElement>) => {
+    const video = document.getElementById("video") as HTMLElement;
     const { value } = e.target;
     video.currentTime = Number(value);
   };
   const fastFoward = () => {
-    const vid = document.getElementById("video");
+    const vid = document.getElementById("video") as HTMLElement;
     const currentNum = 1;
     const lengthOfVideo = [];
     for (let index = 0; index < vid.duration; index++) {
@@ -101,22 +107,22 @@ const VdeoPlayer = (videosrc): JSX.Element => {
     vid.currentTime += lengthOfVideo[currentNum + 1];
   };
   const backWard = () => {
-    const vid = document.getElementById("video");
+    const vid = document.getElementById("video") as HTMLElement;
     if (vid.currentTime == 0) {
       vid.currentTime += 0;
     }
     vid.currentTime += -10;
   };
-  const alterVolume = (e) => {
+  const alterVolume = (e: { target: { value: number } }) => {
     const { value } = e.target;
-    const vid = document.getElementById("video");
+    const vid = document.getElementById("video") as HTMLElement;
     setVolumeVal(value);
     vid.volume = Number(value);
     vid.muted = false;
     setMute(false);
   };
   const handleMute = () => {
-    const vid = document.getElementById("video");
+    const vid = document.getElementById("video") as HTMLElement;
     if (vid.muted) {
       setMute(false);
       vid.muted = false;
@@ -126,13 +132,15 @@ const VdeoPlayer = (videosrc): JSX.Element => {
     }
   };
   const volumeChange = () => {
-    const vid = document.getElementById("video");
+    const vid = document.getElementById("video") as HTMLElement;
     if (vid.volume == 0) {
       setMute(true);
     }
   };
   const fullScreenMode = () => {
-    const containerExpand = document.getElementById("fullscreen");
+    const containerExpand = document.getElementById(
+      "fullscreen"
+    ) as HTMLElement;
     // Checks if the document is currently in fullscreen mode
     const isFullScreen = function () {
       return !!(
@@ -171,7 +179,7 @@ const VdeoPlayer = (videosrc): JSX.Element => {
     navigator.mediaSession.setActionHandler("pause", controlPlayPause);
   }, []);
   useEffect(() => {
-    const vid = document.getElementById("video");
+    const vid = document.getElementById("video") as HTMLElement;
     vid.addEventListener("timeupdate", updateTimeProgress);
     vid.addEventListener("volumechange", volumeChange);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -180,15 +188,7 @@ const VdeoPlayer = (videosrc): JSX.Element => {
   return (
     <div>
       <figure id="fullscreen">
-        <video
-          controls={false}
-          className="w-100"
-          id="video"
-          src={videosrc.videosrc}
-          onLoad={updateTimeProgress}
-          onChange={updateTimeProgress}
-        />
-        {/* {video.map((e) => e)} */}
+        <video controls={false} className="w-100" id="video" src={videosrc} />
         <div className="container video-controls">
           <div className="video-progress">
             <input
@@ -205,14 +205,14 @@ const VdeoPlayer = (videosrc): JSX.Element => {
             <div className="d-flex col play-pause">
               <button
                 disabled={disabled}
-                className="btn text-white"
+                className="btn text-white px-3"
                 onClick={backWard}
               >
                 <i className="fas fa-step-backward"></i>
               </button>
               <button
                 disabled={disabled}
-                className="btn text-white"
+                className="btn text-white px-3"
                 onClick={controlPlayPause}
               >
                 {!play_pause ? (
@@ -223,28 +223,14 @@ const VdeoPlayer = (videosrc): JSX.Element => {
               </button>
               <button
                 disabled={disabled}
-                className="btn text-white"
+                className="btn text-white px-3"
                 onClick={fastFoward}
               >
                 <i className="fas fa-step-forward"></i>
               </button>
             </div>
             <div className="text-white btn d-flex justify-content-end justify-content-md-center col currenttime-duration">
-              <time>
-                {currentVidTime.hrs === 0 ? "" : `${currentVidTime.hrs}:`}
-                {currentVidTime.min === 0 ? 0 : currentVidTime.min}:
-                {currentVidTime.sec}
-              </time>
-              /
-              {vidDurationTime.hrs || vidDurationTime.min >= 0 ? (
-                "0:0"
-              ) : (
-                <time>
-                  {vidDurationTime.hrs === 0 ? "" : `${vidDurationTime.hrs}:`}
-                  {vidDurationTime.min === 0 ? 0 : vidDurationTime.min}:
-                  {vidDurationTime.sec}
-                </time>
-              )}
+              <time>{currentVidTime}</time>/<time>{duration}</time>
             </div>
             <div className="volume col d-flex justify-content-start">
               <div className="vol-container text-white py-1 px-1 d-flex">
@@ -273,7 +259,7 @@ const VdeoPlayer = (videosrc): JSX.Element => {
             <div className="zoom-in-out col d-flex justify-content-end">
               <button
                 disabled={disabled}
-                className="btn text-white"
+                className="btn text-white px-3"
                 onClick={fullScreenMode}
               >
                 <i className="fas fa-expand"></i>

@@ -8,24 +8,34 @@ import styled from "styled-components";
 const Tv = (): JSX.Element => {
   const [src, setSrc] = useState("");
   const [vidSrc, setVidSrc] = useState("");
-  const [showvid, setShowVid] = useState(false);
+  const [vidDuration, setVidDuration] = useState("");
   useEffect(() => {
     (async () => {
       if (src) {
         const { url, ok } = await fetch(src);
+        console.log(url);
         if (!ok) {
-          setShowVid(false);
           return false;
         } else {
           setVidSrc(url);
-          setShowVid(true);
         }
       }
     })();
-    return () => {
-      setVidSrc("");
-    };
+    setVidSrc("");
   }, [src]);
+  const getDuartion = (e: { target: { duration: number } }): void => {
+    const { duration } = e.target;
+    const durationHrs = Math.floor(duration / 3600);
+    const durationMin = Math.floor(duration / 60);
+    const durationSec = Math.floor(duration - durationMin * 60);
+    const data = `${durationHrs}:${durationMin}:${durationSec}`;
+    setVidDuration(data);
+  };
+  const getSrc = (e: { target: { src: string } }) => {
+    const source = e.target.src;
+    setSrc(source);
+  };
+
   return (
     <TvLayout>
       <Tvwrapper>
@@ -50,7 +60,11 @@ const Tv = (): JSX.Element => {
             <div className="tv-body-main-video d-flex flex-column flex-lg-row">
               <div className="left">
                 <div className="video-container bg-dark py-3">
-                  {showvid && <VideoPlayer videosrc={vidSrc} />}
+                  <VideoPlayer
+                    videosrc={vidSrc}
+                    duration={vidDuration}
+                    index={Video}
+                  />
                 </div>
                 <div className="video-title">
                   <div className="border-bottom py-2 border-dark">
@@ -124,34 +138,31 @@ const Tv = (): JSX.Element => {
               </div>
               <div className="right">
                 <div className="row right-main row-cols-1 g-3">
-                  {Video.map((card) => (
-                    <div className="col border-0 right-main-col" key={card.id}>
-                      <div className="card right-main-col-card bg-transparent border-0 d-flex flex-row">
-                        <div className="img d-flex justify-content-end align-items-end">
-                          <video
-                            src={`video/${card.src}`}
-                            className="card-img"
-                            id={card.ids}
-                            onClick={(e) => setSrc(e.target.src)}
-                          />
-                          <mark
-                            className="bg-dark text-white mb-2 me-2"
-                            style={{ zIndex: 1 }}
-                          >
-                            11:00
-                          </mark>
-                        </div>
-                        <div className="ms-1 rigth-card-body card-body p-0">
-                          <p className="p-0 mb-2 fw-bolder fs-6">
-                            Lorem ipsum dolor sit amet
-                          </p>
-                          <p className="text-end p-0 m-0 fs-6 fw-light">
-                            <time>1 month ago</time>
-                          </p>
+                  {Video(getDuartion, getSrc).map(
+                    (card, i): JSX.Element => (
+                      <div className="col border-0 right-main-col" key={i}>
+                        <div className="card right-main-col-card bg-transparent border-0 d-flex flex-colum flex-md-row">
+                          <div className="img d-flex justify-content-end align-items-end">
+                            {card.video}
+                            <mark
+                              className="bg-dark text-white mb-2 me-2"
+                              style={{ zIndex: 1 }}
+                            >
+                              {vidDuration}
+                            </mark>
+                          </div>
+                          <div className="ms-1 rigth-card-body card-body p-0">
+                            <p className="p-0 mb-2 fw-bolder fs-6">
+                              Lorem ipsum dolor sit amet
+                            </p>
+                            <p className="text-end p-0 m-0 fs-6 fw-light">
+                              <time>1 month ago</time>
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               </div>
             </div>
@@ -167,27 +178,44 @@ export default Tv;
 const Tvwrapper = styled.div`
   min-height: 100vh;
 `;
-// https://media.w3.org/2010/05/sintel/trailer_hd.mp4
 
 const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-// https://www.youtube.com/watch?v=ysz5S6PUM-U
-// "http://iandevlin.github.io/mdn/video-player/video/tears-of-steel-battle-clip-medium.mp4"
-// "video/tears-of-steel-battle-clip-medium.mp4";
 
-const Video = [
+const Video = (
+  dura: React.MouseEventHandler<HTMLVideoElement> | undefined,
+  src: React.MouseEventHandler<HTMLVideoElement> | undefined
+) => [
   {
-    id: 1,
-    src: "sintel-short.mp4",
-    ids: "smile",
+    video: (
+      <video
+        src="video/tears-of-steel-battle-clip-medium.mp4"
+        className="card-img card-video"
+        onMouseEnter={dura}
+        onClick={src}
+        controls={false}
+      />
+    ),
   },
   {
-    id: 2,
-    src: "sintel-short.mp4",
-    ids: "laugh",
+    video: (
+      <video
+        src="video/sintel-short.mp4"
+        className="card-img card-video"
+        onMouseEnter={dura}
+        onClick={src}
+        controls={false}
+      />
+    ),
   },
   {
-    id: 3,
-    src: "tears-of-steel-battle-clip-medium.mp4",
-    ids: "tears-of-steel-battle-clip-medium",
+    video: (
+      <video
+        src="video/sintel-short.mp4"
+        className="card-img card-video"
+        onMouseEnter={dura}
+        onClick={src}
+        controls={false}
+      />
+    ),
   },
 ];
