@@ -1,20 +1,17 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import Advertisement from "components/Advertisement";
-import ArticleRightView from "components/articles/ArticleRightView";
-
+import CultureComp from "components/articles/home/CultureComp";
+import EducationComp from "components/articles/home/EducationComp";
+import EntertainmentComp from "components/articles/home/EntertainmentComp";
+import SectionOneComp from "components/articles/home/SectionOneComp";
+import SubscribeComp from "components/articles/home/SubscribeComp";
+import PostPreviewComp from "components/articles/PostPreviewComp";
+import TitleComp from "components/articles/TitleComp";
 import ArticleLayout from "Layout/ArticleLayout";
 import { Fragment } from "react";
 import styled from "styled-components";
 import { articles } from "utils/fakeArticles";
-import Image from "next/image";
-import TitleComp from "components/articles/TitleComp";
-import PostPreviewComp from "components/articles/PostPreviewComp";
-import SectionOneComp from "components/articles/home/SectionOneComp";
-import EntertainmentComp from "components/articles/home/EntertainmentComp";
-import CultureComp from "components/articles/home/CultureComp";
-import EducationComp from "components/articles/home/EducationComp";
-import SubscribeComp from "components/articles/home/SubscribeComp";
 
 export default function Home(): JSX.Element {
 	return (

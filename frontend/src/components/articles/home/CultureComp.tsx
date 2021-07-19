@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import article from "pages/article";
 import React from "react";
 import styled from "styled-components";
 import { IArticles } from "types/articles";

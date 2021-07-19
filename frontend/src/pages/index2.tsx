@@ -60,7 +60,7 @@ export default function Home(): JSX.Element {
 						<div className="section-3-container d-flex flex-column flex-md-row">
 							<div className="left">
 								<div className="left-row row mb-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-									{articles.slice(0, 7).map((article, i) => (
+									{articles.slice(0, 3).map((article, i) => (
 										<div className="col left-row-col" key={i}>
 											<div className="card left-card  border-0">
 												<div className="card-img left-card-img">
