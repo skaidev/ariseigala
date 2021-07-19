@@ -9,28 +9,13 @@ import { articles } from "utils/fakeArticles";
 const ArticleNewsComp = (): JSX.Element => {
 	return (
 		<Wrapper className="section-1 container ">
+			<div className="line bg-warning mt-3"></div>
 			<div className="d-md-flex home-section-flex-wrapper">
 				<div className="left">
-					<p className="big-head">
+					<img src="/images/img1.png" />
+					<p className="big-head my-2">
 						Alhaji Yahaya Bello, recieves man of the year.
 					</p>
-					<img src="/images/img1.png" className="left-big-image" />
-					<div className="text-justify my-2">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non
-						pharetra lacinia ut varius phasellus commodo etiam tellus. Risus
-						nulla quisque integer aliquam amet, venenatis. Tempor congue tempor
-						enim, maecenas arcu. Senectus risus at turpis leo ut risus proin. In
-						non habitant sit neque vestibulum pellentesque vestibulum placerat
-						luctus. Dui faucibus elit sit rhoncus euismod. In nisi suspendisse
-						adipiscing laoreet in. Et, sit felis, natoque pellentesque.
-						Convallis id sodales laoreet sem nulla fermentum integer nibh ac.
-						Neque, eget nisi, diam integer lectus in. Urna, eget morbi massa
-						lacinia pharetra proin nisl, nibh phasellus. Risus feugiat et,
-						pellentesque dui egestas purus diam in. Pretium pharetra at gravida
-						consequat habitant vestibulum. Nulla quam nascetur cursus nulla
-						nisl. Imperdiet arcu, odio condimentum bibendum amet quam. Sit sit
-						mi leo, vel. In morbi pellentesque ornare.
-					</div>
 				</div>
 				<div className="right">
 					<div className="inner">
@@ -54,12 +39,12 @@ const ArticleNewsComp = (): JSX.Element => {
 export default ArticleNewsComp;
 
 const Wrapper = styled.section`
-	margin-top: 3rem;
 	.home-section-flex-wrapper {
+		margin-top: 3rem;
 		gap: 2.5rem;
 		.left {
 			flex: 1;
-			&-big-image {
+			img {
 				width: 100%;
 				max-height: 411px;
 				/* object-fit: cover; */
@@ -68,38 +53,6 @@ const Wrapper = styled.section`
 		.right {
 			width: 100%;
 			max-width: 18rem;
-			display: none;
-			.inner {
-				.inner-content {
-					gap: 0.5rem;
-					img {
-						border-radius: 1rem;
-						width: 100%;
-						height: 100%;
-						object-fit: contain;
-					}
-				}
-			}
-			@media screen and (min-width: 999px) {
-				max-width: 27rem;
-				display: block;
-				.inner-content {
-					display: grid;
-					grid-template-columns: 40% 60%;
-					margin-bottom: 1rem;
-				}
-				@media screen and (max-width: 1199px) {
-					max-width: 18rem;
-					.inner-content {
-						display: grid;
-						grid-template-columns: 1fr;
-						margin-bottom: 0;
-						.small-head {
-							text-align: center;
-						}
-					}
-				}
-			}
 		}
 	}
 `;
@@ -108,11 +61,12 @@ const Card = ({ article }: { article: IArticles }) => {
 	return (
 		<Link href={`/articles/news/${article.id}`}>
 			<a className="inner-content text-decoration-none text-inherit">
-				<img src={article.image} className="" />
 				<div className="">
-					<p className="small-head">{article.title}</p>
+					<p className="text-18 fw-bold">{article.title}</p>
 					<p className="font-14">{article.excerpt}</p>
 				</div>
+
+				<div className="line-thin mb-2 bg-warning"></div>
 			</a>
 		</Link>
 	);

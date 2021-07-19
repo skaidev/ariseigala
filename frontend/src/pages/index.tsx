@@ -5,6 +5,7 @@ import ArticleNewsComp from "components/articles/home/ArticleNewsComp";
 import CultureComp from "components/articles/home/CultureComp";
 import EducationComp from "components/articles/home/EducationComp";
 import EntertainmentComp from "components/articles/home/EntertainmentComp";
+import MagazinAd from "components/articles/home/MagazinAd";
 import SubscribeComp from "components/articles/home/SubscribeComp";
 import PostPreviewComp from "components/articles/PostPreviewComp";
 import TitleComp from "components/articles/TitleComp";
@@ -20,29 +21,7 @@ export default function Home(): JSX.Element {
 				<Wrapper className="article-home">
 					<Advertisement />
 					<ArticleNewsComp />
-					<section className="section-2">
-						<TitleComp title="latest" />
-						<div className="container">
-							<div className="flex-inner d-md-flex justify-content-between gap-2">
-								<div className="left">
-									<div className="row">
-										{articles?.slice(0, 3).map((article, i) => (
-											<div className="col-md-4" key={i}>
-												<PostPreviewComp article={article} />
-											</div>
-										))}
-									</div>
-
-									<div className="my-3 text-center">
-										<button className="btn btn-dark">Go to magazine</button>
-									</div>
-								</div>
-								<div className="right d-none d-md-block">
-									<div className="advert straight "></div>
-								</div>
-							</div>
-						</div>
-					</section>
+					<MagazinAd />
 					<EntertainmentComp articles={articles} />
 					<CultureComp />
 					<EducationComp />
