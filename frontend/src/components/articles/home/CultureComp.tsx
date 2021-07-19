@@ -9,7 +9,7 @@ const CultureComp = (): JSX.Element => {
 	return (
 		<Wrapper className="container">
 			<TitleComp title="Culture and tourism" />
-			<p className="big-head fs-1 my-3">
+			<p className="big-head fs-3 my-3">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nunc felis
 				accumsan.
 			</p>
@@ -87,7 +87,7 @@ const ListPreviewComp = ({ article }: { article: IArticles }): JSX.Element => {
 		<Wrapper>
 			<div className="inner">
 				<img src={article.image} alt={article.title} />
-				<p className="inner-excerpt">
+				<p className="inner-excerpt mt-2">
 					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi,
 					reiciendis. Vero, placeat deleniti.
 				</p>

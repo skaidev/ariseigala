@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import Advertisement from "components/Advertisement";
+import ArticleNewsComp from "components/articles/home/ArticleNewsComp";
 import CultureComp from "components/articles/home/CultureComp";
 import EducationComp from "components/articles/home/EducationComp";
 import EntertainmentComp from "components/articles/home/EntertainmentComp";
-import SectionOneComp from "components/articles/home/SectionOneComp";
 import SubscribeComp from "components/articles/home/SubscribeComp";
 import PostPreviewComp from "components/articles/PostPreviewComp";
 import TitleComp from "components/articles/TitleComp";
@@ -19,7 +19,7 @@ export default function Home(): JSX.Element {
 			<ArticleLayout>
 				<Wrapper className="article-home">
 					<Advertisement />
-					<SectionOneComp />
+					<ArticleNewsComp />
 					<section className="section-2">
 						<TitleComp title="latest" />
 						<div className="container">
@@ -37,10 +37,8 @@ export default function Home(): JSX.Element {
 										<button className="btn btn-dark">Go to magazine</button>
 									</div>
 								</div>
-								<div className="right">
-									<div className="advert straight ">
-										<h1>hi</h1>
-									</div>
+								<div className="right d-none d-md-block">
+									<div className="advert straight "></div>
 								</div>
 							</div>
 						</div>

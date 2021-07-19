@@ -17,14 +17,14 @@ const EntertainmentComp = ({
 				<div className="left">
 					<div className="inner">
 						<img src="/images/Rectangle 19.png" alt="" />
-						<p className="big-head fs-1 mt-3">
+						<p className="big-head fs-3 mt-3">
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
 						</p>
 					</div>
 				</div>
 				<div className="right">
 					<div className="inner">
-						{articles?.slice(0, 3).map((article, i) => (
+						{articles?.slice(0, 5).map((article, i) => (
 							<Card key={i} article={article} />
 						))}
 						{articles.length > 3 && (
@@ -46,36 +46,46 @@ const Wrapper = styled.section`
 		gap: 2.5rem;
 		.left {
 			flex: 1;
-			&-big-image {
+			img {
 				width: 100%;
-				max-height: 411px;
+				/* max-height: 411px; */
 				/* object-fit: cover; */
 			}
 		}
 		.right {
 			width: 100%;
-			max-width: 28rem;
-
+			max-width: 18rem;
+			display: none;
 			.inner {
 				.inner-content {
-					display: grid;
 					gap: 0.5rem;
 					img {
 						border-radius: 1rem;
 						width: 100%;
 						height: 100%;
+						object-fit: contain;
 					}
 				}
 			}
 			@media screen and (min-width: 999px) {
-				/* display: grid; */
-				max-width: 30rem;
+				max-width: 27rem;
+				display: block;
 				.inner-content {
+					display: grid;
 					grid-template-columns: 40% 60%;
+					margin-bottom: 1rem;
 				}
-			}
-			@media screen and (max-width: 768px) {
-				display: none;
+				@media screen and (max-width: 1199px) {
+					max-width: 18rem;
+					.inner-content {
+						display: grid;
+						grid-template-columns: 1fr;
+						margin-bottom: 0;
+						.small-head {
+							text-align: center;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -83,7 +93,7 @@ const Wrapper = styled.section`
 
 const Card = ({ article }: { article: IArticles }) => {
 	return (
-		<div className="inner-content mb-2">
+		<div className="inner-content mb-4">
 			<img src={article.image} className="" />
 			<div className="">
 				<p className="small-head">{article.title}</p>

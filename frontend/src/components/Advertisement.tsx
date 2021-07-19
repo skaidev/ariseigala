@@ -16,7 +16,7 @@ export default Advertisement;
 const AdvertisementWrapper = styled.div`
 	.Advertise {
 		min-height: 16.375rem;
-		background: url("images/Rectangle 27.png") no-repeat;
+		background: url("/images/Rectangle 27.png") no-repeat;
 		background-size: cover;
 	}
 `;

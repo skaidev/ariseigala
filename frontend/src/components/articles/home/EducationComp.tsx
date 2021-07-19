@@ -31,7 +31,7 @@ const EducationComp = (): JSX.Element => {
 				</div>
 			</div>
 
-			<div className="my-2">
+			<div className="mt-5">
 				<div className="row">
 					{articles.slice(0, 3).map((article, i) => (
 						<div className="col-md-4" key={i}>
