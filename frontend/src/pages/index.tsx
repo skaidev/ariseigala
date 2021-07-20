@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+import AdvertisementLandScape from "components/Advertisement";
 import Advertisement from "components/Advertisement";
 import ArticleNewsComp from "components/articles/home/ArticleNewsComp";
 import CultureComp from "components/articles/home/CultureComp";
@@ -21,11 +22,15 @@ export default function Home(): JSX.Element {
 				<Wrapper className="article-home">
 					<Advertisement />
 					<ArticleNewsComp />
+					<div className="line bg-warning my-5 container"></div>
 					<MagazinAd />
 					<EntertainmentComp articles={articles} />
-					<CultureComp />
 					<EducationComp />
+					<CultureComp />
 					<SubscribeComp />
+					<div className="my-5">
+						<AdvertisementLandScape />
+					</div>
 				</Wrapper>
 			</ArticleLayout>
 		</Fragment>

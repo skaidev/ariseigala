@@ -22,8 +22,8 @@ const Wrapper = styled.div`
 			height: 1px;
 			width: 15%;
 		}
-		.title {
+		/* .title {
 			text-transform: capitalize;
-		}
+		} */
 	}
 `;

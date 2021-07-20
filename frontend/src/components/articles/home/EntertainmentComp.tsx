@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { IArticles } from "types/articles";
@@ -13,25 +14,24 @@ const EntertainmentComp = ({
 	return (
 		<Wrapper className="section-3 container">
 			<TitleComp title="Entertainment" />
-			<div className="home-section-flex-wrapper d-md-flex">
+			<div className="home-section-flex-wrapper">
 				<div className="left">
 					<div className="inner">
-						<img src="/images/Rectangle 19.png" alt="" />
-						<p className="big-head fs-3 mt-3">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-						</p>
+						<Link href="/articles/entertainment">
+							<a className="text-inherit text-decoration-none">
+								<img src="/images/Rectangle 19.png" alt="" />
+								<p className="big-head fs-3 mt-3">
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+								</p>
+							</a>
+						</Link>
 					</div>
 				</div>
 				<div className="right">
 					<div className="inner">
-						{articles?.slice(0, 5).map((article, i) => (
-							<Card key={i} article={article} />
-						))}
-						{articles.length > 3 && (
-							<div className="text-center my-3">
-								<button className="btn btn-dark">Read more</button>
-							</div>
-						)}
+						<Card image="/images/Rectangle 24.png" />
+						<Card image="/images/Rectangle 26.png" />
+						<Card image="/images/Rectangle 27.png" />
 					</div>
 				</div>
 			</div>
@@ -44,60 +44,53 @@ export default EntertainmentComp;
 const Wrapper = styled.section`
 	.home-section-flex-wrapper {
 		gap: 2.5rem;
+		display: grid;
+		@media screen and (min-width: 768px) {
+			grid-template-columns: 1fr 1fr;
+		}
 		.left {
-			flex: 1;
 			img {
 				width: 100%;
 				/* max-height: 411px; */
-				/* object-fit: cover; */
+				object-fit: contain;
 			}
 		}
 		.right {
 			width: 100%;
-			max-width: 18rem;
+			/* max-width: 18rem; */
 			display: none;
 			.inner {
 				.inner-content {
-					gap: 0.5rem;
+					gap: 1rem;
 					img {
-						border-radius: 1rem;
 						width: 100%;
-						height: 100%;
-						object-fit: contain;
+
+						height: 269px;
+						object-fit: cover;
 					}
 				}
 			}
-			@media screen and (min-width: 999px) {
-				max-width: 27rem;
+			@media screen and (min-width: 768px) {
 				display: block;
 				.inner-content {
 					display: grid;
-					grid-template-columns: 40% 60%;
+					grid-template-columns: 23rem 60%;
 					margin-bottom: 1rem;
-				}
-				@media screen and (max-width: 1199px) {
-					max-width: 18rem;
-					.inner-content {
-						display: grid;
-						grid-template-columns: 1fr;
-						margin-bottom: 0;
-						.small-head {
-							text-align: center;
-						}
-					}
 				}
 			}
 		}
 	}
 `;
 
-const Card = ({ article }: { article: IArticles }) => {
+const Card = ({ image }: { image: string }) => {
 	return (
 		<div className="inner-content mb-4">
-			<img src={article.image} className="" />
+			<img src={image} className="" />
 			<div className="">
-				<p className="small-head">{article.title}</p>
-				<p className="font-14">{article.excerpt}</p>
+				<p className="font-14 fw-400">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Luctus ornare
+					arcu dui lacus.{" "}
+				</p>
 			</div>
 		</div>
 	);

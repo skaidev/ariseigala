@@ -13,22 +13,23 @@ const ArticleNewsComp = (): JSX.Element => {
 			<div className="d-md-flex home-section-flex-wrapper">
 				<div className="left">
 					<img src="/images/img1.png" />
-					<p className="big-head my-2">
+					<p className="big-head mt-2 mb-5">
 						Alhaji Yahaya Bello, recieves man of the year.
 					</p>
 				</div>
 				<div className="right">
+					<p className="font-24 mb-4 fw-bold">Cover Stories</p>
 					<div className="inner">
 						{articles?.slice(0, 4).map((article, i) => (
 							<Card key={i} article={article} />
 						))}
-						{articles.length > 3 && (
+						{/* {articles.length > 3 && (
 							<div className="text-center my-3">
 								<Link href="/articles/news">
 									<a className="btn btn-dark">Read more</a>
 								</Link>
 							</div>
-						)}
+						)} */}
 					</div>
 				</div>
 			</div>
@@ -46,13 +47,19 @@ const Wrapper = styled.section`
 			flex: 1;
 			img {
 				width: 100%;
-				max-height: 411px;
-				/* object-fit: cover; */
+				min-height: 36rem;
+				max-height: 36.65rem;
+				object-fit: cover;
 			}
 		}
 		.right {
 			width: 100%;
 			max-width: 18rem;
+			line-height: 15px;
+			@media screen and (max-width: 768px) {
+				margin-top: 1rem;
+				max-width: 100%;
+			}
 		}
 	}
 `;
@@ -66,7 +73,7 @@ const Card = ({ article }: { article: IArticles }) => {
 					<p className="font-14">{article.excerpt}</p>
 				</div>
 
-				<div className="line-thin mb-2 bg-warning"></div>
+				<div className="line-thin my-3 bg-warning"></div>
 			</a>
 		</Link>
 	);

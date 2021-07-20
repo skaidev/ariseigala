@@ -14,12 +14,16 @@
 .fw-700 {
 	font-weight: 700;
 }
+.fw-400 {
+	font-weight: 400;
+}
 .big-head {
 	font-weight: 700;
 	font-size: 3rem;
 	font-family: serif;
-	line-height: 45px;
+	line-height: 40px;
 	box-sizing: border-box;
+	// margin-bottom: 1rem;
 }
 
 .small-head {
@@ -43,6 +47,10 @@
 }
 .font-18 {
 	font-size: 1.25rem;
+	line-height: 21px;
+}
+.font-24 {
+	font-size: 1.5rem;
 	line-height: 21px;
 }
 .mc {

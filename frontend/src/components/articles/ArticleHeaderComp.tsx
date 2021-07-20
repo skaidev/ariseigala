@@ -125,6 +125,7 @@ export const categories = [
 	{ name: "Opinion", link: "opinion" },
 	{ name: "Politics", link: "politics" },
 	{ name: "Business", link: "business" },
+	{ name: "Education", link: "education" },
 	{ name: "Religion", link: "religion" },
 	{ name: "Technology", link: "technology" },
 ];
