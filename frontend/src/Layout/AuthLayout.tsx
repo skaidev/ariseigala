@@ -4,23 +4,23 @@ import PdfHeader from "components/pdfComp/PdfHeader";
 import React from "react";
 import styled from "styled-components";
 
-const PdfLayout = ({
+const AuthLayout = ({
   children,
 }: {
   children: React.ReactChild;
 }): JSX.Element => {
   return (
-    <PdfMain id="article-layout">
+    <AuthMain id="article-layout">
       <PdfHeader />
       <main>{children}</main>
       <MagazineFooter />
-    </PdfMain>
+    </AuthMain>
   );
 };
 
-export default PdfLayout;
+export default AuthLayout;
 
-const PdfMain = styled.div`
+const AuthMain = styled.div`
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;

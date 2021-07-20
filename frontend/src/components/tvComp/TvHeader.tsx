@@ -31,26 +31,17 @@ const TvHeader = (): JSX.Element => {
             </button>
             <div className="d-none tv-header-nav-items d-md-flex">
               <ul className="d-flex  ">
-                <li className="nav-item">
-                  <Link href="/">
-                    <a className="nav-link">Home</a>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/">
-                    <a className="nav-link">Subscribe</a>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/">
-                    <a className="nav-link">Tv</a>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/">
-                    <a className="nav-link">contact</a>
-                  </Link>
-                </li>
+                {navlist.map((item, i) => (
+                  <li className="nav-item" key={i}>
+                    <Link
+                      href={
+                        item.toLowerCase() === "home" ? "/" : item.toLowerCase()
+                      }
+                    >
+                      <a className="nav-link text-inherit">{item}</a>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </nav>
@@ -58,34 +49,19 @@ const TvHeader = (): JSX.Element => {
         {minMenu && (
           <div className="min-item bg-light animate__animated animate__zoomIn">
             <ul className="container d-md-none  p-0">
-              <li className="nav-item text-center">
-                <Link href="/">
-                  <a className="nav-link d-inline-block px-3 py-2 animate__animated animate__rotateInDownRight animate__delay-1s">
-                    Home
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item text-center">
-                <Link href="/">
-                  <a className="nav-link d-inline-block px-3 py-2 animate__animated animate__rotateInDownRight animate__delay-1s">
-                    Subscribe
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item text-center">
-                <Link href="/">
-                  <a className="nav-link d-inline-block px-3 py-2 animate__animated animate__rotateInDownRight animate__delay-1s">
-                    Tv
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item text-center">
-                <Link href="/">
-                  <a className="nav-link d-inline-block px-3 py-2 animate__animated animate__rotateInDownRight animate__delay-1s">
-                    contact
-                  </a>
-                </Link>
-              </li>
+              {navlist.map((item, i) => (
+                <li className="nav-item text-center" key={i}>
+                  <Link
+                    href={
+                      item.toLowerCase() === "home" ? "/" : item.toLowerCase()
+                    }
+                  >
+                    <a className="nav-link d-inline-block px-3 py-2 animate__animated animate__rotateInDownRight animate__delay-1s">
+                      {item}
+                    </a>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         )}
@@ -95,3 +71,5 @@ const TvHeader = (): JSX.Element => {
 };
 
 export default TvHeader;
+
+const navlist = ["Home", "Subscribe", "Tv", "contact"];
