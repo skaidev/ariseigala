@@ -45,7 +45,7 @@ const ArticleHeader = (): JSX.Element => {
 						<List className="d-flex">
 							{navitems.map((item) => (
 								<li className="nav-item" key={item.id}>
-									<Link href="/">
+									<Link href={item.link}>
 										<a className="nav-link ">{item.txt}</a>
 									</Link>
 								</li>
@@ -58,7 +58,7 @@ const ArticleHeader = (): JSX.Element => {
 						<ul className="navbar-nav">
 							{navitems.map((item) => (
 								<li className="nav-item text-center fs-5" key={item.id}>
-									<Link href="/">
+									<Link href={item.link}>
 										<a className="nav-link ">{item.txt}</a>
 									</Link>
 								</li>
