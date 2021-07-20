@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import VideoPlayer from "components/videoComp/VideoPlayer";
+import VideoPlayer from "components/video/videoComp/VideoPlayer";
 import TvLayout from "Layout/TvLayout";
 import React, { useState } from "react";
 import styled from "styled-components";

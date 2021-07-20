@@ -1,4 +1,3 @@
-import { useFetch } from "function/Fetch";
 import PdfLayout from "Layout/PdfLayout";
 import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
@@ -11,39 +10,28 @@ const preventLeftClick = () => {
     event.preventDefault();
   });
 };
-
 const Test = (): JSX.Element => {
-  const data = useFetch("https://research.nhm.org/pdfs/10840/10840.pdf");
-  const getPdf = async (e) => {
-    try {
-      const doc = await e.target.files[0];
-      const file = [];
-      file.push(doc);
-      const urlDoc = await window.URL.createObjectURL(new Blob(file));
-      setLocalUrl(urlDoc);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => preventLeftClick(), []);
 
   useEffect(() => {
     let state = true;
     if (state) {
-      setUrl(typeof data === "string" ? data : "");
     }
     return () => {
       state = false;
     };
-  }, [data]);
+  }, []);
 
-  const [numPages, setNumPages] = useState(null);
+  const [numPages, setNumPages] = useState(Number(null));
   const [pageNumber, setPageNumber] = useState(1);
   const [zoom, setZoom] = useState(1);
-  const [localUrl, setLocalUrl] = useState(null);
+  const [localUrl, setLocalUrl] = useState();
+
   const [menu, setMenu] = useState(false);
   const [content, setContent] = useState([]);
-  const [url, setUrl] = useState(null);
+  const [url, setUrl] = useState(
+    "https://www.zok.com/pdf/msds/44-ZOK_27_GOLD_STANDARD_SDS4527.pdf"
+  );
   // setUrl(typeof data === "string" ? data : "");
   // console.log(url);
 
@@ -52,7 +40,7 @@ const Test = (): JSX.Element => {
     setNumPages(numPages);
     setPageNumber(1);
     setZoom(1);
-    const num = [];
+    const num: number[] = [];
     for (let i = 1; i <= numPages; i++) {
       num.push(i);
     }
@@ -60,7 +48,7 @@ const Test = (): JSX.Element => {
     setContent(num);
   }
 
-  function changePage(offset) {
+  function changePage(offset: number) {
     setPageNumber((prevPageNumber) => prevPageNumber + offset);
   }
 
@@ -126,14 +114,6 @@ const Test = (): JSX.Element => {
         <main className="bg-light">
           <section className="py-2 flex-grow-1">
             <Main className="main container">
-              <form className="mb-2">
-                <input
-                  type="file"
-                  className="form-control"
-                  onChange={(e) => getPdf(e)}
-                  placeholder="upload PDF..."
-                />
-              </form>
               <div className="d-flex mb-2 py-1 justify-content-between toggle-zoom">
                 <div className="content-menu">
                   <button
@@ -168,10 +148,9 @@ const Test = (): JSX.Element => {
                 file={localUrl ? localUrl : url}
                 className="pdfViewer"
                 onLoadSuccess={onDocumentLoadSuccess}
-                id="text"
                 renderMode="canvas"
                 onLoadError={() => {
-                  setLocalUrl(null);
+                  setLocalUrl(String(null));
                   alert(`Can't load pdf`);
                 }}
                 error={`cant't load PDF`}
@@ -189,7 +168,9 @@ const Test = (): JSX.Element => {
                     className="progress-bar progress-bar-striped"
                     role="progressbar"
                     style={{
-                      width: `${Math.round((pageNumber / numPages) * 100)}%`,
+                      width: `${Math.round(
+                        (pageNumber / Number(numPages)) * 100
+                      )}%`,
                     }}
                     aria-label="progress"
                     aria-valuenow={pageNumber}
@@ -198,7 +179,7 @@ const Test = (): JSX.Element => {
                   ></div>
                 </div>
                 <p className="text-end mb-1 fw-bold fs-5">
-                  {Math.round((pageNumber / numPages) * 100)}% read
+                  {Math.round((pageNumber / Number(numPages)) * 100)}% read
                 </p>
                 <div className="d-flex control-nav-main justify-content-center align-items-center">
                   <button
@@ -216,7 +197,7 @@ const Test = (): JSX.Element => {
                   </div>
                   <button
                     type="button"
-                    disabled={pageNumber >= numPages}
+                    disabled={pageNumber >= Number(numPages)}
                     onClick={nextPage}
                     className="btn p-0 bg-transparent"
                     aria-label="arrow right"

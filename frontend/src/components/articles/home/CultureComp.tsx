@@ -1,4 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+import AdvertisementLandScape, {
+	AdvertisementPortrait,
+} from "components/Advertisement";
 import React from "react";
 import styled from "styled-components";
 import { IArticles } from "types/articles";
@@ -9,7 +12,7 @@ const CultureComp = (): JSX.Element => {
 	return (
 		<Wrapper className="container">
 			<TitleComp title="Culture and tourism" />
-			<p className="big-head fs-1 my-3">
+			<p className="big-head fs-3 my-3">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nunc felis
 				accumsan.
 			</p>
@@ -58,13 +61,23 @@ const CultureComp = (): JSX.Element => {
 				</button>
 			</div>
 
-			<div className="my-3">
-				<div className="row">
-					{articles?.slice(0, 3).map((article, i) => (
-						<div className="col-md-4" key={i}>
-							<ListPreviewComp article={article} />
+			<div className="my-3 bottom">
+				<div className="inner-grid">
+					<div className="row left">
+						{articles?.slice(0, 3).map((article, i) => (
+							<div className="col-md-4" key={i}>
+								<ListPreviewComp article={article} />
+							</div>
+						))}
+					</div>
+					<div className="right">
+						<div className="portrait">
+							<AdvertisementPortrait />
 						</div>
-					))}
+						<div className="landscape">
+							<AdvertisementLandScape />
+						</div>
+					</div>
 				</div>
 			</div>
 		</Wrapper>
@@ -80,6 +93,48 @@ const Wrapper = styled.section`
 	.line {
 		height: 2px;
 	}
+	.bottom {
+		.right {
+			width: 100%;
+			min-width: 14rem;
+			max-width: 17rem;
+
+			.portrait {
+				height: 100%;
+				display: none;
+				@media screen and (min-width: 768px) {
+					display: block;
+				}
+			}
+			.landscape {
+				display: none;
+				@media screen and (max-width: 768px) {
+					display: block;
+					width: 100%;
+				}
+			}
+		}
+		@media screen and (min-width: 768px) {
+			.inner-grid {
+				display: grid;
+				grid-template-columns: 1fr auto;
+				grid-column-gap: 2rem;
+			}
+		}
+		@media screen and (max-width: 920px) {
+			.right {
+				width: 100%;
+				min-width: 14rem;
+				max-width: 15rem;
+			}
+			@media screen and (max-width: 768px) {
+				grid-template-columns: 1fr;
+				.right {
+					max-width: 100%;
+				}
+			}
+		}
+	}
 `;
 
 const ListPreviewComp = ({ article }: { article: IArticles }): JSX.Element => {
@@ -87,7 +142,7 @@ const ListPreviewComp = ({ article }: { article: IArticles }): JSX.Element => {
 		<Wrapper>
 			<div className="inner">
 				<img src={article.image} alt={article.title} />
-				<p className="inner-excerpt">
+				<p className="inner-excerpt mt-2">
 					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi,
 					reiciendis. Vero, placeat deleniti.
 				</p>

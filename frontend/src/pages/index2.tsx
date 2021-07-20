@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Advertisement from "components/Advertisement";
 import ArticleRightView from "components/articles/ArticleRightView";
-import SubscribeComp from "components/SubscribeComp";
+import SubscribeComp from "components/articles/home/SubscribeComp";
+
 import ArticleLayout from "Layout/ArticleLayout";
 import styled from "styled-components";
 import { articles } from "utils/fakeArticles";

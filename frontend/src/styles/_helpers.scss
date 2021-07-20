@@ -14,20 +14,27 @@
 .fw-700 {
 	font-weight: 700;
 }
+.fw-400 {
+	font-weight: 400;
+}
 .big-head {
 	font-weight: 700;
 	font-size: 3rem;
 	font-family: serif;
-	line-height: 45px;
+	line-height: 40px;
 	box-sizing: border-box;
+	// margin-bottom: 1rem;
 }
 
 .small-head {
 	font-weight: 700;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	font-family: serif;
 	line-height: 27px;
 	box-sizing: border-box;
+}
+.text-inherit {
+	color: inherit;
 }
 
 .text-justify {
@@ -38,7 +45,14 @@
 	font-size: 0.875rem;
 	line-height: 21px;
 }
-
+.font-18 {
+	font-size: 1.25rem;
+	line-height: 21px;
+}
+.font-24 {
+	font-size: 1.5rem;
+	line-height: 21px;
+}
 .mc {
 	width: 90%;
 	max-width: 1000000000000000000000000000px;

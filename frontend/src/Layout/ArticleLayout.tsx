@@ -1,5 +1,5 @@
 import FooterComp from "components/FooterComp";
-import SinglearticleHeader from "components/SinglearticleHeader";
+import HeaderComp from "components/articles/ArticleHeaderComp";
 import React from "react";
 import styled from "styled-components";
 
@@ -10,7 +10,7 @@ const ArticleLayout = ({
 }): JSX.Element => {
   return (
     <Main id="article-layout">
-      <SinglearticleHeader />
+      <HeaderComp />
       <main>{children}</main>
       <FooterComp />
     </Main>
