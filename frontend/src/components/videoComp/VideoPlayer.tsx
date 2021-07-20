@@ -9,20 +9,14 @@ interface EventTarget {
   target: { duration: number; currentTime: number; ended: boolean };
 }
 
-interface Iindex {}
-
 const VdeoPlayer = ({
   videosrc,
   duration,
-  index,
 }: {
   videosrc: string;
   duration: string;
-  index: Iindex;
 }): JSX.Element => {
-  // STATES
-  console.log();
-
+  // @ USESTATES
   const [currentVidTime, setCurrentVidTime] = useState("--");
   const [vidDurationTime, setVidDurationTime] = useState("--");
   const [play_pause, setPlay_Pause] = useState(false);
@@ -34,19 +28,16 @@ const VdeoPlayer = ({
   const [volumeVal, setVolumeVal] = useState(1);
   const [mute, setMute] = useState(false);
 
-  // FOR THE VIDEO INITIAL RENDER STATE
+  // Validate if the video prop is null
   useEffect(() => {
-    const vid = document.getElementById("video") as HTMLElement;
     if (!videosrc) {
       setDisabled(true);
       return setRange({ ...range, max: 0 });
     } else {
-      setRange({ ...range, max: vid.duration });
       setDisabled(false);
       setPlay_Pause(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videosrc]);
+  }, [range, videosrc]);
   //KNOW WHEN THE USER  LEFT THE TAB
   useEffect(() => {
     const vid = document.getElementById("video") as HTMLElement;
@@ -57,22 +48,17 @@ const VdeoPlayer = ({
       }
     });
   }, []);
-  // LISTEN TO ALL VIDEO EVENT
-
+  // Function to Handle the custom video conrtols
   const updateTimeProgress = (e: EventTarget) => {
     const { duration, currentTime, ended } = e.target;
     setRange({ ...range, max: duration, value: currentTime });
+    // @ CurrentTime
     const currentHrs = Math.floor(currentTime / 3600);
-    const durationHrs = Math.floor(duration / 3600);
     const currentMin = Math.floor(currentTime / 60);
     const currentSec = Math.floor(currentTime - currentMin * 60);
-    const durationMin = Math.floor(duration / 60);
-    const durationSec = Math.floor(duration - durationMin * 60);
+    // Formated CurrentTime
     const formatedVidTime = `${currentHrs}:${currentMin}:${currentSec}`;
-    const formatedVidDuration = `${durationHrs}:${durationMin}:${durationSec}`;
-
     setCurrentVidTime(formatedVidTime);
-    setVidDurationTime(formatedVidDuration);
     if (ended) {
       setPlay_Pause(false);
     }
@@ -171,7 +157,7 @@ const VdeoPlayer = ({
         containerExpand.msRequestFullscreen();
     }
   };
-  // SET KDB CONTROL
+  // SET Keyboard  CONTROL
   useEffect(() => {
     navigator.mediaSession.setActionHandler("previoustrack", backWard);
     navigator.mediaSession.setActionHandler("nexttrack", fastFoward);
@@ -182,6 +168,23 @@ const VdeoPlayer = ({
     const vid = document.getElementById("video") as HTMLElement;
     vid.addEventListener("timeupdate", updateTimeProgress);
     vid.addEventListener("volumechange", volumeChange);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (process.browser) {
+      const { duration, currentTime } = document.getElementById(
+        "video"
+      ) as HTMLVideoElement;
+      setRange({ ...range, max: duration, value: currentTime });
+      const checked_Duartion = Number(duration);
+      const durationHrs = Math.floor(checked_Duartion / 3600);
+      const durationMin = Math.floor(checked_Duartion / 60);
+      const durationSec = Math.floor(checked_Duartion - durationMin * 60);
+      const formatedVidDuration = `${Number(durationHrs)}:${Number(
+        durationMin
+      )}:${Number(durationSec)}`;
+      setVidDurationTime(formatedVidDuration);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -230,7 +233,8 @@ const VdeoPlayer = ({
               </button>
             </div>
             <div className="text-white btn d-flex justify-content-end justify-content-md-center col currenttime-duration">
-              <time>{currentVidTime}</time>/<time>{duration}</time>
+              <time>{currentVidTime}</time>/
+              <time>{duration ? duration : vidDurationTime}</time>
             </div>
             <div className="volume col d-flex justify-content-start">
               <div className="vol-container text-white py-1 px-1 d-flex">

@@ -2,38 +2,34 @@
 import VideoPlayer from "components/videoComp/VideoPlayer";
 import TvLayout from "Layout/TvLayout";
 import React, { useState } from "react";
-import { useEffect } from "react";
 import styled from "styled-components";
 
 const Tv = (): JSX.Element => {
   const [src, setSrc] = useState("");
-  const [vidSrc, setVidSrc] = useState("");
   const [vidDuration, setVidDuration] = useState("");
-  useEffect(() => {
-    (async () => {
-      if (src) {
-        const { url, ok } = await fetch(src);
-        console.log(url);
-        if (!ok) {
-          return false;
-        } else {
-          setVidSrc(url);
-        }
-      }
-    })();
-    setVidSrc("");
-  }, [src]);
-  const getDuartion = (e: { target: { duration: number } }): void => {
-    const { duration } = e.target;
-    const durationHrs = Math.floor(duration / 3600);
-    const durationMin = Math.floor(duration / 60);
-    const durationSec = Math.floor(duration - durationMin * 60);
-    const data = `${durationHrs}:${durationMin}:${durationSec}`;
-    setVidDuration(data);
+  const [markDuration, setMarkDuration] = useState("");
+
+  const getDuartion = (): void => {
+    const { duration } = document.getElementById("video") as HTMLElement;
+    const checked_Duartion = Number(duration);
+    const durationHrs = Math.floor(checked_Duartion / 3600);
+    const durationMin = Math.floor(checked_Duartion / 60);
+    const durationSec = Math.floor(checked_Duartion - durationMin * 60);
+    const formatedVidDuration = `${Number(durationHrs)}:${Number(
+      durationMin
+    )}:${Number(durationSec)}`;
+    setVidDuration(formatedVidDuration);
   };
-  const getSrc = (e: { target: { src: string } }) => {
-    const source = e.target.src;
-    setSrc(source);
+  const getDurationByMouseOver = (e: { target: { duration: number } }) => {
+    const { duration } = e.target;
+    const checked_Duartion = Number(duration);
+    const durationHrs = Math.floor(checked_Duartion / 3600);
+    const durationMin = Math.floor(checked_Duartion / 60);
+    const durationSec = Math.floor(checked_Duartion - durationMin * 60);
+    const formatedVidDuration = `${Number(durationHrs)}:${Number(
+      durationMin
+    )}:${Number(durationSec)}`;
+    setMarkDuration(formatedVidDuration);
   };
 
   return (
@@ -61,9 +57,8 @@ const Tv = (): JSX.Element => {
               <div className="left">
                 <div className="video-container bg-dark py-3">
                   <VideoPlayer
-                    videosrc={vidSrc}
+                    videosrc={src ? src : videoSource[0].src}
                     duration={vidDuration}
-                    index={Video}
                   />
                 </div>
                 <div className="video-title">
@@ -138,31 +133,37 @@ const Tv = (): JSX.Element => {
               </div>
               <div className="right">
                 <div className="row right-main row-cols-1 g-3">
-                  {Video(getDuartion, getSrc).map(
-                    (card, i): JSX.Element => (
-                      <div className="col border-0 right-main-col" key={i}>
-                        <div className="card right-main-col-card bg-transparent border-0 d-flex flex-colum flex-md-row">
-                          <div className="img d-flex justify-content-end align-items-end">
-                            {card.video}
-                            <mark
-                              className="bg-dark text-white mb-2 me-2"
-                              style={{ zIndex: 1 }}
-                            >
-                              {vidDuration}
-                            </mark>
-                          </div>
-                          <div className="ms-1 rigth-card-body card-body p-0">
-                            <p className="p-0 mb-2 fw-bolder fs-6">
-                              Lorem ipsum dolor sit amet
-                            </p>
-                            <p className="text-end p-0 m-0 fs-6 fw-light">
-                              <time>1 month ago</time>
-                            </p>
-                          </div>
+                  {videoSource.map((source, i) => (
+                    <div className="col border-0 right-main-col" key={i}>
+                      <div className="card right-main-col-card bg-transparent border-0 d-flex flex-colum flex-md-row">
+                        <div className="img d-flex justify-content-end align-items-end">
+                          <video
+                            src={source.src}
+                            controls={false}
+                            onClick={(e) => {
+                              setSrc(e.target.src);
+                              getDuartion();
+                            }}
+                            onMouseOver={getDurationByMouseOver}
+                          />
+                          <mark
+                            className="bg-dark text-white mb-2 me-2"
+                            style={{ zIndex: 1 }}
+                          >
+                            {markDuration}
+                          </mark>
+                        </div>
+                        <div className="ms-1 rigth-card-body card-body p-0">
+                          <p className="p-0 mb-2 fw-bolder fs-6">
+                            Lorem ipsum dolor sit amet
+                          </p>
+                          <p className="text-end p-0 m-0 fs-6 fw-light">
+                            <time>1 month ago</time>
+                          </p>
                         </div>
                       </div>
-                    )
-                  )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -181,41 +182,9 @@ const Tvwrapper = styled.div`
 
 const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-const Video = (
-  dura: React.MouseEventHandler<HTMLVideoElement> | undefined,
-  src: React.MouseEventHandler<HTMLVideoElement> | undefined
-) => [
-  {
-    video: (
-      <video
-        src="video/tears-of-steel-battle-clip-medium.mp4"
-        className="card-img card-video"
-        onMouseEnter={dura}
-        onClick={src}
-        controls={false}
-      />
-    ),
-  },
-  {
-    video: (
-      <video
-        src="video/sintel-short.mp4"
-        className="card-img card-video"
-        onMouseEnter={dura}
-        onClick={src}
-        controls={false}
-      />
-    ),
-  },
-  {
-    video: (
-      <video
-        src="video/sintel-short.mp4"
-        className="card-img card-video"
-        onMouseEnter={dura}
-        onClick={src}
-        controls={false}
-      />
-    ),
-  },
+const videoSource = [
+  { src: "video/tears-of-steel-battle-clip-medium.mp4" },
+  { src: "video/sintel-short.mp4" },
+  { src: "video/tears-of-steel-battle-clip-medium.mp4" },
+  { src: "video/sintel-short.mp4" },
 ];
