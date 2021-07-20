@@ -97,8 +97,8 @@ const Tv = (): JSX.Element => {
                   </form>
                 </div>
                 <div className="row comments row-cols-1 g-3">
-                  {Cards.slice(6).map((card) => (
-                    <div className="col comments-main " key={card}>
+                  {comments.map((comment, i) => (
+                    <div className="col comments-main " key={i}>
                       <div className="card border-0 comments-main-card p-0 d-flex align-items-md-start flex-column flex-md-row">
                         <div className="comments-main-card-pic">
                           <div className="comments-main-card-pic-main overflow-hidden rounded-circle position-relative ">
@@ -111,20 +111,10 @@ const Tv = (): JSX.Element => {
                         </div>
                         <div className="card-body p-0 comments-main-card-body">
                           <div className="card-title comments-main-card-title align-items-center d-flex justify-content-between">
-                            <span className="fw-bold">Emeka Chibuzor</span>
-                            <time className="text-muted">2 Hrs ago</time>
+                            <span className="fw-bold">{comment.title}</span>
+                            <time className="text-muted">{comment.time}</time>
                           </div>
-                          <p>
-                            Nunc amet purus at amet elementum ornare tincidunt
-                            phasellus habitant. Sed dui, leo amet, tristique sed
-                            porta magnis tincidunt massa. In orci scelerisque
-                            nunc cras euismod suscipit non ut orci. Purus ac
-                            imperdiet laoreet quam fames. Nunc enim malesuada
-                            volutpat mattis. Praesent ipsum lacinia dis metus.
-                            In amet, eget tellus facilisi pellentesque. Tortor
-                            integer urna libero phasellus. Ullamcorper congue
-                            volutpat vel.
-                          </p>
+                          <p>{comment.body}</p>
                         </div>
                       </div>
                     </div>
@@ -180,11 +170,37 @@ const Tvwrapper = styled.div`
   min-height: 100vh;
 `;
 
-const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-
 const videoSource = [
   { src: "video/tears-of-steel-battle-clip-medium.mp4" },
   { src: "video/sintel-short.mp4" },
   { src: "video/tears-of-steel-battle-clip-medium.mp4" },
   { src: "video/sintel-short.mp4" },
+];
+
+const comments = [
+  {
+    title: "Emeka Chibuzor",
+    body: "Nunc amet purus at amet elementum ornare tincidunt phasellus habitant. Sed dui, leo amet, tristique sed porta magnis tincidunt massa. In orci scelerisque nunc cras euismod suscipit non ut orci. Purus ac imperdiet laoreet quam fames. Nunc enim malesuada volutpat mattis. Praesent ipsum lacinia dis metus. In amet, eget tellus facilisi pellentesque. Tortor integer urna libero phasellus. Ullamcorper congue volutpat vel.",
+    time: "2 Hrs ago",
+  },
+  {
+    title: "Emeka Chibuzor",
+    body: "Nunc amet purus at amet elementum ornare tincidunt phasellus habitant. Sed dui, leo amet, tristique sed porta magnis tincidunt massa. In orci scelerisque nunc cras euismod suscipit non ut orci. Purus ac imperdiet laoreet quam fames. Nunc enim malesuada volutpat mattis. Praesent ipsum lacinia dis metus. In amet, eget tellus facilisi pellentesque. Tortor integer urna libero phasellus. Ullamcorper congue volutpat vel.",
+    time: "2 Hrs ago",
+  },
+  {
+    title: "Emeka Chibuzor",
+    body: "Nunc amet purus at amet elementum ornare tincidunt phasellus habitant. Sed dui, leo amet, tristique sed porta magnis tincidunt massa. In orci scelerisque nunc cras euismod suscipit non ut orci. Purus ac imperdiet laoreet quam fames. Nunc enim malesuada volutpat mattis. Praesent ipsum lacinia dis metus. In amet, eget tellus facilisi pellentesque. Tortor integer urna libero phasellus. Ullamcorper congue volutpat vel.",
+    time: "2 Hrs ago",
+  },
+  {
+    title: "Emeka Chibuzor",
+    body: "Nunc amet purus at amet elementum ornare tincidunt phasellus habitant. Sed dui, leo amet, tristique sed porta magnis tincidunt massa. In orci scelerisque nunc cras euismod suscipit non ut orci. Purus ac imperdiet laoreet quam fames. Nunc enim malesuada volutpat mattis. Praesent ipsum lacinia dis metus. In amet, eget tellus facilisi pellentesque. Tortor integer urna libero phasellus. Ullamcorper congue volutpat vel.",
+    time: "2 Hrs ago",
+  },
+  {
+    title: "Emeka Chibuzor",
+    body: "Nunc amet purus at amet elementum ornare tincidunt phasellus habitant. Sed dui, leo amet, tristique sed porta magnis tincidunt massa. In orci scelerisque nunc cras euismod suscipit non ut orci. Purus ac imperdiet laoreet quam fames. Nunc enim malesuada volutpat mattis. Praesent ipsum lacinia dis metus. In amet, eget tellus facilisi pellentesque. Tortor integer urna libero phasellus. Ullamcorper congue volutpat vel.",
+    time: "2 Hrs ago",
+  },
 ];
