@@ -10,9 +10,9 @@ const preventLeftClick = () => {
     event.preventDefault();
   });
 };
+
 const Test = (): JSX.Element => {
   useEffect(() => preventLeftClick(), []);
-
   useEffect(() => {
     let state = true;
     if (state) {
@@ -21,20 +21,13 @@ const Test = (): JSX.Element => {
       state = false;
     };
   }, []);
-
   const [numPages, setNumPages] = useState(Number(null));
   const [pageNumber, setPageNumber] = useState(1);
   const [zoom, setZoom] = useState(1);
-  const [localUrl, setLocalUrl] = useState();
-
   const [menu, setMenu] = useState(false);
-  const [content, setContent] = useState([]);
-  const [url, setUrl] = useState(
-    "https://www.zok.com/pdf/msds/44-ZOK_27_GOLD_STANDARD_SDS4527.pdf"
-  );
-  // setUrl(typeof data === "string" ? data : "");
-  // console.log(url);
-
+  const [content, setContent] = useState({});
+  const [url, setUrl] = useState("");
+  console.log(typeof content);
   /*When document gets loaded successfully*/
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
@@ -44,26 +37,28 @@ const Test = (): JSX.Element => {
     for (let i = 1; i <= numPages; i++) {
       num.push(i);
     }
-
     setContent(num);
   }
-
   function changePage(offset: number) {
     setPageNumber((prevPageNumber) => prevPageNumber + offset);
   }
-
   function previousPage() {
     changePage(-1);
   }
-
   function nextPage() {
     changePage(1);
   }
   /* Set content */
-  function pageNum(num: { num: number }) {
+  function pageNum(num: { num: number | string }) {
     setPageNumber(Number(num));
     setMenu(false);
   }
+
+  const handlePdfUpload = (e): void => {
+    const pdf = e.target.files[0];
+    const pdf_url = window.URL.createObjectURL(pdf);
+    setUrl(pdf_url);
+  };
   return (
     <PdfLayout>
       <>
@@ -82,9 +77,9 @@ const Test = (): JSX.Element => {
               </div>
               <h4>Contents</h4>
               <div>
-                {content.map((e) => (
+                {content?.map((e: number | never) => (
                   <div
-                    id={e}
+                    id={String(e)}
                     key={e}
                     className={`mb-1 content-bar align-items-start g-2 d-flex py-1 ${
                       pageNumber === e ? "gray" : ""
@@ -114,6 +109,15 @@ const Test = (): JSX.Element => {
         <main className="bg-light">
           <section className="py-2 flex-grow-1">
             <Main className="main container">
+              <div className="py-2 mb-3">
+                <form>
+                  <input
+                    type="file"
+                    onChange={handlePdfUpload}
+                    className="form-control"
+                  />
+                </form>
+              </div>
               <div className="d-flex mb-2 py-1 justify-content-between toggle-zoom">
                 <div className="content-menu">
                   <button
@@ -145,12 +149,11 @@ const Test = (): JSX.Element => {
                 </div>
               </div>
               <Document
-                file={localUrl ? localUrl : url}
+                file={url}
                 className="pdfViewer"
                 onLoadSuccess={onDocumentLoadSuccess}
                 renderMode="canvas"
                 onLoadError={() => {
-                  setLocalUrl(String(null));
                   alert(`Can't load pdf`);
                 }}
                 error={`cant't load PDF`}

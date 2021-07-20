@@ -1,9 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import MagazineLayout from "Layout/MagazineLayout";
+import Link from "next/link";
 import React, { useState } from "react";
 import Title from "react-vanilla-tilt";
 
-const index = (): JSX.Element => {
+// declare module "react-vanilla-tilt" {}
+
+const Index = (): JSX.Element => {
   const options = {
     scale: 2,
     max: 35,
@@ -47,21 +50,25 @@ const index = (): JSX.Element => {
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 {Card.map((card) => (
                   <div className="col" key={card} data-aos="zoom-in-up">
-                    <div className="card  border-0 h-100">
-                      <img
-                        src="./images/book.png"
-                        alt=""
-                        className="card-img"
-                      />
-                      <div className="card-body">
-                        <p className="card-title mb-2 fw-bold text-center fs-4">
-                          Issue 60
-                        </p>
-                        <p className="text-center fs-5 georgia">
-                          January 06,2021
-                        </p>
-                      </div>
-                    </div>
+                    <Link href="/magazine/single">
+                      <a className="text-decoration-none text-inherit">
+                        <div className="card  border-0 h-100">
+                          <img
+                            src="./images/book.png"
+                            alt=""
+                            className="card-img"
+                          />
+                          <div className="card-body">
+                            <p className="card-title mb-2 fw-bold text-center fs-4">
+                              Issue 60
+                            </p>
+                            <p className="text-center fs-5 georgia">
+                              January 06,2021
+                            </p>
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -86,21 +93,25 @@ const index = (): JSX.Element => {
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 {Card.map((card) => (
                   <div className="col" data-aos="zoom-in-up" key={card}>
-                    <div className="card  border-0 h-100">
-                      <img
-                        src="./images/book.png"
-                        alt=""
-                        className="card-img"
-                      />
-                      <div className="card-body">
-                        <p className="card-title mb-2 fw-bold text-center fs-4">
-                          Issue 60
-                        </p>
-                        <p className="text-center fs-5 georgia">
-                          January 06,2021
-                        </p>
-                      </div>
-                    </div>
+                    <Link href="/magazine/single">
+                      <a className="text-decoration-none text-inherit">
+                        <div className="card  border-0 h-100">
+                          <img
+                            src="./images/book.png"
+                            alt=""
+                            className="card-img"
+                          />
+                          <div className="card-body">
+                            <p className="card-title mb-2 fw-bold text-center fs-4">
+                              Issue 60
+                            </p>
+                            <p className="text-center fs-5 georgia">
+                              January 06,2021
+                            </p>
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -117,5 +128,5 @@ const index = (): JSX.Element => {
   );
 };
 
-export default index;
+export default Index;
 const Card = [1, 2, 3, 4, 5, 6, 7, 8];
