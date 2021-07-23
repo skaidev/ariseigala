@@ -45,7 +45,9 @@ const ArticleHeader = (): JSX.Element => {
                      {navitems.map((item) => (
                         <li className="nav-item" key={item.id}>
                            <Link href={item.link}>
-                              <a className="nav-link ">{item.txt}</a>
+                              <a className="nav-link text-inherit">
+                                 {item.txt}
+                              </a>
                            </Link>
                         </li>
                      ))}
@@ -58,7 +60,9 @@ const ArticleHeader = (): JSX.Element => {
                      {navitems.map((item) => (
                         <li className="nav-item text-center fs-5" key={item.id}>
                            <Link href={item.link}>
-                              <a className="nav-link ">{item.txt}</a>
+                              <a className="nav-link text-inherit">
+                                 {item.txt}
+                              </a>
                            </Link>
                         </li>
                      ))}

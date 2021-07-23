@@ -1,21 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 import TvComment from "components/tvComp/comments/TvComment";
-import VideoList from "components/tvComp/video/VideoList";
+import VideoList, { VideoData } from "components/tvComp/video/VideoList";
 import VideoPlayer from "components/tvComp/video/VideoPlayer";
 import TvLayout from "Layout/TvLayout";
+import { useRouter } from "next/router";
 import React from "react";
-import { useEffect } from "react";
 import styled from "styled-components";
+import * as timeago from "timeago.js";
+interface IDate {
+   data: {
+      id: string;
+      title: string;
+      createdAt: number | string;
+   }[];
+}
 
 const Tv = (): JSX.Element => {
-   useEffect(() => {
-      const vod = document.getElementById("vod");
-      if (process.browser) {
-         if (vod?.className.includes("player")) {
-            console.log(true);
-         }
-      }
-   }, []);
+   const { query } = useRouter();
+   const id: string | string[] | undefined = query?.id;
+   const { data }: IDate = VideoData();
+   console.log(data);
+
    return (
       <TvLayout>
          <Tvwrapper>
@@ -40,25 +45,39 @@ const Tv = (): JSX.Element => {
                   <div className="tv-body-main-video d-flex flex-column flex-lg-row">
                      <div className="left">
                         <div className="video-container bg-dark py-3">
-                           <VideoPlayer id="ysz5S6PUM-U" />
+                           <VideoPlayer id={id} />
                         </div>
                         <div className="video-title">
                            <div className="border-bottom py-2 border-dark">
                               <p className="p-0 mb-1">
-                                 Tempus ornare morbi molestie purus dis et.
-                                 Pellentesque
+                                 {data.map((each) =>
+                                    !id
+                                       ? "no title"
+                                       : each.id == id
+                                       ? each.title
+                                       : ""
+                                 )}
                               </p>
-                              <span className="text-muted ">3rd June 2021</span>
+                              <span className="text-muted ">
+                                 {data.map((each) => {
+                                    const formatedTime = timeago.format(
+                                       each.createdAt
+                                    );
+                                    const time =
+                                       each.id == id ? formatedTime : "";
+                                    return time;
+                                 })}
+                              </span>
                            </div>
                            <div className="border-bottom mb-2 border-dark py-2">
-                              255 Comments
+                              <p>255 Comments</p>
                            </div>
                         </div>
                         <div className="comment-section mb-3 d-flex flex-column flex-md-row py-3">
                            <div className="profile-pic">
                               <div className="profile-pic-main position-relative rounded-pill">
                                  <img
-                                    src="images/Frame 1.png"
+                                    src="/images/Frame 1.png"
                                     alt=""
                                     className="position-absolute"
                                  />

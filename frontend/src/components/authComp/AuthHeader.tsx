@@ -5,7 +5,7 @@ import Logo from "../logo/Logo";
 const PdfHeader = (): JSX.Element => {
    return (
       <header className="d-flex justify-content-center align-items-center ">
-         <Link href="/magazine">
+         <Link href="/">
             <a className="text-decoration-none">
                <Logo />
             </a>
