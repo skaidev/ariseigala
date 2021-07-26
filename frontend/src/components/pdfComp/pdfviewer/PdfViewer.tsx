@@ -7,7 +7,7 @@ export default function PdfViewer(): JSX.Element {
    const [numPages, setNumPages] = useState(null);
    const [pageNumber, setPageNumber] = useState(1);
 
-   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
+   function onDocumentLoadSuccess({ numPages }) {
       setNumPages(numPages);
       setPageNumber(1);
    }
@@ -25,7 +25,7 @@ export default function PdfViewer(): JSX.Element {
    }
    return (
       <>
-         <div className="container overflow-auto d-flex justify-content-center">
+         <div className="container overflow-auto mb-3 d-flex justify-content-center">
             <Document file={samplePDF} onLoadSuccess={onDocumentLoadSuccess}>
                <Page pageNumber={pageNumber} scale={1.5} />
             </Document>
@@ -38,7 +38,7 @@ export default function PdfViewer(): JSX.Element {
                   onClick={previousPage}
                   className="btn "
                >
-                  Previous
+                  <i className="fas fa-2x fa-caret-left"></i>
                </button>
                <p className="m-0">
                   Page {pageNumber || (numPages ? 1 : "--")} of
@@ -49,8 +49,9 @@ export default function PdfViewer(): JSX.Element {
                   type="button"
                   disabled={pageNumber >= numPages}
                   onClick={nextPage}
+                  className="btn"
                >
-                  Next
+                  <i className="fas fa-2x fa-caret-right"></i>
                </button>
             </div>
          </div>

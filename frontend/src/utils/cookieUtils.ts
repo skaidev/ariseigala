@@ -17,7 +17,7 @@ export const setToken = (res: NextApiResponse, token: string): void => {
   res.setHeader("Set-Cookie", cookie);
 };
 
-export const removeTokenCookie = (res): void => {
+export const removeTokenCookie = (res: any): void => {
   if (res) {
     const cookie = serialize(TOKEN_NAME, "", {
       maxAge: -1,

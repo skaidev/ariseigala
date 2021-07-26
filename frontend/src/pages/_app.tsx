@@ -19,7 +19,7 @@ import AOS from "aos";
 import "animate.css";
 
 if (process.browser) {
-   require("bootstrap/dist/js/bootstrap");
+    require("bootstrap/dist/js/bootstrap");
 }
 
 axios.defaults.baseURL = HTTP_URI;

@@ -3,13 +3,13 @@ import PdfLayout from "Layout/PdfLayout";
 import React from "react";
 
 const Pdf = (): JSX.Element => {
-   return (
-      <PdfLayout>
-         <div>
-            <PdfViewer />
-         </div>
-      </PdfLayout>
-   );
+  return (
+    <PdfLayout>
+      <div>
+        <PdfViewer />
+      </div>
+    </PdfLayout>
+  );
 };
 
 export default Pdf;

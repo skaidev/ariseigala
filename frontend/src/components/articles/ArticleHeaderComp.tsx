@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
 import Logo from "components/logo/Logo";
 import Link from "next/link";
@@ -106,6 +107,29 @@ const ArticleHeader = (): JSX.Element => {
 };
 
 export default ArticleHeader;
+
+export const CategoryNavComp = (): JSX.Element => {
+  const { query } = useRouter();
+  const category = query?.category;
+  return (
+    <CategoryNav className="navbar justify-content-center">
+      <ul className="nav">
+        {categories.map((cat, i) => (
+          <li className="nav-item" key={i}>
+            <Link href={`/articles/${cat.link}`}>
+              <a
+                className={`nav-link ${category === cat.link ? "active" : ""}`}
+                id={cat.link}
+              >
+                {cat.name}
+              </a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </CategoryNav>
+  );
+};
 
 const navitems = [
    { id: 1, txt: "Television", link: "/tv" },
