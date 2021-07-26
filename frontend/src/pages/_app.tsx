@@ -19,7 +19,7 @@ import AOS from "aos";
 import "animate.css";
 
 if (process.browser) {
-    require("bootstrap/dist/js/bootstrap");
+  require("bootstrap/dist/js/bootstrap");
 }
 
 axios.defaults.baseURL = HTTP_URI;
@@ -28,39 +28,38 @@ axios.defaults.withCredentials = true;
 axios.defaults.headers.common["authorization"] = cookie.get(TOKEN_NAME) || "";
 
 axios.create({
-   baseURL: HTTP_URI,
-   withCredentials: true,
-   // withCredentials: true,
+  baseURL: HTTP_URI,
+  withCredentials: true,
+  // withCredentials: true,
 });
 
 Router.events.on("routeChangeStart", () => {
-   Nprogress.start();
+  Nprogress.start();
 });
 Router.events.on("routeChangeComplete", () => Nprogress.done());
 Router.events.on("routeChangeError", () => Nprogress.done());
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-   const client = useApollo(pageProps.apollo);
-   useEffect(() => {
-      AOS.init({
-         duration: 2500,
-      });
-   }, []);
-   return (
-      <Fragment>
-         <Head>
-            <title>Arise Igala</title>
-            <script src="https://mozilla.github.io/pdf.js/build/pdf.js" defer />
-         </Head>
-         <ApolloProvider client={client}>
-            <RecoilRoot>
-               <ThemeProvider theme={theme}>
-                  <Component {...pageProps} />
-               </ThemeProvider>
-            </RecoilRoot>
-         </ApolloProvider>
-      </Fragment>
-   );
+  const client = useApollo(pageProps.apollo);
+  useEffect(() => {
+    AOS.init({
+      duration: 2500,
+    });
+  }, []);
+  return (
+    <Fragment>
+      <Head>
+        <title>Arise Igala</title>
+      </Head>
+      <ApolloProvider client={client}>
+        <RecoilRoot>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </RecoilRoot>
+      </ApolloProvider>
+    </Fragment>
+  );
 }
 
 export default MyApp;
