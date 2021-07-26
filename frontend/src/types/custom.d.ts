@@ -1,9 +1,11 @@
 declare module "react-vanilla-tilt" {
-    export const options: Options;
+  export const options: Options;
 }
 
+declare module "react-tilt";
+
 interface Options {
-    scale: number;
-    max: number;
-    reverse: boolean;
+  scale: number;
+  max: number;
+  reverse: boolean;
 }
