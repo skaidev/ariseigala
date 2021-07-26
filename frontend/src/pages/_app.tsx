@@ -51,7 +51,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
          <Head>
             <title>Arise Igala</title>
             <script src="https://mozilla.github.io/pdf.js/build/pdf.js" defer />
-            <script src="/script/Pdf.js" defer />
          </Head>
          <ApolloProvider client={client}>
             <RecoilRoot>

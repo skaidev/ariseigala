@@ -56,7 +56,7 @@ const Index = (): JSX.Element => {
                               data-aos="zoom-in-up"
                            >
                               <Link href="/magazine/single">
-                                 <a className="text-decoration-none text-inherit" target="_blank">
+                                 <a className="text-decoration-none text-inherit">
                                     <div className="card  border-0 h-100">
                                        <img
                                           src="./images/book.png"
@@ -103,10 +103,7 @@ const Index = (): JSX.Element => {
                               key={card}
                            >
                               <Link href="/magazine/single">
-                                 <a
-                                    className="text-decoration-none text-inherit"
-                                    target="_blank"
-                                 >
+                                 <a className="text-decoration-none text-inherit">
                                     <div className="card  border-0 h-100">
                                        <img
                                           src="./images/book.png"
