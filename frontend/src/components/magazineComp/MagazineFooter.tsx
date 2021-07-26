@@ -6,7 +6,7 @@ const MagazineFooter = (): JSX.Element => {
     <footer className="py-4">
       <div className="d-flex justify-content-center">
         <div>
-          <img src="./images/logo.png" alt="" className="d-block" />
+          <img src="/images/logo.png" alt="" className="d-block" />
           <div className="d-flex text-warning fs-5 justify-content-between">
             <i className="fab fa-instagram"></i>
             <i className="fab fa-youtube ms-1"></i>

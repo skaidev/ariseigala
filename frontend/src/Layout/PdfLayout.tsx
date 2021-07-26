@@ -2,6 +2,7 @@ import MagazineFooter from "components/magazineComp/MagazineFooter";
 import PdfHeader from "components/pdfComp/PdfHeader";
 
 import React from "react";
+import styled from "styled-components";
 
 const PdfLayout = ({
   children,
@@ -9,12 +10,18 @@ const PdfLayout = ({
   children: React.ReactChild;
 }): JSX.Element => {
   return (
-    <div id="article-layout">
+    <PdfMain id="article-layout">
       <PdfHeader />
       <main>{children}</main>
       <MagazineFooter />
-    </div>
+    </PdfMain>
   );
 };
 
 export default PdfLayout;
+
+const PdfMain = styled.div`
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+`;

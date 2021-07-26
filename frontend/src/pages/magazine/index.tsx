@@ -18,18 +18,11 @@ const Index = (): JSX.Element => {
           <section className="bg-dark first-wrapper py-2 text-white">
             <div className="container mb-2 first-main d-flex flex-column-reverse flex-md-row align-items-md-center">
               <div className="left">
-                <h1 className="fw-bold mb-3 fs-1 georgia">
-                  Lorem ipsum dolor sit amet.
-                </h1>
+                <h1 className="fw-bold mb-3 fs-1 georgia">Lorem ipsum dolor sit amet.</h1>
                 <p className="poppins fs-5 mb-4 p-0 ">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Egestas in vivamus nisi non vivamus etiam tincidunt nec
-                  aliquam. Adipiscing purus a tincidunt faucibus felis mattis
-                  elementum massa
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas in vivamus nisi non vivamus etiam tincidunt nec aliquam. Adipiscing purus a tincidunt faucibus felis mattis elementum massa
                 </p>
-                <button className="btn poppins border text-white border-2 px-5 fs-5 d-block py-3">
-                  Buy Issue
-                </button>
+                <button className="btn poppins border text-white border-2 px-5 fs-5 d-block py-3">Buy Issue</button>
               </div>
               <div className="right">
                 <Tilt {...options}>
@@ -51,18 +44,10 @@ const Index = (): JSX.Element => {
                     <Link href="/magazine/single">
                       <a className="text-decoration-none text-inherit">
                         <div className="card  border-0 h-100">
-                          <img
-                            src="./images/book.png"
-                            alt=""
-                            className="card-img"
-                          />
+                          <img src="./images/book.png" alt="" className="card-img" />
                           <div className="card-body">
-                            <p className="card-title mb-2 fw-bold text-center fs-4">
-                              Issue 60
-                            </p>
-                            <p className="text-center fs-5 georgia">
-                              January 06,2021
-                            </p>
+                            <p className="card-title mb-2 fw-bold text-center fs-4">Issue 60</p>
+                            <p className="text-center fs-5 georgia">January 06,2021</p>
                           </div>
                         </div>
                       </a>
@@ -79,8 +64,7 @@ const Index = (): JSX.Element => {
                   className="fas fa-times-circle fw-light fa-3x position-absolute rounded-circle"
                   onClick={() => {
                     setAds(false);
-                  }}
-                ></i>
+                  }}></i>
                 <img src="/images/ads.png" alt="" draggable={false} />
               </div>
             </section>
@@ -94,18 +78,10 @@ const Index = (): JSX.Element => {
                     <Link href="/magazine/single">
                       <a className="text-decoration-none text-inherit">
                         <div className="card  border-0 h-100">
-                          <img
-                            src="./images/book.png"
-                            alt=""
-                            className="card-img"
-                          />
+                          <img src="./images/book.png" alt="" className="card-img" />
                           <div className="card-body">
-                            <p className="card-title mb-2 fw-bold text-center fs-4">
-                              Issue 60
-                            </p>
-                            <p className="text-center fs-5 georgia">
-                              January 06,2021
-                            </p>
+                            <p className="card-title mb-2 fw-bold text-center fs-4">Issue 60</p>
+                            <p className="text-center fs-5 georgia">January 06,2021</p>
                           </div>
                         </div>
                       </a>
@@ -116,9 +92,7 @@ const Index = (): JSX.Element => {
             </div>
           </section>
           <div className="d-flex mb-5 justify-content-center py-2">
-            <button className="btn border-2 border-dark px-4 fw-bold py-2">
-              Load More
-            </button>
+            <button className="btn border-2 border-dark px-4 fw-bold py-2">Load More</button>
           </div>
         </main>
       </div>

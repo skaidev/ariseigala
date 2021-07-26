@@ -1,10 +1,4 @@
-import {
-  ApolloClient,
-  createHttpLink,
-  InMemoryCache,
-  NormalizedCacheObject,
-  split,
-} from "@apollo/client";
+import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject, split } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import fetch from "isomorphic-unfetch";
@@ -20,10 +14,7 @@ let apolloClient: ApolloClient<any>;
 //     global.fetch = fetch;
 // }
 
-const uri =
-  process.env.NODE_ENV === "production"
-    ? `${HTTP_URI}/graphql`
-    : `http://localhost:8000/api/v1/graphql`;
+const uri = process.env.NODE_ENV === "production" ? `${HTTP_URI}/graphql` : `http://localhost:8000/graphql`;
 
 export const apollo: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   uri,
@@ -66,10 +57,7 @@ const createLink = (initialState: any, token: string) => {
     ? split(
         ({ query }) => {
           const definition = getMainDefinition(query);
-          return (
-            definition.kind === "OperationDefinition" &&
-            definition.operation === "subscription"
-          );
+          return definition.kind === "OperationDefinition" && definition.operation === "subscription";
         },
         wsLink,
         httpLink
@@ -84,10 +72,7 @@ const createLink = (initialState: any, token: string) => {
   });
 };
 
-export const initializeApollo = (
-  initialState?: any,
-  ctx?: NextPageContext
-): ApolloClient<any> => {
+export const initializeApollo = (initialState?: any, ctx?: NextPageContext): ApolloClient<any> => {
   const cookie = getTokenCookie(ctx?.req);
   if (!process.browser) return createLink(initialState, cookie);
   if (!apolloClient) {

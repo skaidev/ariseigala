@@ -1,9 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import {
-  default as Advertisement,
-  default as AdvertisementLandScape,
-} from "components/Advertisement";
+import { default as Advertisement, default as AdvertisementLandScape } from "components/Advertisement";
 import ArticleNewsComp from "components/articles/home/ArticleNewsComp";
 import CultureComp from "components/articles/home/CultureComp";
 import EducationComp from "components/articles/home/EducationComp";
