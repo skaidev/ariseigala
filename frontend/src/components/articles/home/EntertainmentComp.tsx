@@ -15,9 +15,7 @@ const EntertainmentComp = (): JSX.Element => {
             <Link href="/articles/entertainment">
               <a className="text-inherit text-decoration-none">
                 <img src="/images/Rectangle 19.png" alt="" />
-                <p className="big-head fs-3 mt-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-                </p>
+                <p className="big-head fs-3 mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
               </a>
             </Link>
           </div>
@@ -45,14 +43,14 @@ const Wrapper = styled.section`
     }
     .left {
       img {
-        width: 100%;
+        max-width: 100%;
         /* max-height: 411px; */
         object-fit: contain;
       }
     }
     .right {
       width: 100%;
-      /* max-width: 18rem; */
+      max-width: 25rem;
       display: none;
       .inner {
         .inner-content {
@@ -82,10 +80,7 @@ const Card = ({ image }: { image: string }) => {
     <div className="inner-content mb-4">
       <img src={image} className="" />
       <div className="">
-        <p className="font-14 fw-400">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Luctus ornare
-          arcu dui lacus.{" "}
-        </p>
+        <p className="font-14 fw-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Luctus ornare arcu dui lacus. </p>
       </div>
     </div>
   );
