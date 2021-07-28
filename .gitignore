@@ -41,6 +41,7 @@ build/Release
 node_modules/
 jspm_packages/
 
+
 # TypeScript v1 declaration files
 typings/
 
@@ -67,6 +68,8 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+yarn.lock
+yarn-error.log
 
 # dotenv environment variables file
 .env

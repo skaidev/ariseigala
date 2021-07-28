@@ -9,7 +9,11 @@ import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
+<<<<<<< HEAD
 const Article = (): JSX.Element => {
+=======
+const article = (): JSX.Element => {
+>>>>>>> 3e46f8f557a05c4595fce575fa5e6010d08aaa5e
   const { query } = useRouter();
   const categoryLink = query?.category;
   const category = categories.find((cat) => cat.link === categoryLink);
@@ -267,3 +271,22 @@ const Main = styled.div`
 `;
 
 const num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+<<<<<<< HEAD
+=======
+
+const Card = () => {
+  return (
+    <div className="col one-col">
+      <div className="card border-0 rounded-0 one-card">
+        <div className="one-card-img rounded-0 card-img mb-2">
+          <img loading="lazy" src="/images/Rectangle 28.png" alt="" />
+        </div>
+        <div className="one-card-body card-body p-0">
+          <p className="georgia p-0 mb-2 fw-bold line-height-1">Lacus in quam odio lectus. Nam tellus commodo metus.</p>
+          <div className="d-inline-block py-1 border-top border-dark border-1">By Emeka Alice</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+>>>>>>> 3e46f8f557a05c4595fce575fa5e6010d08aaa5e

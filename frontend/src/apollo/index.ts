@@ -14,7 +14,7 @@ let apolloClient: ApolloClient<any>;
 //     global.fetch = fetch;
 // }
 
-const uri = process.env.NODE_ENV === "production" ? `${HTTP_URI}/graphql` : `http://localhost:8000/graphql`;
+const uri = process.env.NODE_ENV === "production" ? `${HTTP_URI}/api/v1/graphql` : `http://localhost:8000/api/v1/graphql`;
 
 export const apollo: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   uri,

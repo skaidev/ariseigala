@@ -10,22 +10,22 @@ export default function PdfViewer(): JSX.Element {
   const [zoom, setZoom] = useState(1);
   const [content_list, setContentList] = useState(false);
 
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
     setPageNumber(1);
-  }
+  };
 
-  function changePage(offset: number) {
+  const changePage = (offset: number) => {
     setPageNumber((prevPageNumber) => prevPageNumber + offset);
-  }
+  };
 
-  function previousPage() {
+  const previousPage = () => {
     changePage(-1);
-  }
+  };
 
-  function nextPage() {
+  const nextPage = () => {
     changePage(1);
-  }
+  };
   const numContents = () => {
     const num_of_content = [];
     if (numPages) {
@@ -40,8 +40,8 @@ export default function PdfViewer(): JSX.Element {
   return (
     <PDFWrapper>
       {content_list && (
-        <div className="cover-dark">
-          <div className="cover-light overflow-auto">
+        <div className="cover-dark animate__animated animate__slideInLeft">
+          <div className="cover-light overflow-auto animate__animated animate__zoomInRight">
             <div className="container py-4">
               <h3 className="mb-3 fw-bolder d-flex justify-content-between align-items-center">
                 <span>Contents</span>
