@@ -1,34 +1,72 @@
 import { gql } from "@apollo/client";
 
 export const GET_ARTICLES_BY_SLUG = gql`
-  query ArticleBySlug($slug: String!) {
+  query ArticleSlug($slug: String) {
     articles(where: { slug: $slug }) {
       id
-      title
       createdAt
-      category
+      title
+      slug
+      description
+      content
+      banner
       image {
         url
       }
-      author {
-        firstname
-        lastname
+      category {
+        name
+        slug
       }
-      body
+    }
+  }
+`;
+
+export const GET_ARTICLES_BY_CATEGORY = gql`
+  query ArticlesByCategory($slug: String) {
+    articles(where: { category: { slug: $slug } }) {
+      id
+      createdAt
+      title
+      slug
+      description
+      content
+      banner
+      image {
+        url
+      }
+      category {
+        name
+        slug
+      }
     }
   }
 `;
 
 export const GET_ARTICLES = gql`
-  {
-    articles {
+  query {
+    articles(sort: "createdAt:DESC") {
       id
-      title
       createdAt
+      title
+      slug
+      description
+      banner
       image {
         url
       }
-      excerpt
+      category {
+        name
+        slug
+      }
+    }
+  }
+`;
+
+export const GET_CATEGORIES = gql`
+  {
+    categories {
+      name
+      slug
     }
   }
 `;
