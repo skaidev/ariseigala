@@ -9,11 +9,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
-<<<<<<< HEAD
 const Article = (): JSX.Element => {
-=======
-const article = (): JSX.Element => {
->>>>>>> 3e46f8f557a05c4595fce575fa5e6010d08aaa5e
   const { query } = useRouter();
   const categoryLink = query?.category;
   const category = categories.find((cat) => cat.link === categoryLink);
@@ -271,8 +267,6 @@ const Main = styled.div`
 `;
 
 const num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-<<<<<<< HEAD
-=======
 
 const Card = () => {
   return (
@@ -289,4 +283,3 @@ const Card = () => {
     </div>
   );
 };
->>>>>>> 3e46f8f557a05c4595fce575fa5e6010d08aaa5e

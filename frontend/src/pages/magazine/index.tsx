@@ -1,17 +1,48 @@
 /* eslint-disable @next/next/no-img-element */
+import { useQuery, gql } from "@apollo/client";
 import MagazineLayout from "Layout/MagazineLayout";
 import Link from "next/link";
 import React, { useState } from "react";
 
 import Tilt from "react-tilt";
+import { IMagazines } from "types/interface";
+
+const GET_MAGAZINES = gql`
+  query {
+    magazines {
+      id
+      issue
+      createdAt
+      pdf {
+        url
+        id
+      }
+      cover {
+        url
+      }
+    }
+  }
+`;
 
 const Index = (): JSX.Element => {
   const options = {
     scale: 1,
-    // max: 3,
     reverse: true,
   };
   const [ads, setAds] = useState(true);
+
+  const { data, loading, error } = useQuery(GET_MAGAZINES);
+
+  const formartDate = (e) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    const newDate = new Date(e);
+    return Intl.DateTimeFormat("en-us", options).format(newDate);
+  };
+
   return (
     <MagazineLayout>
       <div>
@@ -40,21 +71,24 @@ const Index = (): JSX.Element => {
             <div className="container">
               <h1 className="mb-5 fw-bold">January: New Releases</h1>
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                {Card.map((card) => (
-                  <div className="col" key={card} data-aos="zoom-in-up">
-                    <Link href="/magazine/single">
-                      <a className="text-decoration-none text-inherit">
-                        <div className="card  border-0 h-100">
-                          <img src="./images/book.png" alt="" className="card-img" />
-                          <div className="card-body">
-                            <p className="card-title mb-2 fw-bold text-center fs-4">Issue 60</p>
-                            <p className="text-center fs-5 georgia">January 06,2021</p>
+                {data &&
+                  data.magazines?.map((magazine: IMagazines, i: number) => (
+                    <div className="col" key={i} data-aos="zoom-in-up">
+                      <Link href={`/magazine/${magazine.id}`}>
+                        <a className="text-decoration-none text-inherit">
+                          <div className="card  border-0 h-100">
+                            <img src={`http://localhost:8000${magazine.cover.url}`} alt="" className="card-img" />
+                            <div className="card-body">
+                              <p className="card-title mb-2 fw-bold text-center fs-4">{magazine?.issue}</p>
+                              <p className="text-center fs-5 georgia">{formartDate(magazine.createdAt)}</p>
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </Link>
-                  </div>
-                ))}
+                        </a>
+                      </Link>
+                    </div>
+                  ))}
+
+                {loading && <h1>Loading...</h1>}
               </div>
             </div>
           </section>

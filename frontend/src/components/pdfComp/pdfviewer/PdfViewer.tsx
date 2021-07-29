@@ -3,8 +3,8 @@ import { Document, Page, pdfjs } from "react-pdf";
 import styled from "styled-components";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-export default function PdfViewer(): JSX.Element {
-  const samplePDF = "https://www.hq.nasa.gov/alsj/a17/A17_FlightPlan.pdf";
+export default function PdfViewer(uri: string): JSX.Element {
+  const samplePDF = uri;
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [zoom, setZoom] = useState(1);
