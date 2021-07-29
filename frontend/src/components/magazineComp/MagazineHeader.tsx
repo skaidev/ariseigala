@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-
 import { CategoryNavComp } from "components/articles/ArticleHeaderComp";
 import Logo from "components/logo/Logo";
 import Link from "next/link";
@@ -8,7 +7,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const MagazineHeader = (): JSX.Element => {
-  const [toggle, setToggle] = useState(false);
   const [minMenu, setMinMenu] = useState(false);
   const { query } = useRouter();
   const category = query?.category;
@@ -74,17 +72,9 @@ const MagazineHeader = (): JSX.Element => {
             </ul>
           </div>
         )}
-        <div className=" py-2 d-block d-lg-flex container mc  mx-auto">
-          <div
-            className="col d-md-none bg-gradient"
-            onClick={() => setToggle(!toggle)}
-          >
-            <i className="fas d-block text-white fa-caret-square-down fs-2 "></i>
-          </div>
-          <TvNav className="navbar justify-content-md-center">
-            <ul className="nav flex-column flex-md-row flex-wrap">
-              <CategoryNavComp />
-            </ul>
+        <div className=" py-2 container">
+          <TvNav className="">
+            <CategoryNavComp />
           </TvNav>
         </div>
       </div>
@@ -95,11 +85,16 @@ const MagazineHeader = (): JSX.Element => {
 export default MagazineHeader;
 
 const TvNav = styled.nav`
-  .nav-link {
-    color: white;
-    &.active {
-      font-weight: bold;
-      transition: 0.5s ease-in-out;
+  .nav-bg-color {
+    .col {
+      background-color: whitesmoke;
+    }
+    .nav-link {
+      color: white;
+      &.active {
+        font-weight: bold;
+        transition: 0.5s ease-in-out;
+      }
     }
   }
 `;

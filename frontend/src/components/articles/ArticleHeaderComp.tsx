@@ -85,7 +85,7 @@ export const CategoryNavComp = (): JSX.Element => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div>
+    <div className="nav-bg-color">
       <div
         className="col c-pointer d-md-none bg-gradient"
         onClick={() => setToggle(!toggle)}
@@ -93,7 +93,7 @@ export const CategoryNavComp = (): JSX.Element => {
         <i className="fas d-block fa-caret-square-down fs-2 "></i>
       </div>
       <CategoryNav className="navbar justify-content-center">
-        <ul className="nav">
+        <ul className="nav d-flex flex-wrap flex-column flex-sm-row">
           {categories?.map((cat, i) => (
             <li
               className={`nav-item mb-2 mb-lg-0 ${
