@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-css-tags */
 import { AppProps } from "next/app";
-import { ApolloProvider } from "@apollo/client";
+import { ApolloProvider, useQuery } from "@apollo/client";
 import { ThemeProvider } from "styled-components";
 import { theme } from "utils/theme";
 import "../styles/index.scss";
@@ -12,11 +13,13 @@ import Router from "next/router";
 import { useApollo } from "apollo";
 import React, { Fragment, useEffect } from "react";
 import Head from "next/head";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useSetRecoilState } from "recoil";
 import cookie from "js-cookie";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import "animate.css";
+import { CategoriesAtom } from "atoms/CategoryAtoms";
+import { GET_CATEGORIES } from "apollo/queries/articleQuery";
 
 if (process.browser) {
   require("bootstrap/dist/js/bootstrap");
@@ -50,11 +53,14 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <Fragment>
       <Head>
         <title>Arise Igala</title>
+        <link rel="stylesheet" href="/nprogress.css" />
       </Head>
       <ApolloProvider client={client}>
         <RecoilRoot>
           <ThemeProvider theme={theme}>
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </ThemeProvider>
         </RecoilRoot>
       </ApolloProvider>
@@ -63,3 +69,14 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 }
 
 export default MyApp;
+
+const Layout = ({ children }: { children: React.ReactChild }) => {
+  const setCategories = useSetRecoilState(CategoriesAtom);
+
+  useQuery(GET_CATEGORIES, {
+    onCompleted: (data) => setCategories(data?.categories),
+    onError: (err) => console.log(err),
+  });
+
+  return <Fragment>{children}</Fragment>;
+};

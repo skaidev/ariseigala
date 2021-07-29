@@ -3,9 +3,9 @@ import { Document, Page, pdfjs } from "react-pdf";
 import styled from "styled-components";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-export default function PdfViewer(uri: string): JSX.Element {
-  const samplePDF = uri;
-  const [numPages, setNumPages] = useState(null);
+export default function PdfViewer({ file }: { file: string }): JSX.Element {
+  // const samplePDF = "https://www.hq.nasa.gov/alsj/a17/A17_FlightPlan.pdf";
+  const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const [zoom, setZoom] = useState(1);
   const [content_list, setContentList] = useState(false);
@@ -86,7 +86,7 @@ export default function PdfViewer(uri: string): JSX.Element {
       </div>
       <div className="container py-3 overflow mb-4 mx-auto shadow-sm d-flex justify-content-center">
         <div className="">
-          <Document file={samplePDF} onLoadSuccess={onDocumentLoadSuccess} renderMode="canvas">
+          <Document file={file} onLoadSuccess={onDocumentLoadSuccess} renderMode="canvas">
             <Page pageNumber={pageNumber} scale={zoom} className="w-100" />
           </Document>
         </div>
@@ -125,11 +125,12 @@ const PDFWrapper = styled.div`
     width: 100%;
     min-height: 100%;
     position: fixed;
-    z-index: 10000;
+    z-index: 2;
     background: #000000e8;
     overflow: hidden;
     .cover-light {
       width: 80%;
+      max-width: 40rem;
       background: white;
       height: 100%;
       position: absolute;

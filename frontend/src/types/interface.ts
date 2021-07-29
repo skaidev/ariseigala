@@ -43,15 +43,20 @@ export interface IArticle {
   published_at: Date;
 }
 
-export interface IMagazines {
+export interface IMagazine {
   id: string;
-  issue: string;
-  createdAt: Date;
-  pdf: {
-    url: string;
-    id: string;
-  };
   cover: {
     url: string;
   };
+  title: string;
+  issue: string;
+  pdf: {
+    url: string;
+  };
+  date: Date;
+}
+
+export interface ICategory {
+  slug: string;
+  name: string;
 }
