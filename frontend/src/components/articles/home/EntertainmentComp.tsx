@@ -43,18 +43,21 @@ const Wrapper = styled.section`
     }
     .left {
       img {
-        max-width: 100%;
+        width: 100%;
         /* max-height: 411px; */
         object-fit: contain;
       }
     }
     .right {
-      width: 100%;
-      max-width: 25rem;
+      /* width: 5; */
+      /* max-width: 30rem; */
       display: none;
       .inner {
         .inner-content {
+          max-width: 100%;
+
           gap: 1rem;
+
           img {
             width: 100%;
 
@@ -67,7 +70,7 @@ const Wrapper = styled.section`
         display: block;
         .inner-content {
           display: grid;
-          grid-template-columns: 23rem 60%;
+          grid-template-columns: 22rem auto;
           margin-bottom: 1rem;
         }
       }

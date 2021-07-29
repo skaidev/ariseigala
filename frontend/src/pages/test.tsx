@@ -32,9 +32,9 @@ const Test = (): JSX.Element => {
     <div>
       <h1>Test</h1>
       <ul>
-        {data?.articles?.map((article: any, i: number) => (
+        {data?.magazines?.map((article: any, i: number) => (
           <li key={i}>
-            <img src={`http://localhost:8000${article?.cover?.url}`} alt="" />
+            <img src={`http://localhost:8000${article?.cover?.url}`} alt={article?.title} />
             <p>{article.title}</p>
           </li>
         ))}

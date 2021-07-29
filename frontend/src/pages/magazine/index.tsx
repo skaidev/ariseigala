@@ -1,17 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
+import { useQuery } from "@apollo/client";
+import { apollo } from "apollo";
+import { GET_MAGAZINES } from "apollo/queries/magazineQuery";
+import dayjs from "dayjs";
 import MagazineLayout from "Layout/MagazineLayout";
 import Link from "next/link";
 import React, { useState } from "react";
-
 import Tilt from "react-tilt";
+import { IMagazine } from "types/interface";
+import { HTTP_URI } from "utils/constants";
 
-const Index = (): JSX.Element => {
+const Index = ({ magazines }: { magazines: IMagazine[] }): JSX.Element => {
   const options = {
     scale: 1,
     // max: 3,
     reverse: true,
   };
   const [ads, setAds] = useState(true);
+
   return (
     <MagazineLayout>
       <div>
@@ -23,7 +29,9 @@ const Index = (): JSX.Element => {
                 <p className="poppins fs-5 mb-4 p-0 ">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas in vivamus nisi non vivamus etiam tincidunt nec aliquam. Adipiscing purus a tincidunt faucibus felis mattis elementum massa
                 </p>
-                <button className="btn poppins border text-white border-2 px-5 fs-5 d-block py-3">Buy Issue</button>
+                <Link href="/subscribe">
+                  <a className="btn poppins border text-white border-1 px-5 fs-5 py-3">Buy Issue</a>
+                </Link>
               </div>
               <div className="right">
                 <Tilt {...options}>
@@ -40,20 +48,8 @@ const Index = (): JSX.Element => {
             <div className="container">
               <h1 className="mb-5 fw-bold">January: New Releases</h1>
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                {Card.map((card) => (
-                  <div className="col" key={card} data-aos="zoom-in-up">
-                    <Link href="/magazine/single">
-                      <a className="text-decoration-none text-inherit">
-                        <div className="card  border-0 h-100">
-                          <img src="./images/book.png" alt="" className="card-img" />
-                          <div className="card-body">
-                            <p className="card-title mb-2 fw-bold text-center fs-4">Issue 60</p>
-                            <p className="text-center fs-5 georgia">January 06,2021</p>
-                          </div>
-                        </div>
-                      </a>
-                    </Link>
-                  </div>
+                {magazines?.map((magazine, i) => (
+                  <SingleMagazine key={i} magazine={magazine} />
                 ))}
               </div>
             </div>
@@ -74,20 +70,8 @@ const Index = (): JSX.Element => {
             <div className="container">
               <h1 className="mb-5 fw-bold">February: New Releases</h1>
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                {Card.map((card) => (
-                  <div className="col" data-aos="zoom-in-up" key={card}>
-                    <Link href="/magazine/single">
-                      <a className="text-decoration-none text-inherit">
-                        <div className="card  border-0 h-100">
-                          <img src="./images/book.png" alt="" className="card-img" />
-                          <div className="card-body">
-                            <p className="card-title mb-2 fw-bold text-center fs-4">Issue 60</p>
-                            <p className="text-center fs-5 georgia">January 06,2021</p>
-                          </div>
-                        </div>
-                      </a>
-                    </Link>
-                  </div>
+                {magazines?.map((magazine, i) => (
+                  <SingleMagazine key={i} magazine={magazine} />
                 ))}
               </div>
             </div>
@@ -102,4 +86,41 @@ const Index = (): JSX.Element => {
 };
 
 export default Index;
-const Card = [1, 2, 3, 4, 5, 6, 7, 8];
+
+const SingleMagazine = ({ magazine }: { magazine: IMagazine }) => {
+  return (
+    <Link href={`/magazine/${magazine?.id}`}>
+      <a className="text-decoration-none text-inherit">
+        <div className="card  border-0 h-100">
+          <img src={`${HTTP_URI}${magazine?.cover?.url}`} alt={magazine?.title} className="card-img" />
+          <div className="card-body">
+            <p className="card-title mb-2 fw-bold text-center fs-4">{magazine?.issue}</p>
+            <p className="text-center fs-5 georgia">{dayjs(magazine?.date).format("MMMM DD, YYYY")}</p>
+          </div>
+        </div>
+      </a>
+    </Link>
+  );
+};
+
+export const getStaticProps = async (): Promise<{ props: { magazines: IMagazine[] | null } }> => {
+  try {
+    const { data } = await apollo.query({
+      query: GET_MAGAZINES,
+    });
+
+    const magazines: IMagazine[] = data?.magazines;
+    return {
+      props: {
+        magazines,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        magazines: null,
+      },
+    };
+  }
+};

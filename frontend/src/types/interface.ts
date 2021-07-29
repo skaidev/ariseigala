@@ -42,3 +42,21 @@ export interface IArticle {
   category: ICategory;
   published_at: Date;
 }
+
+export interface IMagazine {
+  id: string;
+  cover: {
+    url: string;
+  };
+  title: string;
+  issue: string;
+  pdf: {
+    url: string;
+  };
+  date: Date;
+}
+
+export interface ICategory {
+  slug: string;
+  name: string;
+}

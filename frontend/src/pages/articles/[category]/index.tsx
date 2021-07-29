@@ -1,30 +1,31 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
+import { apollo } from "apollo";
+import { GET_ARTICLES_BY_CATEGORY } from "apollo/queries/articleQuery";
+import { GET_CATEGORY } from "apollo/queries/categoryQuery";
 import Advertisement from "components/Advertisement";
 import SubscribeComp from "components/articles/home/SubscribeComp";
-import { categories } from "components/articles/ArticleHeaderComp";
-
+// import { categories } from "components/articles/ArticleHeaderComp";
 import ArticleLayout from "Layout/ArticleLayout";
-import { useRouter } from "next/router";
+import { NextPage, NextPageContext } from "next";
 import React from "react";
 import styled from "styled-components";
+import { IArticle, ICategory } from "types/interface";
 
-<<<<<<< HEAD
-const Article = (): JSX.Element => {
-=======
-const article = (): JSX.Element => {
->>>>>>> 3e46f8f557a05c4595fce575fa5e6010d08aaa5e
-  const { query } = useRouter();
-  const categoryLink = query?.category;
-  const category = categories.find((cat) => cat.link === categoryLink);
+interface IProps {
+  category: ICategory | null;
+  articles: IArticle[] | null;
+}
 
+const Article: NextPage<IProps> = ({ category, articles }: IProps): JSX.Element => {
+  console.log(articles);
   return (
     <ArticleLayout>
       <Main>
         <section className="first-article mb-4">
           <div className="container first-article-main">
             <div className="text-center first-article-main-title mb-3">
-              <h1 className="georgia">{category?.name}</h1>
+              <h1 className="georgia text-capitalize">{category?.name}</h1>
               <div className="line-thin w-75 mx-auto bg-warning"></div>
             </div>
             <div className="d-flex first-article-main-body flex-column flex-md-row">
@@ -172,6 +173,61 @@ const article = (): JSX.Element => {
 
 export default Article;
 
+const num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+const Card = () => {
+  return (
+    <div className="col one-col">
+      <div className="card border-0 rounded-0 one-card">
+        <div className="one-card-img rounded-0 card-img mb-2">
+          <img loading="lazy" src="/images/Rectangle 28.png" alt="" />
+        </div>
+        <div className="one-card-body card-body p-0">
+          <p className="georgia p-0 mb-2 fw-bold line-height-1">Lacus in quam odio lectus. Nam tellus commodo metus.</p>
+          <div className="d-inline-block py-1 border-top border-dark border-1">By Emeka Alice</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+Article.getInitialProps = async (ctx: NextPageContext): Promise<IProps> => {
+  const getCategory = async () => {
+    try {
+      const { data } = await apollo.query({
+        query: GET_CATEGORY,
+        variables: { slug: ctx?.query?.category },
+      });
+      return data?.categories?.[0];
+    } catch (error) {
+      throw error;
+    }
+  };
+  const getArticles = async () => {
+    try {
+      const { data } = await apollo.query({
+        query: GET_ARTICLES_BY_CATEGORY,
+        variables: { slug: ctx?.query?.category },
+      });
+      return data?.articles;
+    } catch (error) {
+      throw error;
+    }
+  };
+  try {
+    return {
+      category: await getCategory(),
+      articles: await getArticles(),
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      category: null,
+      articles: null,
+    };
+  }
+};
+
 const Main = styled.div`
   .first-article {
     &-main {
@@ -269,24 +325,3 @@ const Main = styled.div`
     }
   }
 `;
-
-const num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-<<<<<<< HEAD
-=======
-
-const Card = () => {
-  return (
-    <div className="col one-col">
-      <div className="card border-0 rounded-0 one-card">
-        <div className="one-card-img rounded-0 card-img mb-2">
-          <img loading="lazy" src="/images/Rectangle 28.png" alt="" />
-        </div>
-        <div className="one-card-body card-body p-0">
-          <p className="georgia p-0 mb-2 fw-bold line-height-1">Lacus in quam odio lectus. Nam tellus commodo metus.</p>
-          <div className="d-inline-block py-1 border-top border-dark border-1">By Emeka Alice</div>
-        </div>
-      </div>
-    </div>
-  );
-};
->>>>>>> 3e46f8f557a05c4595fce575fa5e6010d08aaa5e
