@@ -45,11 +45,7 @@ const MagazineHeader = (): JSX.Element => {
             <ul className="d-flex ">
               {navlist.map((item, i) => (
                 <li className="nav-item text-center" key={i}>
-                  <Link
-                    href={
-                      item.toLowerCase() === "home" ? "/" : item.toLowerCase()
-                    }
-                  >
+                  <Link href={item.toLowerCase()}>
                     <a className="nav-link d-inline-block text-white px-3 py-2">
                       {item}
                     </a>
@@ -108,4 +104,4 @@ const TvNav = styled.nav`
   }
 `;
 
-const navlist = ["Home", "Subscribe", "Tv", "contact"];
+const navlist = ["Article", "Subscribe", "Tv", "contact"];

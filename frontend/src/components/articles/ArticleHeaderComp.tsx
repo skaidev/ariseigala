@@ -11,7 +11,6 @@ import { CategoriesAtom } from "atoms/CategoryAtoms";
 import { ICategory } from "types/interface";
 
 const ArticleHeader = (): JSX.Element => {
-  const [toggle, setToggle] = useState(false);
   const [minMenu, setMinMenu] = useState(false);
   const { query } = useRouter();
   const category = query?.category;
@@ -70,26 +69,7 @@ const ArticleHeader = (): JSX.Element => {
           </div>
         )}
         <div className=" py-2 d-block d-lg-flex container mc  mx-auto">
-          <div
-            className="col d-md-none bg-gradient"
-            onClick={() => setToggle(!toggle)}
-          >
-            <i className="fas d-block fa-caret-square-down fs-2 "></i>
-          </div>
-          <CategoryNav className="navbar justify-content-md-center">
-            {/* <ul className="nav flex-column flex-md-row flex-wrap">
-              {categories.map((cat, i) => (
-                <li className={`nav-item mb-2 mb-lg-0 ${toggle ? "" : "d-none"} d-md-flex`} key={i}>
-                  <Link href={`/articles/${cat.link}`}>
-                    <a className={`nav-link ${category === cat.link ? "active" : ""}`} id={cat.link}>
-                      {cat.name}
-                    </a>
-                  </Link>
-                </li>
-              ))}
-            </ul> */}
-            <CategoryNavComp />
-          </CategoryNav>
+          <CategoryNavComp />
         </div>
       </div>
     </header>
@@ -102,24 +82,40 @@ export const CategoryNavComp = (): JSX.Element => {
   const { query } = useRouter();
   const category = query?.category;
   const categories = useRecoilValue<ICategory[]>(CategoriesAtom);
+  const [toggle, setToggle] = useState(false);
 
   return (
-    <CategoryNav className="navbar justify-content-center">
-      <ul className="nav">
-        {categories?.map((cat, i) => (
-          <li className="nav-item" key={i}>
-            <Link href={`/articles/${cat.slug}`}>
-              <a
-                className={`nav-link ${category === cat.slug ? "active" : ""}`}
-                id={cat.slug}
-              >
-                {cat.name}
-              </a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </CategoryNav>
+    <div>
+      <div
+        className="col c-pointer d-md-none bg-gradient"
+        onClick={() => setToggle(!toggle)}
+      >
+        <i className="fas d-block fa-caret-square-down fs-2 "></i>
+      </div>
+      <CategoryNav className="navbar justify-content-center">
+        <ul className="nav">
+          {categories?.map((cat, i) => (
+            <li
+              className={`nav-item mb-2 mb-lg-0 ${
+                toggle ? "" : "d-none"
+              } d-md-flex`}
+              key={i}
+            >
+              <Link href={`/articles/${cat.slug}`}>
+                <a
+                  className={`nav-link ${
+                    category === cat.slug ? "active" : ""
+                  }`}
+                  id={cat.slug}
+                >
+                  {cat.name}
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </CategoryNav>
+    </div>
   );
 };
 
