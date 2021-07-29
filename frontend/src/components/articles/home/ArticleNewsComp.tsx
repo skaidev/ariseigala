@@ -1,31 +1,31 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { useQuery } from "@apollo/client";
-import { GET_ARTICLES } from "apollo/queries/articleQuery";
+import { GET_ARTICLES_BY_CATEGORY } from "apollo/queries/articleQuery";
 import axios from "axios";
 import Link from "next/link";
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { IArticles } from "types/articles";
 import { articles } from "utils/fakeArticles";
 
 const ArticleNewsComp = (): JSX.Element => {
-  // useQuery(GET_ARTICLES, {
-  //   onCompleted: (data) => console.log(data),
-  //   onError: (err) => console.log(err),
-  // });
-  useEffect(() => {
-    const getArticlesByCategory = async () => {
-      try {
-        const { data } = await axios.get("/articles");
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getArticlesByCategory();
-  }, []);
+  useQuery(GET_ARTICLES_BY_CATEGORY, {
+    variables: { slug: "news" },
+    onCompleted: (data) => console.log(data),
+    onError: (err) => console.log(err),
+  });
+  // useEffect(() => {
+  //   const getArticlesByCategory = async () => {
+  //     try {
+  //       const { data } = await axios.get("/articles");
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getArticlesByCategory();
+  // }, []);
   return (
     <Wrapper className="section-1 container ">
       <div className="line bg-warning mt-3"></div>

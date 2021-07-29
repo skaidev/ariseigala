@@ -6,20 +6,16 @@ import { IArticle } from "types/interface";
 
 const GET_ARTICLES = gql`
   query {
-    articles(sort: "createdAt:DESC") {
+    magazines {
       id
-      createdAt
-      title
-      slug
-      description
-      banner
-      image {
+      issue
+      cover {
         url
       }
-      category {
-        name
-        slug
+      pdf {
+        url
       }
+      title
     }
   }
 `;
@@ -30,14 +26,15 @@ const Test = (): JSX.Element => {
   if (loading) return <p>Loading....</p>;
 
   if (error) return <pre>{error?.message}</pre>;
+  console.log(data);
 
   return (
     <div>
       <h1>Test</h1>
       <ul>
-        {data?.articles?.map((article: IArticle, i: number) => (
+        {data?.articles?.map((article: any, i: number) => (
           <li key={i}>
-            <img src={`http://localhost:8000${article?.image?.url}`} alt="" />
+            <img src={`http://localhost:8000${article?.cover?.url}`} alt="" />
             <p>{article.title}</p>
           </li>
         ))}
