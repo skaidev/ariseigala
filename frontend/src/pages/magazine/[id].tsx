@@ -14,9 +14,7 @@ const Pdf: NextPage<{ file: string }> = ({
   if (!file) return <p>Loading...</p>;
   return (
     <PdfViewLayout>
-      <div>
-        <PdfViewer file={`${HTTP_URI}${file}`} />
-      </div>
+      <PdfViewer file={`${HTTP_URI}${file}`} />
     </PdfViewLayout>
   );
 };

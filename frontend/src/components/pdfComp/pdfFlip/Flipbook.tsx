@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import HTMLFlipBook from "react-pageflip";
 
 interface IFlip {
@@ -10,24 +10,19 @@ interface IFlip {
 export const Flipbook = ({ children, width, height }: IFlip): JSX.Element => {
   let pageFlip = useRef();
 
-  useEffect(() => {
-    console.log(pageFlip?.pageFlip());
-  }, [pageFlip]);
-
   return (
-    <div className="d-flex justify-content-center">
+    <div className="">
       <HTMLFlipBook
         width={width}
         height={height}
         maxWidth={width}
-        className="pdf-flipper"
+        className="pdf-flipper d-block mx-auto"
         autoSize={true}
         mobileScrollSupport={true}
         usePortrait={true}
         showPageCorners={false}
         onFlip={(e) => console.log(e.data)}
         ref={(component) => (pageFlip = component)}
-        // drawShadow={true}
       >
         {children}
       </HTMLFlipBook>

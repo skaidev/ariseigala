@@ -52,6 +52,7 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
 
   useEffect(() => {
     getRect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -105,7 +106,7 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
         </button>
       </div>
       <div className="pdf-section py-3">
-        <div className="pdf-wrapper container overflow-auto">
+        <div className="pdf-wrapper overflow-auto">
           <Document
             file={file}
             onLoadSuccess={onDocumentLoadSuccess}
@@ -113,7 +114,7 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
             className="pdf-main py-3"
           >
             <Flipbook
-              width={rect.width ? rect.width : 595}
+              width={rect.width ? rect.width : 600}
               height={rect.height ? rect.height : 845}
             >
               {numOfPages().map((e, i) => (
