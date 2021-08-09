@@ -1,19 +1,23 @@
 import { apollo } from "apollo";
 import { GET_MAGAZINE } from "apollo/queries/magazineQuery";
 import PdfViewer from "components/pdfComp/pdfviewer/PdfViewer";
-import PdfLayout from "Layout/PdfLayout";
+import PdfViewLayout from "Layout/PdfViewLayout";
 import { NextPage, NextPageContext } from "next";
 import React from "react";
 import { HTTP_URI } from "utils/constants";
 
-const Pdf: NextPage<{ file: string }> = ({ file }: { file: string }): JSX.Element => {
+const Pdf: NextPage<{ file: string }> = ({
+  file,
+}: {
+  file: string;
+}): JSX.Element => {
   if (!file) return <p>Loading...</p>;
   return (
-    <PdfLayout>
+    <PdfViewLayout>
       <div>
         <PdfViewer file={`${HTTP_URI}${file}`} />
       </div>
-    </PdfLayout>
+    </PdfViewLayout>
   );
 };
 

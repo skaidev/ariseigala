@@ -32,7 +32,7 @@ const ArticleHeader = (): JSX.Element => {
         <nav className="navbar border-bottom  border-3" role="navigation">
           <Link href="/">
             <a className="navbar-brand p-0" aria-label="logo">
-              <Logo />
+              <img src="/images/logo.png" alt="" />
             </a>
           </Link>
           <button
