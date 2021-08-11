@@ -357,6 +357,11 @@
   resolved "https://registry.yarnpkg.com/@types/nprogress/-/nprogress-0.2.0.tgz#86c593682d4199212a0509cc3c4d562bbbd6e45f"
   integrity sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==
 
+"@types/page-flip@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/page-flip/-/page-flip-2.0.0.tgz#0ca908451747ec1d57ecf904b310a51b7d46b1b4"
+  integrity sha512-gGsLg9OytYjZFO2LH1HC1bdwtR4r1oUh6oPcGnbYxI+UJyNTLYTmd2FZNqF1bP0dRMz3gU4q5YHuvC5btK7etg==
+
 "@types/pdfjs-dist@*":
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/@types/pdfjs-dist/-/pdfjs-dist-2.7.4.tgz#b8f618d382f6d5d14acb6c351ced784f48f4551b"
@@ -2831,7 +2836,7 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-page-flip@latest:
+page-flip@^2.0.7, page-flip@latest:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/page-flip/-/page-flip-2.0.7.tgz#b6eaf9dac78fd1dceeb7cb4d0e2eeb203591ea1e"
   integrity sha512-96lQFUUz7r/LZzEUZJ3yBIMEKU9+m8HMFDzTvTdD6P7Ag/wXINjp9n0W7b4wanwnDbQETo4uNUoL3zMqpFxwGA==

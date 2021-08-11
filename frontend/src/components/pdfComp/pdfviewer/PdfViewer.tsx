@@ -12,6 +12,7 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const [content_list, setContentList] = useState(false);
+  const [renderstate, setRenderState] = useState(false);
   const [rect, setRect] = useState({
     width: 0,
     height: 0,
@@ -116,6 +117,7 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
             <Flipbook
               width={rect.width ? rect.width : 600}
               height={rect.height ? rect.height : 845}
+              render_state={renderstate}
             >
               {numOfPages().map((e, i) => (
                 <div className="demoPage me-sm-2" key={i}>
@@ -123,7 +125,9 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
                     pageNumber={e}
                     className="w-100 get-rect"
                     onLoadSuccess={getRect}
+                    onRenderSuccess={() => setRenderState(true)}
                     scale={1}
+                    renderTextLayer={false}
                   />
                 </div>
               ))}

@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { useQuery } from "@apollo/client";
 import { apollo } from "apollo";
 import { GET_MAGAZINES } from "apollo/queries/magazineQuery";
 import dayjs from "dayjs";
 import MagazineLayout from "Layout/MagazineLayout";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import Tilt from "react-tilt";
 import styled from "styled-components";
 import { IMagazine } from "types/interface";
@@ -16,7 +15,6 @@ const Index = ({ magazines }: { magazines: IMagazine[] }): JSX.Element => {
     scale: 1,
     reverse: true,
   };
-  const [ads, setAds] = useState(true);
 
   return (
     <MagazineLayout>

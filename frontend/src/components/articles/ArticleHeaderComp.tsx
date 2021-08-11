@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
-import Logo from "components/logo/Logo";
-import Link from "next/link";
-import React, { useState } from "react";
-import styled from "styled-components";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
 import { CategoriesAtom } from "atoms/CategoryAtoms";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import styled from "styled-components";
 import { ICategory } from "types/interface";
 
 const ArticleHeader = (): JSX.Element => {
