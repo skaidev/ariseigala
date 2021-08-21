@@ -5,23 +5,26 @@ import React from "react";
 import styled from "styled-components";
 
 const PdfLayout = ({
-  children,
+	children,
 }: {
-  children: React.ReactChild;
+	children: React.ReactChild;
 }): JSX.Element => {
-  return (
-    <PdfMain id="article-layout">
-      <PdfHeader />
-      <main>{children}</main>
-      <MagazineFooter />
-    </PdfMain>
-  );
+	return (
+		<PdfMain>
+			{/* <PdfHeader /> */}
+			<main>{children}</main>
+			{/* <MagazineFooter /> */}
+		</PdfMain>
+	);
 };
 
 export default PdfLayout;
 
 const PdfMain = styled.div`
-  display: grid;
-  min-height: 100vh;
-  grid-template-rows: auto 1fr auto;
+	/* background-color: black; */
+
+	/* color: white; */
+	/* display: grid;
+	min-height: 100vh;
+	grid-template-rows: auto 1fr auto; */
 `;

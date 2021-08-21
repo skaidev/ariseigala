@@ -7,6 +7,7 @@ import React from "react";
 import { HTTP_URI } from "utils/constants";
 
 const Pdf: NextPage<{ file: string }> = ({ file }: { file: string }): JSX.Element => {
+  console.log(file);
   if (!file) return <p>Loading...</p>;
   return (
     <PdfLayout>
@@ -20,12 +21,12 @@ const Pdf: NextPage<{ file: string }> = ({ file }: { file: string }): JSX.Elemen
 export default Pdf;
 
 Pdf.getInitialProps = async (ctx: NextPageContext) => {
-  console.log(ctx?.query);
   try {
     const { data } = await apollo.query({
       query: GET_MAGAZINE,
       variables: { id: ctx?.query?.id },
     });
+
     const file = data?.magazine?.pdf?.url;
     return {
       file,

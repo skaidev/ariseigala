@@ -16,8 +16,8 @@ const MagazinAd = (): JSX.Element => {
 						</div>
 						<div className="right">
 							<div className="inner container ">
-								<p className="fs-2 fw-bold mb-0">Arise Igala magazine</p>
-								<p className="fs-2 fw-bold">Issue 45</p>
+								<p className="fs-2 fw-bold mb-0">ARISE IGALA Magazine</p>
+								<p className="fs-2 fw-bold">ISSUE 45</p>
 
 								<p className="serif">
 									Sapien sit morbi vitae nec et. Interdum etiam in morbi id
