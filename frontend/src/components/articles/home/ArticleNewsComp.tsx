@@ -2,9 +2,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { useQuery } from "@apollo/client";
 import { GET_ARTICLES_BY_CATEGORY } from "apollo/queries/articleQuery";
-import axios from "axios";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { IArticles } from "types/articles";
 import { articles } from "utils/fakeArticles";
@@ -32,7 +31,9 @@ const ArticleNewsComp = (): JSX.Element => {
       <div className="d-md-flex home-section-flex-wrapper">
         <div className="left">
           <img src="/images/img1.png" />
-          <p className="big-head mt-2 mb-5">Alhaji Yahaya Bello, recieves man of the year.</p>
+          <p className="big-head mt-2 mb-5">
+            Alhaji Yahaya Bello, recieves man of the year.
+          </p>
         </div>
         <div className="right">
           <p className="font-24 mb-4 fw-bold">Cover Stories</p>

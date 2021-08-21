@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
-import Logo from "components/logo/Logo";
-import Link from "next/link";
-import React, { useState } from "react";
-import styled from "styled-components";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
 import { CategoriesAtom } from "atoms/CategoryAtoms";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import styled from "styled-components";
 import { ICategory } from "types/interface";
 
 const ArticleHeader = (): JSX.Element => {
@@ -32,7 +30,7 @@ const ArticleHeader = (): JSX.Element => {
         <nav className="navbar border-bottom  border-3" role="navigation">
           <Link href="/">
             <a className="navbar-brand p-0" aria-label="logo">
-              <Logo />
+              <img src="/images/logo.png" alt="" />
             </a>
           </Link>
           <button

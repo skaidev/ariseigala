@@ -1,46 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
-import { gql, useQuery } from "@apollo/client";
-
+import ChoiceModalComp from "components/ChoiceModal";
 import React from "react";
-import { IArticle } from "types/interface";
-
-const GET_ARTICLES = gql`
-  query {
-    magazines {
-      id
-      issue
-      cover {
-        url
-      }
-      pdf {
-        url
-      }
-      title
-    }
-  }
-`;
+import { useState } from "react";
 
 const Test = (): JSX.Element => {
-  const { data, loading, error } = useQuery(GET_ARTICLES);
-
-  if (loading) return <p>Loading....</p>;
-
-  if (error) return <pre>{error?.message}</pre>;
-  console.log(data);
-
-  return (
-    <div>
-      <h1>Test</h1>
-      <ul>
-        {data?.magazines?.map((article: any, i: number) => (
-          <li key={i}>
-            <img src={`http://localhost:8000${article?.cover?.url}`} alt={article?.title} />
-            <p>{article.title}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+	const [show, setShow] = useState(true);
+	return (
+		<div>
+			<ChoiceModalComp show={show} onHide={() => setShow(false)} />
+		</div>
+	);
 };
 
 export default Test;

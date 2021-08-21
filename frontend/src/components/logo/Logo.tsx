@@ -3,14 +3,14 @@ import * as React from "react";
 function SvgComponent(): JSX.Element {
   return (
     <svg
-      width={109}
-      height={103}
-      viewBox="0 0 109 103"
+      width={77}
+      height={46}
+      viewBox="0 0 77 46"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <path fill="url(#prefix__pattern0)" d="M0 0h108.824v102.778H0z" />
+      <path fill="url(#prefix__pattern0)" d="M0 0h77v46H0z" />
       <defs>
         <pattern
           id="prefix__pattern0"
@@ -20,7 +20,7 @@ function SvgComponent(): JSX.Element {
         >
           <use
             xlinkHref="#prefix__image0"
-            transform="matrix(.0011 0 0 .0011 0 0)"
+            transform="matrix(.00157 0 0 .00262 -.208 -.413)"
           />
         </pattern>
         <image
