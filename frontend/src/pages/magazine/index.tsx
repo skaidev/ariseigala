@@ -87,7 +87,7 @@ export default Index;
 
 const SingleMagazine = ({ magazine }: { magazine: IMagazine }) => {
   return (
-    <Link href={`/magazine/${magazine?.id}`}>
+    <Link as={`/magazine/${magazine?.id}`} href={`/magazine/[id]`}>
       <a
         className="text-decoration-none text-inherit"
         data-aos="zoom-in"
