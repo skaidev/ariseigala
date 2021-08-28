@@ -1,11 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import { useQuery } from "@apollo/client";
-import { GET_ARTICLES_BY_CATEGORY } from "apollo/queries/articleQuery";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-
 import { IArticle } from "types/interface";
 import { HTTP_URI } from "utils/constants";
 

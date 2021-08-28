@@ -20,7 +20,7 @@ const EntertainmentComp = ({
 					<div className="inner">
 						<Link href="/articles/entertainment">
 							<a className="text-inherit text-decoration-none">
-								<img src={HTTP_URI + articles?.[0]?.image?.url} alt="" />
+								<img src="/images/Rectangle 19.png" alt="" />
 								<p className="big-head fs-3 mt-3">{articles?.[0]?.title}</p>
 							</a>
 						</Link>
@@ -28,7 +28,7 @@ const EntertainmentComp = ({
 				</div>
 				<div className="right">
 					<div className="inner">
-						{articles?.slice(0, 4).map((article, i) => (
+						{articles?.slice(0, 3).map((article, i) => (
 							<SingleCard article={article} key={i} />
 						))}
 					</div>
@@ -87,7 +87,7 @@ const Wrapper = styled.section`
 const SingleCard = ({ article }: { article: IArticle }) => {
 	return (
 		<Link href={`/articles/entertainment/${article?.slug}`}>
-			<a>
+			<a className="link-dark">
 				<div className="inner-content mb-4">
 					<img src={HTTP_URI + article?.image?.url} className="" />
 					<div className="">
