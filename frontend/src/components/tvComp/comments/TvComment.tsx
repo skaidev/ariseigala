@@ -1,61 +1,72 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
+import styled from "styled-components";
+import { ITelevision } from "types/interface";
+import AddComment from "./AddComment";
+import * as timeago from "timeago.js";
+import { useRecoilValue } from "recoil";
+import { CommentsAtom } from "atoms/CommentsAtom";
 
-const TvComment = (): JSX.Element => {
-   return (
-      <>
-         {comments.map((comment, i) => (
-            <div className="col comments-main " key={i}>
-               <div className="card border-0 comments-main-card p-0 d-flex align-items-md-start flex-column flex-md-row">
-                  <div className="comments-main-card-pic">
-                     <div className="comments-main-card-pic-main overflow-hidden rounded-circle position-relative ">
-                        <img
-                           src="/images/Frame 1.png"
-                           alt=""
-                           className="position-absolute"
-                        />
-                     </div>
-                  </div>
-                  <div className="card-body p-0 comments-main-card-body">
-                     <div className="card-title comments-main-card-title align-items-center d-flex justify-content-between">
-                        <span className="fw-bold">{comment.title}</span>
-                        <time className="text-muted">{comment.time}</time>
-                     </div>
-                     <p>{comment.body}</p>
-                  </div>
-               </div>
-            </div>
-         ))}
-      </>
-   );
+const TvComment = ({ video }: { video: ITelevision }): JSX.Element => {
+	const comments = useRecoilValue(CommentsAtom);
+	return (
+		<Wrapper>
+			<hr />
+			<p>{comments?.length} Comments</p>
+			<hr />
+			<AddComment video={video} />
+			{comments?.map((comment, i) => (
+				<div className="comment mt-4" key={i}>
+					<div className="comment-inner ">
+						<div className="comment-image ">
+							<img src={comment?.user?.image} alt="" />
+						</div>
+						<div className="comment-text">
+							<div className="comment-text-header">
+								<p className="fw-bold">{comment?.user?.name}</p>
+								<time className="text-muted">
+									{timeago.format(comment?.createdAt)}
+								</time>
+							</div>
+							<p>{comment?.content}</p>
+						</div>
+					</div>
+				</div>
+			))}
+		</Wrapper>
+	);
 };
 
 export default TvComment;
 
-const comments = [
-   {
-      title: "Emeka Chibuzor",
-      body: "Nunc amet purus at amet elementum ornare tincidunt phasellus habitant. Sed dui, leo amet, tristique sed porta magnis tincidunt massa. In orci scelerisque nunc cras euismod suscipit non ut orci. Purus ac imperdiet laoreet quam fames. Nunc enim malesuada volutpat mattis. Praesent ipsum lacinia dis metus. In amet, eget tellus facilisi pellentesque. Tortor integer urna libero phasellus. Ullamcorper congue volutpat vel.",
-      time: "2 Hrs ago",
-   },
-   {
-      title: "Emeka Chibuzor",
-      body: "Nunc amet purus at amet elementum ornare tincidunt phasellus habitant. Sed dui, leo amet, tristique sed porta magnis tincidunt massa. In orci scelerisque nunc cras euismod suscipit non ut orci. Purus ac imperdiet laoreet quam fames. Nunc enim malesuada volutpat mattis. Praesent ipsum lacinia dis metus. In amet, eget tellus facilisi pellentesque. Tortor integer urna libero phasellus. Ullamcorper congue volutpat vel.",
-      time: "2 Hrs ago",
-   },
-   {
-      title: "Emeka Chibuzor",
-      body: "Nunc amet purus at amet elementum ornare tincidunt phasellus habitant. Sed dui, leo amet, tristique sed porta magnis tincidunt massa. In orci scelerisque nunc cras euismod suscipit non ut orci. Purus ac imperdiet laoreet quam fames. Nunc enim malesuada volutpat mattis. Praesent ipsum lacinia dis metus. In amet, eget tellus facilisi pellentesque. Tortor integer urna libero phasellus. Ullamcorper congue volutpat vel.",
-      time: "2 Hrs ago",
-   },
-   {
-      title: "Emeka Chibuzor",
-      body: "Nunc amet purus at amet elementum ornare tincidunt phasellus habitant. Sed dui, leo amet, tristique sed porta magnis tincidunt massa. In orci scelerisque nunc cras euismod suscipit non ut orci. Purus ac imperdiet laoreet quam fames. Nunc enim malesuada volutpat mattis. Praesent ipsum lacinia dis metus. In amet, eget tellus facilisi pellentesque. Tortor integer urna libero phasellus. Ullamcorper congue volutpat vel.",
-      time: "2 Hrs ago",
-   },
-   {
-      title: "Emeka Chibuzor",
-      body: "Nunc amet purus at amet elementum ornare tincidunt phasellus habitant. Sed dui, leo amet, tristique sed porta magnis tincidunt massa. In orci scelerisque nunc cras euismod suscipit non ut orci. Purus ac imperdiet laoreet quam fames. Nunc enim malesuada volutpat mattis. Praesent ipsum lacinia dis metus. In amet, eget tellus facilisi pellentesque. Tortor integer urna libero phasellus. Ullamcorper congue volutpat vel.",
-      time: "2 Hrs ago",
-   },
-];
+const Wrapper = styled.div`
+	.add-comment {
+		textarea {
+			width: 100%;
+			border-radius: 1rem;
+			padding: 1rem;
+		}
+	}
+	.comment {
+		margin-bottom: 1rem;
+
+		&-inner {
+			display: flex;
+			gap: 1rem;
+		}
+		&-image {
+			img {
+				width: 4rem;
+				height: 4rem;
+				border-radius: 100%;
+			}
+		}
+		&-text {
+			flex: 1;
+		}
+		&-text-header {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+`;

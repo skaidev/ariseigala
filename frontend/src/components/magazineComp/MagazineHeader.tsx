@@ -43,9 +43,9 @@ const MagazineHeader = (): JSX.Element => {
 						<ul className="nav ">
 							{navlist.map((item, i) => (
 								<li className="nav-item text-center" key={i}>
-									<Link href={item.toLowerCase()}>
+									<Link href={item?.link}>
 										<a className="nav-link d-inline-block text-white px-3 py-2">
-											{item}
+											{item?.name}
 										</a>
 									</Link>
 								</li>
@@ -58,13 +58,9 @@ const MagazineHeader = (): JSX.Element => {
 						<ul className="navbar-nav">
 							{navlist.map((item, i) => (
 								<li className="nav-item text-center" key={i}>
-									<Link
-										href={
-											item.toLowerCase() === "home" ? "/" : item.toLowerCase()
-										}
-									>
+									<Link href={item?.link}>
 										<a className="nav-link text-white d-inline-block px-3 py-2">
-											{item}
+											{item?.name}
 										</a>
 									</Link>
 								</li>
@@ -99,4 +95,7 @@ const TvNav = styled.nav`
 	}
 `;
 
-const navlist = ["Article", "Subscribe", "Tv", "contact"];
+const navlist = [
+	{ name: "Article", link: "/" },
+	{ name: "Television", link: "/tv" },
+];

@@ -78,3 +78,26 @@ export const GET_CATEGORIES = gql`
 		}
 	}
 `;
+
+export const GET_NEWS_COVER = gql`
+	{
+		newCover {
+			title
+			image {
+				url
+			}
+		}
+	}
+`;
+
+export const GET_CULTURE_AND_TOURISM_COVER = gql`
+	{
+		cultureAndTourism {
+			title
+			description
+			image {
+				url
+			}
+		}
+	}
+`;

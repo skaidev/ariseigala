@@ -5,30 +5,28 @@ import React from "react";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
 import { HTTP_URI } from "utils/constants";
+import { NewsCover } from "utils/homeUtils";
 import { truncateDescription, truncateTitle } from "utils/utils";
 
-const ArticleNewsComp = ({
-	articles,
-}: {
-	articles: IArticle[];
-}): JSX.Element => {
-	// const [articles, setArticles] = useState<IArticle[]>([]);
-	// const { loading } = useQuery(GET_ARTICLES_BY_CATEGORY, {
-	// 	variables: { slug: "news" },
-	// 	onCompleted: (data) => setArticles(data.articles),
-	// 	onError: (err) => console.log(err),
-	// });
+interface IProps {
+	cover: NewsCover | null | undefined;
+	articles: IArticle[] | null;
+}
 
+const ArticleNewsComp: React.FC<IProps> = ({
+	articles,
+	cover,
+}): JSX.Element => {
 	if (!articles?.length) return <p>No article for this category</p>;
 	return (
 		<Wrapper className="section-1 container ">
 			<div className="line bg-warning mt-3"></div>
 			<div className="d-md-flex home-section-flex-wrapper">
 				<div className="left">
-					<img src={HTTP_URI + articles?.[0]?.image?.url} />
-					<Link href={`/articles/news/${articles?.[0]?.slug}`} passHref>
+					<img src={HTTP_URI + cover?.image?.url} />
+					<Link href={`/articles/news/`} passHref>
 						<p className="big-head mt-2 mb-5 c-pointer">
-							{truncateTitle(articles?.[0]?.title)}
+							{truncateTitle(cover?.title, 10)}
 						</p>
 					</Link>
 				</div>

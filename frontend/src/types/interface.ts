@@ -21,12 +21,28 @@ export interface IMage {
 export interface IUser {
 	id: string;
 	name: string;
-	image: IMage;
+	image: string;
 }
 export interface ICategory {
 	id: string;
 	name: string;
 	slug: string;
+}
+
+export interface IComment {
+	id: string;
+	content: string;
+	user: IUser;
+	television: ITelevision;
+	createdAt: Date;
+}
+
+export interface ITelevision {
+	id: string;
+	title: string;
+	videoUrl: string;
+	createdAt: Date;
+	comments: IComment[];
 }
 
 export interface IArticle {

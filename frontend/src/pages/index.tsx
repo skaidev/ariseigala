@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import { apollo } from "apollo";
-import { GET_ARTICLES } from "apollo/queries/articleQuery";
+import { useQuery } from "@apollo/client";
+import { GET_ARTICLES_BY_CATEGORY } from "apollo/queries/articleQuery";
 import { ArticlesAtom } from "atoms/ArticlesAtom";
 import {
 	default as Advertisement,
@@ -17,17 +17,61 @@ import ChoiceModalComp from "components/ChoiceModal";
 import Cookies from "js-cookie";
 import ArticleLayout from "Layout/ArticleLayout";
 import { NextPage } from "next";
-import { useEffect } from "react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
+import {
+	CultureCover,
+	EducationCover,
+	EntertainmentCover,
+	getCultureCover,
+	getEducationCover,
+	getEntertainmentCover,
+	getMagazineCover,
+	getNewsCover,
+	MagazineCover,
+	NewsCover,
+} from "utils/homeUtils";
 
-const Home: NextPage<{ articles: IArticle[] | null }> = ({
-	articles,
+interface IProps {
+	news: {
+		articles: IArticle[] | null;
+		cover: NewsCover | null;
+	} | null;
+	magazine: {
+		cover: MagazineCover | null;
+		articles: IArticle[] | null;
+	} | null;
+	entertainment: {
+		cover: EntertainmentCover | null;
+		articles: IArticle[] | null;
+	} | null;
+	education: {
+		cover: EducationCover | null;
+		articles: IArticle[] | null;
+	} | null;
+	culture: {
+		cover: CultureCover | null;
+		articles: IArticle[] | null;
+	} | null;
+}
+
+const Home: NextPage<IProps> = ({
+	news,
+	magazine,
+	entertainment,
+	education,
+	culture,
 }): JSX.Element => {
 	const [show, setShow] = useState(Boolean(!Cookies.get("consent")));
 	const setArticles = useSetRecoilState(ArticlesAtom);
+
+	useQuery(GET_ARTICLES_BY_CATEGORY, {
+		variables: { slug: "culture-and-tourism" },
+		onCompleted: (data) => console.log(data),
+		onError: (err) => console.log(err),
+	});
 
 	const handleHide = () => {
 		Cookies.set("consent", "true");
@@ -35,10 +79,23 @@ const Home: NextPage<{ articles: IArticle[] | null }> = ({
 	};
 
 	useEffect(() => {
-		if (articles?.length) {
-			setArticles(articles);
+		if (news?.articles?.length) {
+			setArticles(news?.articles);
 		}
 	}, []);
+
+	if (!news)
+		return (
+			<div
+				className="d-flex align-items-center justify-content-center"
+				style={{ height: "100vh" }}
+			>
+				<div>
+					<img src="/images/loader.svg" />
+					<p className="text-center">Getting ready...</p>
+				</div>
+			</div>
+		);
 	return (
 		<Fragment>
 			<ChoiceModalComp show={show} onHide={handleHide} />
@@ -46,23 +103,20 @@ const Home: NextPage<{ articles: IArticle[] | null }> = ({
 				<Wrapper className="article-home">
 					<Advertisement />
 					<ArticleNewsComp
-						articles={
-							articles?.filter((article) => article.category.name === "news") ||
-							[]
-						}
+						cover={news?.cover}
+						articles={news?.articles as IArticle[]}
 					/>
 					<div className="line bg-warning my-5 container"></div>
-					<MagazinAd />
+					<MagazinAd cover={magazine?.cover} />
 					<EntertainmentComp
-						articles={
-							articles?.filter(
-								(article) =>
-									article.category.name.toLowerCase() === "entertainment",
-							) || []
-						}
+						cover={entertainment?.cover}
+						articles={entertainment?.articles as IArticle[]}
 					/>
-					<EducationComp />
-					<CultureComp data={articles as IArticle[]} />
+					<EducationComp cover={education?.cover as EducationCover} />
+					<CultureComp
+						cover={culture?.cover as CultureCover}
+						articles={culture?.articles as IArticle[]}
+					/>
 					<SubscribeComp />
 					<div className="my-5">
 						<AdvertisementLandScape />
@@ -78,22 +132,33 @@ const Wrapper = styled.div``;
 export default Home;
 
 export const getStaticProps = async (): Promise<{
-	props: { articles: IArticle[] | null };
+	props: IProps;
 }> => {
 	try {
-		const { data } = await apollo.query({
-			query: GET_ARTICLES,
-		});
-		const articles: IArticle[] = data.articles;
+		const news = await getNewsCover();
+		const entertainment = await getEntertainmentCover();
+		const education = await getEducationCover();
+		const culture = await getCultureCover();
+		const magazine = await getMagazineCover();
 		return {
 			props: {
-				articles,
+				news,
+				entertainment,
+				education,
+				culture,
+				magazine,
 			},
 		};
 	} catch (error) {
 		console.log(error);
 		return {
-			props: { articles: null },
+			props: {
+				news: null,
+				entertainment: null,
+				education: null,
+				culture: null,
+				magazine: null,
+			},
 		};
 	}
 };

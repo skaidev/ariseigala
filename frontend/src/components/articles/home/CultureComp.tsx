@@ -8,27 +8,28 @@ import ReactMarkdown from "react-markdown";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
 import { SERVER_URI } from "utils/constants";
+import { CultureCover } from "utils/homeUtils";
 import { truncateTitle } from "utils/utils";
 import TitleComp from "../TitleComp";
 
-const CultureComp = ({ data }: { data: IArticle[] }): JSX.Element => {
-	const articles = data?.filter(
-		(item) => item.category.slug === "culture-and-tourism",
-	);
+interface IProps {
+	cover: CultureCover | null;
+	articles: IArticle[] | null;
+}
+
+const CultureComp: React.FC<IProps> = ({ cover, articles }): JSX.Element => {
 	return (
 		<Wrapper className="container">
 			<TitleComp title="Culture and tourism" />
-			<p className="big-head fs-3 my-3">
-				{truncateTitle(articles?.[0]?.title, 16)}
-			</p>
+			<p className="big-head fs-3 my-3">{truncateTitle(cover?.title, 16)}</p>
 
 			<img
-				src={SERVER_URI + articles?.[0]?.image?.url}
+				src={SERVER_URI + cover?.image?.url}
 				alt="culture"
 				className="banner-image"
 			/>
 			<div className="text-justify mt-3">
-				<ReactMarkdown>{articles?.[0]?.description}</ReactMarkdown>
+				<ReactMarkdown>{cover?.description as string}</ReactMarkdown>
 			</div>
 			<div className="text-end my-3">
 				<Link href={`/articles/culture-and-tourism`}>

@@ -33,14 +33,8 @@ const TvHeader = (): JSX.Element => {
 							<ul className="d-flex  ">
 								{navlist.map((item, i) => (
 									<li className="nav-item" key={i}>
-										<Link
-											href={
-												item.toLowerCase() === "home"
-													? "/"
-													: `/${item.toLowerCase()}`
-											}
-										>
-											<a className="nav-link text-inherit">{item}</a>
+										<Link href={item.link}>
+											<a className="nav-link text-inherit">{item.name}</a>
 										</Link>
 									</li>
 								))}
@@ -53,14 +47,10 @@ const TvHeader = (): JSX.Element => {
 						<ul className="container d-md-none  p-0">
 							{navlist.map((item, i) => (
 								<li className="nav-item text-center" key={i}>
-									<Link
-										href={
-											item.toLowerCase() === "home"
-												? "/"
-												: `/${item.toLowerCase()}`
-										}
-									>
-										<a className="nav-link d-inline-block px-3 py-2">{item}</a>
+									<Link href={item.link}>
+										<a className="nav-link d-inline-block px-3 py-2">
+											{item.name}
+										</a>
 									</Link>
 								</li>
 							))}
@@ -74,4 +64,7 @@ const TvHeader = (): JSX.Element => {
 
 export default TvHeader;
 
-const navlist = ["Article", "Subscribe", "Tv"];
+const navlist = [
+	{ name: "Article", link: "/" },
+	{ name: "Magazine", link: "/magazine" },
+];

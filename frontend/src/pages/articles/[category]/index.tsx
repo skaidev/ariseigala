@@ -8,7 +8,7 @@ import SubscribeComp from "components/articles/home/SubscribeComp";
 import TitleComp from "components/articles/TitleComp";
 // import { categories } from "components/articles/ArticleHeaderComp";
 import ArticleLayout from "Layout/ArticleLayout";
-import { NextPage, NextPageContext } from "next";
+import { GetStaticProps, NextPage, NextPageContext } from "next";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
@@ -26,7 +26,7 @@ const Article: NextPage<IProps> = ({ articles }: IProps): JSX.Element => {
 		<ArticleLayout>
 			<Wrapper className="">
 				<div className="container">
-					<h1 className="text-center text-uppercase my-3">
+					<h1 className="text-center text-uppercase my-3 serif">
 						{articles?.[0]?.category?.name}
 					</h1>
 					<div className="top">
@@ -36,7 +36,7 @@ const Article: NextPage<IProps> = ({ articles }: IProps): JSX.Element => {
 							className="banner-image"
 						/>
 						<h3 className="fs-3 serif">
-							{truncateTitle(articles?.[0]?.title as string)}
+							{truncateTitle(articles?.[0]?.title as string, 18)}
 						</h3>
 					</div>
 
@@ -112,7 +112,7 @@ const Wrapper = styled.div`
 	}
 `;
 
-export const getStaticProps = async (
+export const getStaticProps: GetStaticProps = async (
 	ctx: NextPageContext | any,
 ): Promise<{ props: IProps; revalidate: number }> => {
 	try {

@@ -2,8 +2,14 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import { SERVER_URI } from "utils/constants";
+import { MagazineCover } from "utils/homeUtils";
 
-const MagazinAd = (): JSX.Element => {
+const MagazinAd = ({
+	cover,
+}: {
+	cover: MagazineCover | null | undefined;
+}): JSX.Element => {
 	return (
 		<Wrapper>
 			<div className="container content-wrapper">
@@ -11,22 +17,18 @@ const MagazinAd = (): JSX.Element => {
 					<div className="flex-wrapper d-md-flex">
 						<div className="left ">
 							<div className="inner">
-								<img src="/images/book.png" alt="" />
+								<img src={SERVER_URI + cover?.cover?.url} alt="" />
 							</div>
 						</div>
 						<div className="right">
 							<div className="inner container ">
 								<p className="fs-2 fw-bold mb-0">ARISE IGALA Magazine</p>
-								<p className="fs-2 fw-bold">ISSUE 45</p>
+								<p className="fs-2 fw-bold">ISSUE {cover?.issue}</p>
 
-								<p className="serif">
-									Sapien sit morbi vitae nec et. Interdum etiam in morbi id
-									interdum enim sit fermentum. Blandit massa lectus lacus turpis
-									platea et. Accumsan aliquam at ipsum consectetur. Leo eget
-									aenean dolor eget augue dignissim et consectetur massa. Ut
-									velit tristique nunc diam habitasse.
-								</p>
-								<button className="btn btn-dark">Go to magazine</button>
+								<p className="serif mb-3">{cover?.description}</p>
+								<Link href="/magazine">
+									<a className="btn btn-dark">Go to magazine</a>
+								</Link>
 							</div>
 						</div>
 					</div>

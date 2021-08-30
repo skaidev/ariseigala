@@ -4,13 +4,18 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
-import { HTTP_URI } from "utils/constants";
+import { HTTP_URI, SERVER_URI } from "utils/constants";
+import { EntertainmentCover } from "utils/homeUtils";
 import TitleComp from "../TitleComp";
 
-const EntertainmentComp = ({
+interface IProps {
+	cover: EntertainmentCover | null | undefined;
+	articles: IArticle[] | null;
+}
+
+const EntertainmentComp: React.FC<IProps> = ({
 	articles,
-}: {
-	articles: IArticle[];
+	cover,
 }): JSX.Element => {
 	return (
 		<Wrapper className="section-3 container">
@@ -20,8 +25,8 @@ const EntertainmentComp = ({
 					<div className="inner">
 						<Link href="/articles/entertainment">
 							<a className="text-inherit text-decoration-none">
-								<img src="/images/Rectangle 19.png" alt="" />
-								<p className="big-head fs-3 mt-3">{articles?.[0]?.title}</p>
+								<img src={SERVER_URI + cover?.image?.url} alt="" />
+								<p className="big-head fs-3 mt-3">{cover?.title}</p>
 							</a>
 						</Link>
 					</div>
