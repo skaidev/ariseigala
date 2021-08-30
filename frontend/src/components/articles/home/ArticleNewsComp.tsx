@@ -5,6 +5,7 @@ import React from "react";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
 import { HTTP_URI } from "utils/constants";
+import { truncateDescription, truncateTitle } from "utils/utils";
 
 const ArticleNewsComp = ({
 	articles,
@@ -27,7 +28,7 @@ const ArticleNewsComp = ({
 					<img src={HTTP_URI + articles?.[0]?.image?.url} />
 					<Link href={`/articles/news/${articles?.[0]?.slug}`} passHref>
 						<p className="big-head mt-2 mb-5 c-pointer">
-							{articles?.[0]?.title}
+							{truncateTitle(articles?.[0]?.title)}
 						</p>
 					</Link>
 				</div>
@@ -83,8 +84,8 @@ const Card = ({ article }: { article: IArticle }) => {
 		<Link href={`/articles/news/${article.slug}`}>
 			<a className="inner-content text-decoration-none text-inherit">
 				<div className="">
-					<p className="text-18 fw-bold">{article.title}</p>
-					<p className="font-14">{article.description}</p>
+					<p className="text-18 fw-bold">{truncateTitle(article?.title)}</p>
+					<p className="font-14">{truncateDescription(article?.description)}</p>
 				</div>
 
 				<div className="line-thin my-3 bg-warning"></div>

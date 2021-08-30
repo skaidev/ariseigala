@@ -62,7 +62,7 @@ const Home: NextPage<{ articles: IArticle[] | null }> = ({
 						}
 					/>
 					<EducationComp />
-					<CultureComp />
+					<CultureComp data={articles as IArticle[]} />
 					<SubscribeComp />
 					<div className="my-5">
 						<AdvertisementLandScape />
@@ -77,19 +77,23 @@ const Wrapper = styled.div``;
 
 export default Home;
 
-Home.getInitialProps = async (): Promise<{ articles: IArticle[] | null }> => {
+export const getStaticProps = async (): Promise<{
+	props: { articles: IArticle[] | null };
+}> => {
 	try {
 		const { data } = await apollo.query({
 			query: GET_ARTICLES,
 		});
 		const articles: IArticle[] = data.articles;
 		return {
-			articles,
+			props: {
+				articles,
+			},
 		};
 	} catch (error) {
 		console.log(error);
 		return {
-			articles: null,
+			props: { articles: null },
 		};
 	}
 };

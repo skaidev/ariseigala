@@ -1,270 +1,164 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
+import { gql } from "@apollo/client";
 import { apollo } from "apollo";
 import { GET_ARTICLES_BY_CATEGORY } from "apollo/queries/articleQuery";
-import { GET_CATEGORY } from "apollo/queries/categoryQuery";
 import Advertisement from "components/Advertisement";
 import SubscribeComp from "components/articles/home/SubscribeComp";
+import TitleComp from "components/articles/TitleComp";
 // import { categories } from "components/articles/ArticleHeaderComp";
 import ArticleLayout from "Layout/ArticleLayout";
 import { NextPage, NextPageContext } from "next";
+import Link from "next/link";
 import React from "react";
-import { IArticle, ICategory } from "types/interface";
+import styled from "styled-components";
+import { IArticle } from "types/interface";
+import { SERVER_URI } from "utils/constants";
+import { truncateTitle } from "utils/utils";
 
 interface IProps {
-  category: ICategory | null;
-  articles: IArticle[] | null;
+	articles: IArticle[] | null;
 }
 
-const Article: NextPage<IProps> = ({
-  category,
-  articles,
-}: IProps): JSX.Element => {
-  console.log(articles);
-  return (
-    <ArticleLayout>
-      <main className="artilce-main">
-        <section className="first-article mb-4">
-          <div className="container first-article-main">
-            <div className="text-center first-article-main-title mb-3">
-              <h1 className="georgia text-capitalize">{category?.name}</h1>
-              <div className="line-thin w-75 mx-auto bg-warning"></div>
-            </div>
-            <div className="d-flex first-article-main-body flex-column flex-md-row">
-              <div className="one">
-                <div className="row row-cols-1 one-row g-3">
-                  {num.slice(7).map((e) => (
-                    <div className="col one-col" key={e}>
-                      <div className="card border-0 rounded-0 one-card">
-                        <div className="one-card-img rounded-0 card-img mb-2">
-                          <img
-                            loading="lazy"
-                            src="/images/Rectangle 29.png"
-                            alt=""
-                          />
-                        </div>
-                        <div className="one-card-body card-body p-0">
-                          <p className="georgia p-0 mb-2 fw-bold">
-                            Lacus in quam odio lectus. Nam tellus commodo metus.
-                          </p>
-                          <div className="d-inline-block py-1 border-top border-dark border-2">
-                            By Emeka Alice
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="two">
-                <div className="two-row row row-cols-1">
-                  <div className="two-col col">
-                    <div className="two-card border-0 rounded-0 card">
-                      <div className="two-card-img rounded-0 card-img mb-2">
-                        <img
-                          loading="lazy"
-                          src="/images/Rectangle 28.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="two-card-body card-body p-0">
-                        <p className="p-0 fw-bold georgia mb-2">
-                          Rutrum ac, placerat purus aliquam nulla magna nisl
-                          volutpat a. At lectus malesuada sed urna a amet non.
-                        </p>
-                        <div className="d-inline-block py-1 border-top border-dark border-2">
-                          By Emeka Alice
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="three">
-                <div className="row row-cols-1 three-row g-3">
-                  {num.slice(7).map((e) => (
-                    <div className="col three-col" key={e}>
-                      <div className="card border-0 rounded-0 three-card">
-                        <div className="three-card-img rounded-0 card-img mb-2">
-                          <img
-                            loading="lazy"
-                            src="/images/Rectangle 29.png"
-                            alt=""
-                          />
-                        </div>
-                        <div className="three-card-body card-body p-0">
-                          <p className="georgia p-0 mb-2 fw-bold">
-                            Lacus in quam odio lectus. Nam tellus commodo metus.
-                          </p>
-                          <div className="d-inline-block py-1 border-top border-dark border-2">
-                            By Emeka Alice
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <div className="mb-3 py-1">
-          <Advertisement />
-        </div>
-        <section className="second-article mb-5">
-          <div className="container second-article-main">
-            <div className="second-article-main-head py-3 mb-4 text-center">
-              <h1 className="pb-3 d-inline-block fw-bold  border-bottom border-warning georgia border-2">
-                Sub-heading
-              </h1>
-            </div>
-            <div className="second-article-main-body">
-              <div className="second-article-row row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                {num.slice(1).map((e) => (
-                  <div className="second-article-col col" key={e}>
-                    <div className="second-article-card card rounded-0 border-0">
-                      <div className="second-article-card-img card-img rounded-0 mb-2">
-                        <img
-                          loading="lazy"
-                          src="/images/Rectangle 27.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="card-body p-0">
-                        <p className="p-0 mb-2 georgia fw-bold">
-                          Lacus in quam odio lectus. Nam tellus commodo metus.
-                        </p>
-                        <span className="d-inline-block border-dark py-1 border-top border-2">
-                          By Emeka Alice
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* ---- @START --------*/}
-        <section className="second-article mb-5">
-          <div className="container second-article-main">
-            <div className="second-article-main-head py-3 mb-4 text-center">
-              <h1 className="pb-3 d-inline-block fw-bold  border-bottom border-warning georgia border-2">
-                Sub-heading
-              </h1>
-            </div>
-            <div className="second-article-main-body">
-              <div className="second-article-row row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                {num.slice(1).map((e) => (
-                  <div className="second-article-col col" key={e}>
-                    <div className="second-article-card card rounded-0 border-0">
-                      <div className="second-article-card-img card-img rounded-0 mb-2">
-                        <img
-                          loading="lazy"
-                          src="/images/Rectangle 27.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="card-body p-0">
-                        <p className="p-0 mb-2 georgia fw-bold">
-                          Lacus in quam odio lectus. Nam tellus commodo metus.
-                        </p>
-                        <span className="d-inline-block border-dark py-1 border-top border-2">
-                          By Emeka Alice
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* ----- ** @STOP  **-------  */}
-        <div>
-          <Advertisement />
-        </div>
-        {/* ---- @START --------*/}
-        <section className="second-article mb-5">
-          <div className="container second-article-main">
-            <div className="second-article-main-head py-3 mb-4 text-center">
-              <h1 className="pb-3 d-inline-block fw-bold  border-bottom border-warning georgia border-2">
-                Sub-heading
-              </h1>
-            </div>
-            <div className="second-article-main-body">
-              <div className="second-article-row row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                {num.slice(1).map((e) => (
-                  <div className="second-article-col col" key={e}>
-                    <div className="second-article-card card rounded-0 border-0">
-                      <div className="second-article-card-img card-img rounded-0 mb-2">
-                        <img
-                          loading="lazy"
-                          src="/images/Rectangle 27.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="card-body p-0">
-                        <p className="p-0 mb-2 georgia fw-bold">
-                          Lacus in quam odio lectus. Nam tellus commodo metus.
-                        </p>
-                        <span className="d-inline-block border-dark py-1 border-top border-2">
-                          By Emeka Alice
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* ----- ** @STOP  **-------  */}
-        <div>
-          <SubscribeComp />
-        </div>
-      </main>
-    </ArticleLayout>
-  );
+const Article: NextPage<IProps> = ({ articles }: IProps): JSX.Element => {
+	//console.log(articles?.map((article) => article.category?.name));
+	return (
+		<ArticleLayout>
+			<Wrapper className="">
+				<div className="container">
+					<h1 className="text-center text-uppercase my-3">
+						{articles?.[0]?.category?.name}
+					</h1>
+					<div className="top">
+						<img
+							src={SERVER_URI + articles?.[0]?.image?.url}
+							alt=""
+							className="banner-image"
+						/>
+						<h3 className="fs-3 serif">
+							{truncateTitle(articles?.[0]?.title as string)}
+						</h3>
+					</div>
+
+					<div className="main mb-4">
+						<TitleComp title="Recent articles" />
+						<div className="card-list-wrapper row">
+							{articles &&
+								[...articles]
+									?.splice(0, 8)
+									?.map((article, i) => (
+										<ArticleCard article={article} key={i} />
+									))}
+						</div>
+						<div className="my-3">
+							<Advertisement />
+						</div>
+						<div className="card-list-wrapper row my-3">
+							{articles &&
+								[...articles]
+									?.splice(8)
+									?.map((article, i) => (
+										<ArticleCard article={article} key={i} />
+									))}
+						</div>
+					</div>
+				</div>
+				<div>
+					<SubscribeComp />
+				</div>
+			</Wrapper>
+		</ArticleLayout>
+	);
 };
 
 export default Article;
 
-const num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const ArticleCard = ({ article }: { article: IArticle }) => {
+	return (
+		<Link
+			href={`/articles/${article?.category?.slug}/${article?.slug}`}
+			passHref
+		>
+			<div className="article-card mb-2 col-md-6 col-lg-3 c-pointer">
+				<img src={SERVER_URI + article?.image?.url} alt="" />
+				<p className="serif fs-4">{truncateTitle(article?.title)}</p>
+				<div className="line w-25 my-3"></div>
+				<p>By {article?.author?.name}</p>
+			</div>
+		</Link>
+	);
+};
 
-Article.getInitialProps = async (ctx: NextPageContext): Promise<IProps> => {
-  const getCategory = async () => {
-    try {
-      const { data } = await apollo.query({
-        query: GET_CATEGORY,
-        variables: { slug: ctx?.query?.category },
-      });
-      return data?.categories?.[0];
-    } catch (error) {
-      throw error;
-    }
-  };
-  const getArticles = async () => {
-    try {
-      const { data } = await apollo.query({
-        query: GET_ARTICLES_BY_CATEGORY,
-        variables: { slug: ctx?.query?.category },
-      });
-      return data?.articles;
-    } catch (error) {
-      throw error;
-    }
-  };
-  try {
-    return {
-      category: await getCategory(),
-      articles: await getArticles(),
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      category: null,
-      articles: null,
-    };
-  }
+const Wrapper = styled.div`
+	.top {
+		img {
+			width: 100%;
+			height: 545px;
+			object-fit: cover;
+		}
+	}
+	.line {
+		height: 1px;
+		background-color: black;
+	}
+	.card-list-wrapper {
+		.article-card {
+			img {
+				width: 100%;
+				height: 267px;
+				object-fit: cover;
+			}
+		}
+	}
+`;
+
+export const getStaticProps = async (
+	ctx: NextPageContext | any,
+): Promise<{ props: IProps; revalidate: number }> => {
+	try {
+		const { data } = await apollo.query({
+			query: GET_ARTICLES_BY_CATEGORY,
+			variables: { slug: ctx?.params?.category },
+		});
+
+		return {
+			props: {
+				articles: data?.articles,
+			},
+			revalidate: 500,
+		};
+	} catch (error) {
+		console.log(error);
+		return {
+			props: {
+				articles: null,
+			},
+			revalidate: 500,
+		};
+	}
+};
+
+const GET_ARTICLES = gql`
+	query {
+		articles(sort: "createdAt:DESC") {
+			slug
+			category {
+				slug
+			}
+		}
+	}
+`;
+
+export const getStaticPaths = async (): Promise<{
+	paths: string[];
+	fallback: string;
+}> => {
+	const { data } = await apollo.query({
+		query: GET_ARTICLES,
+	});
+	const paths = data?.articles?.map((article: IArticle) => ({
+		params: { slug: article.slug, category: article?.category?.slug },
+	}));
+
+	return { paths, fallback: "blocking" };
 };
