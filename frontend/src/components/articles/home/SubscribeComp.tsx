@@ -6,7 +6,7 @@ const SubscribeComp = (): JSX.Element => {
 		<Wrapper>
 			<div className="text-white">
 				<div className="container">
-					<div className="inner mx-auto py-md-0 py-4">
+					<div className="inner mx-auto py-md-0 py-4 w-75">
 						<p className="text-center mb-3 big-head fw-700">
 							Subscribe to our daily newsletter
 						</p>
