@@ -54,6 +54,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 			<Head>
 				<title>Arise Igala</title>
 				<link rel="stylesheet" href="/nprogress.css" />
+				{/* <script
+					data-ad-client="ca-pub-6813649967013416"
+					async
+					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+				></script> */}
 			</Head>
 			<ApolloProvider client={client}>
 				<RecoilRoot>

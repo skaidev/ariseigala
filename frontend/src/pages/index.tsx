@@ -21,6 +21,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
+
 import {
 	CultureCover,
 	EducationCover,
@@ -67,12 +68,6 @@ const Home: NextPage<IProps> = ({
 	const [show, setShow] = useState(Boolean(!Cookies.get("consent")));
 	const setArticles = useSetRecoilState(ArticlesAtom);
 
-	useQuery(GET_ARTICLES_BY_CATEGORY, {
-		variables: { slug: "culture-and-tourism" },
-		onCompleted: (data) => console.log(data),
-		onError: (err) => console.log(err),
-	});
-
 	const handleHide = () => {
 		Cookies.set("consent", "true");
 		setShow(false);
@@ -102,6 +97,7 @@ const Home: NextPage<IProps> = ({
 			<ArticleLayout>
 				<Wrapper className="article-home">
 					<Advertisement />
+
 					<ArticleNewsComp
 						cover={news?.cover}
 						articles={news?.articles as IArticle[]}

@@ -8,7 +8,6 @@ import React from "react";
 import Tilt from "react-tilt";
 import styled from "styled-components";
 import { IMagazine } from "types/interface";
-import { HTTP_URI } from "utils/constants";
 
 const Index = ({ magazines }: { magazines: IMagazine[] }): JSX.Element => {
 	const options = {
@@ -96,7 +95,7 @@ const SingleMagazine = ({ magazine }: { magazine: IMagazine }) => {
 			>
 				<div className="card  border-0 h-100">
 					<img
-						src={`${HTTP_URI}${magazine?.cover?.url}`}
+						src={magazine?.cover?.url}
 						alt={magazine?.title}
 						className="card-img"
 					/>

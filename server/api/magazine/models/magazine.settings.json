@@ -12,13 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string",
-      "required": true
-    },
-    "issue": {
-      "type": "string"
-    },
     "cover": {
       "model": "file",
       "via": "related",
@@ -39,9 +32,11 @@
       "required": true,
       "pluginOptions": {}
     },
-    "date": {
-      "type": "date",
-      "required": true
+    "issue": {
+      "type": "integer"
+    },
+    "edition": {
+      "type": "string"
     }
   }
 }

@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { SERVER_URI } from "utils/constants";
 import { EducationCover } from "utils/homeUtils";
 import TitleComp from "../TitleComp";
 
@@ -13,7 +12,7 @@ const EducationComp = ({ cover }: { cover: EducationCover }): JSX.Element => {
 			<Link href="/articles/education">
 				<a className="text-inherit text-decoration-none">
 					<img
-						src={SERVER_URI + cover?.image?.url}
+						src={cover?.image?.url}
 						alt="Education"
 						className="banner-image"
 					/>

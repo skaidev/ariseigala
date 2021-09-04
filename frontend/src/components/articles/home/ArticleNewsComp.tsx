@@ -4,7 +4,6 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
-import { HTTP_URI } from "utils/constants";
 import { NewsCover } from "utils/homeUtils";
 import { truncateDescription, truncateTitle } from "utils/utils";
 
@@ -23,7 +22,7 @@ const ArticleNewsComp: React.FC<IProps> = ({
 			<div className="line bg-warning mt-3"></div>
 			<div className="d-md-flex home-section-flex-wrapper">
 				<div className="left">
-					<img src={HTTP_URI + cover?.image?.url} />
+					<img src={cover?.image?.url} />
 					<Link href={`/articles/news/`} passHref>
 						<p className="big-head mt-2 mb-5 c-pointer">
 							{truncateTitle(cover?.title, 10)}
