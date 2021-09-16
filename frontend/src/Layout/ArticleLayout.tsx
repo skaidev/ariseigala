@@ -1,26 +1,37 @@
 import FooterComp from "components/FooterComp";
 import HeaderComp from "components/articles/ArticleHeaderComp";
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
+import Head from "next/head";
 
 const ArticleLayout = ({
-  children,
+	children,
+	title,
+	description,
 }: {
-  children: React.ReactChild;
+	children: React.ReactChild;
+	title?: string;
+	description?: string;
 }): JSX.Element => {
-  return (
-    <Main id="article-layout">
-      <HeaderComp />
-      <main>{children}</main>
-      <FooterComp />
-    </Main>
-  );
+	return (
+		<Fragment>
+			<Head>
+				<title>{title}</title>
+				<meta name="description" content={description} />
+			</Head>
+			<Main id="article-layout">
+				<HeaderComp />
+				<main>{children}</main>
+				<FooterComp />
+			</Main>
+		</Fragment>
+	);
 };
 
 export default ArticleLayout;
 
 const Main = styled.div`
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+	min-height: 100vh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
 `;

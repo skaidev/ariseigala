@@ -13,7 +13,6 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
-import { SERVER_URI } from "utils/constants";
 import { truncateTitle } from "utils/utils";
 
 interface IProps {
@@ -22,6 +21,15 @@ interface IProps {
 
 const Article: NextPage<IProps> = ({ articles }: IProps): JSX.Element => {
 	//console.log(articles?.map((article) => article.category?.name));
+	if (!articles?.length)
+		return (
+			<p className="container mt-3">
+				No Article in this category
+				<Link href="/">
+					<a>Go back home</a>
+				</Link>{" "}
+			</p>
+		);
 	return (
 		<ArticleLayout>
 			<Wrapper className="">
@@ -31,11 +39,11 @@ const Article: NextPage<IProps> = ({ articles }: IProps): JSX.Element => {
 					</h1>
 					<div className="top">
 						<img
-							src={SERVER_URI + articles?.[0]?.image?.url}
+							src={articles?.[0]?.image?.url}
 							alt=""
 							className="banner-image"
 						/>
-						<h3 className="fs-3 serif">
+						<h3 className="fs-3 serif fw-bold">
 							{truncateTitle(articles?.[0]?.title as string, 18)}
 						</h3>
 					</div>
@@ -80,7 +88,7 @@ const ArticleCard = ({ article }: { article: IArticle }) => {
 			passHref
 		>
 			<div className="article-card mb-2 col-md-6 col-lg-3 c-pointer">
-				<img src={SERVER_URI + article?.image?.url} alt="" />
+				<img src={article?.image?.url} alt="" />
 				<p className="serif fs-4">{truncateTitle(article?.title)}</p>
 				<div className="line w-25 my-3"></div>
 				<p>By {article?.author?.name}</p>

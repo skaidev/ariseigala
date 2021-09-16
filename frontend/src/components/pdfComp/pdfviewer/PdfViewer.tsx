@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import styled from "styled-components";
@@ -58,55 +60,14 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
 
 	return (
 		<PDFWrapper>
-			{content_list && (
-				<div className="cover-dark animate__animated animate__slideInLeft">
-					<div className="cover-light overflow-auto animate__animated animate__zoomInRight">
-						<div className="container py-4">
-							<h3 className="mb-3 fw-bolder d-flex justify-content-between align-items-center">
-								<span>Contents</span>
-								<button
-									className="btn btn-light"
-									onClick={() => setContentList(false)}
-								>
-									<i className="fas fa-times fa-2x"></i>
-								</button>
-							</h3>
-							<ul className="list-group">
-								{numContents().map((content, i) => (
-									<li
-										className={`list-group-item d-flex align-items-center border-0 c-pointer ${
-											pageNumber == content ? "bg-secondary" : ""
-										}`}
-										key={i}
-										onClick={() => {
-											setPageNumber(content);
-											setContentList(false);
-										}}
-									>
-										<span className="fw-bold">-</span>
-										<p className="m-0 p-0 px-2 flex-fill">
-											<b className="d-block text-center fw-bolder fs-5 mb-2">
-												A in nunc purus urna nulla eu gravida quisque.{" "}
-											</b>
-											<span className="float-end pe-5">
-												Nisl, ac eget ac nibh. Vel dui auctor ultricies quisque
-												a nibh.
-											</span>
-										</p>
-										<span className="fw-bold">{content}</span>
-									</li>
-								))}
-							</ul>
-						</div>
-					</div>
-				</div>
-			)}
-			<div className="container d-flex mb-4 justify-content-between align-items-center ">
-				<button className="btn btn-dark" onClick={() => setContentList(true)}>
-					<i className="fas fa-2x fa-bars"></i>
-				</button>
-			</div>
 			<div className="pdf-section py-3">
+				<div className="container text-center my-4">
+					<Link href="/magazine">
+						<a>
+							<img src="/images/logo.png" alt="Logo" />
+						</a>
+					</Link>
+				</div>
 				<div className="pdf-wrapper overflow-auto">
 					<Document
 						file={file}

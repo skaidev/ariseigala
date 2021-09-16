@@ -138,7 +138,7 @@ const ListPreviewComp = ({ article }: { article: IArticle }): JSX.Element => {
 			<div>
 				<p className="inner-excerpt mt-2">{truncateTitle(article?.title)}</p>
 				<div className="line bg-warning w-50 mb-2 mx-auto" />
-				<small className="text-center d-block">By Sola Oyebanji</small>
+				<small className="text-center d-block">{article?.author?.name}</small>
 			</div>
 		</div>
 	);

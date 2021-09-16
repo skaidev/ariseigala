@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { apollo } from "apollo";
 import { GET_MAGAZINES } from "apollo/queries/magazineQuery";
-import dayjs from "dayjs";
 import MagazineLayout from "Layout/MagazineLayout";
+import { groupBy } from "lodash";
 import Link from "next/link";
 import React from "react";
 import Tilt from "react-tilt";
@@ -15,6 +15,8 @@ const Index = ({ magazines }: { magazines: IMagazine[] }): JSX.Element => {
 		reverse: true,
 	};
 
+	const data = groupBy(magazines, "edition");
+
 	return (
 		<MagazineLayout>
 			<div>
@@ -22,20 +24,22 @@ const Index = ({ magazines }: { magazines: IMagazine[] }): JSX.Element => {
 					<section className="bg-dark first-wrapper py-2 text-white">
 						<div className="container mb-2 first-main d-flex flex-column-reverse flex-md-row align-items-md-center">
 							<div className="left">
-								<h1 className="fw-bold mb-3 fs-1 georgia">
-									Lorem ipsum dolor sit amet.
+								<h1 className="fw-bold mb-3 fs-1 georgia text-uppercase">
+									ARISE IGALA Magazine
 								</h1>
 								<p className="poppins fs-5 mb-4 p-0 ">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Egestas in vivamus nisi non vivamus etiam tincidunt nec
-									aliquam. Adipiscing purus a tincidunt faucibus felis mattis
-									elementum massa
+									ARISE IGALA Magazine is a Socio-Cultural and Lifestyle
+									Publication Designed to Celebrate, Inspire and Challenge the
+									People into Positive Ventures for the Benefit of Mankind. It
+									is published by ARISE IGALA PUBLISHING LIMITED (RC 1822199), a
+									subsidiary of ONOJA DREAMS NETWORK LIMITED (RC 868974)
 								</p>
-								<Link href="/subscribe">
-									<a className="btn poppins border text-white border-1 px-5 fs-5 py-3">
-										Buy Issue
-									</a>
-								</Link>
+								<a
+									href="#issues"
+									className="btn poppins border text-white border-1 px-5 fs-5 py-3"
+								>
+									Read Issues
+								</a>
 							</div>
 							<div className="right">
 								<Tilt {...options}>
@@ -48,18 +52,22 @@ const Index = ({ magazines }: { magazines: IMagazine[] }): JSX.Element => {
 							<i className="d-block text-center fas fa-chevron-down fa-2x fw-bold"></i>
 						</div>
 					</section>
-					<section className="py-5 ">
+					<section className="py-5 " id="issues">
 						<div className="container">
-							<h1 className="mb-5 fw-bold">January - Febuary, 2021</h1>
-							<div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-								{magazines?.map((magazine, i) => (
-									<SingleMagazine key={i} magazine={magazine} />
-								))}
-							</div>
+							{Object.keys(data)?.map((item, i) => (
+								<div key={i}>
+									<h1 className="mb-5 fw-bold">{item}</h1>
+									<div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+										{data[item]?.map((magazine, i) => (
+											<SingleMagazine key={i} magazine={magazine} />
+										))}
+									</div>
+								</div>
+							))}
 						</div>
 					</section>
 
-					<section className="py-5 ">
+					{/* <section className="py-5 ">
 						<div className="container">
 							<div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
 								{magazines?.map((magazine, i) => (
@@ -67,15 +75,15 @@ const Index = ({ magazines }: { magazines: IMagazine[] }): JSX.Element => {
 								))}
 							</div>
 						</div>
-					</section>
-					<div className="container">
+					</section> */}
+					{/* <div className="container">
 						<Ads className="ads img-fluid bg-light shadow-lg"></Ads>
-					</div>
-					<div className="d-flex mb-5 justify-content-center py-2">
+					</div> */}
+					{/* <div className="d-flex mb-5 justify-content-center py-2">
 						<button className="btn border-2 border-dark px-4 fw-bold py-2">
 							Load More
 						</button>
-					</div>
+					</div> */}
 				</main>
 			</div>
 		</MagazineLayout>
@@ -100,12 +108,12 @@ const SingleMagazine = ({ magazine }: { magazine: IMagazine }) => {
 						className="card-img"
 					/>
 					<div className="card-body">
-						<p className="card-title mb-2 fw-bold text-center fs-4">
-							{magazine?.issue}
+						<p className="card-title mb-2 fw-bold text-center fs-4 text-uppercase">
+							Issue {magazine?.issue}
 						</p>
-						<p className="text-center fs-5 georgia">
+						{/* <p className="text-center fs-5 georgia">
 							{dayjs(magazine?.date).format("MMMM DD, YYYY")}
-						</p>
+						</p> */}
 					</div>
 				</div>
 			</a>

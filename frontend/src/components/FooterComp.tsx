@@ -19,16 +19,21 @@ const MagazineFooter = (): JSX.Element => {
 			<hr />
 			<div className="py-2">
 				<CategoryNavComp />
-				<p className="text-center mb-3 georgia fa-2x">Arise Igala</p>
+				<p className="text-center mb-3 georgia fa-2x text-uppercase">
+					Arise Igala
+				</p>
 				<div className="container">
-					<p className="text-center">
-						© Arise Igala 2021 All Rights Reserved. Use of this site constitutes
-						acceptance of our Terms of Service, Privacy Policy and Do Not Sell
-						My Personal Information. Arise Igala may receive compensation for
-						some links to products and services on this website. Offers may be
-						subject to change without notice. This site is protected by
-						reCAPTCHA and the Google Privacy Policy Terms of Service apply.
-					</p>
+					<div className="text-center">
+						<div className="">
+							<p>All Rights Reserved © 2021 Onoja Dreams Network Limited.</p>
+							<p className="text-center">
+								ARISE IGALA Magazine is published by ARISE IGALA PUBLISHING
+								LIMITED (RC 1822199) and ARISE IGALA Television is operated by
+								ARISE IGALA BROADCASTING LIMITED (RC 1520165).
+							</p>
+							<p>Subsidiaries of ONOJA DREAMS NETWORK LIMITED (RC 868974)</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</footer>

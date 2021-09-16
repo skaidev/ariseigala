@@ -6,11 +6,11 @@ const SubscribeComp = (): JSX.Element => {
 		<Wrapper>
 			<div className="text-white">
 				<div className="container">
-					<div className="inner mx-auto py-md-0 py-4 w-75">
-						<p className="text-center mb-3 big-head fw-700">
-							Subscribe to our daily newsletter
+					<div className="inner mx-auto py-md-0 py-4 ">
+						<p className="text-center mb-5 big-head fw-700 text-uppercase">
+							Subscribe to our newsletter
 						</p>
-						<p className="p-0 my-4 text-center fw-light">
+						{/* <p className="p-0 my-4 text-center fw-light">
 							Sit vestibulum facilisis at at egestas malesuada dignissim. Eget
 							in semper et ultrices leo scelerisque dui diam. Ut posuere
 							sagittis volutpat pretium egestas aliquet. Nibh condimentum mattis
@@ -20,7 +20,7 @@ const SubscribeComp = (): JSX.Element => {
 							fermentum at amet. Sit velit ipsum amet fringilla integer quis est
 							lorem. Lacus nisi, faucibus elit vitae eu netus. Aliquam etiam
 							egestas urna arcu.
-						</p>
+						</p> */}
 						<form className=" d-md-flex  w-75 mx-auto">
 							<div className="col-md-7">
 								<input
