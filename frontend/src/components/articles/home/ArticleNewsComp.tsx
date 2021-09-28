@@ -4,28 +4,24 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
-import { NewsCover } from "utils/homeUtils";
 import { truncateDescription, truncateTitle } from "utils/utils";
 
 interface IProps {
-	cover: NewsCover | null | undefined;
 	articles: IArticle[] | null;
 }
 
-const ArticleNewsComp: React.FC<IProps> = ({
-	articles,
-	cover,
-}): JSX.Element => {
-	if (!articles?.length) return <p>No article for this category</p>;
+const ArticleNewsComp: React.FC<IProps> = ({ articles }): JSX.Element => {
+	if (!articles?.length)
+		return <p className="container">No article for this category</p>;
 	return (
 		<Wrapper className="section-1 container ">
 			<div className="line bg-warning mt-3"></div>
 			<div className="d-md-flex home-section-flex-wrapper">
 				<div className="left">
-					<img src={cover?.image?.url} />
-					<Link href={`/articles/news/`} passHref>
+					<img src={articles?.[0]?.image?.url} />
+					<Link href={`/articles/news/${articles?.[0]?.slug}`} passHref>
 						<p className="big-head mt-2 mb-5 c-pointer">
-							{truncateTitle(cover?.title, 10)}
+							{truncateTitle(articles?.[0]?.title, 10)}
 						</p>
 					</Link>
 				</div>

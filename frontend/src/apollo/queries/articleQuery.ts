@@ -26,7 +26,7 @@ export const GET_ARTICLES_BY_SLUG = gql`
 
 export const GET_ARTICLES_BY_CATEGORY = gql`
 	query ArticlesByCategory($slug: String) {
-		articles(where: { category: { slug: $slug } }) {
+		articles(where: { category: { slug: $slug } }, sort: "createdAt:DESC") {
 			id
 			createdAt
 			title
@@ -95,6 +95,26 @@ export const GET_CULTURE_AND_TOURISM_COVER = gql`
 		cultureAndTourism {
 			title
 			description
+			image {
+				url
+			}
+		}
+	}
+`;
+
+export const GET_ADS_1 = gql`
+	{
+		ads1s {
+			image {
+				url
+			}
+		}
+	}
+`;
+
+export const GET_ADS_2 = gql`
+	{
+		ads2s {
 			image {
 				url
 			}

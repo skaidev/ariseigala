@@ -1,20 +1,13 @@
-export const truncateTitle = (
-	text: string | undefined,
-	length?: number,
-): string => {
-	const newText = text
-		?.split(" ")
-		.slice(0, length || 8)
-		.join(" ");
+export const truncateTitle = (text: string | undefined, length = 8): string => {
+	const words = text?.split(" ");
+	const newText = words?.slice(0, length).join(" ");
 
-	return `${newText}...`;
+	return `${newText}${words && words?.length > 5 ? "..." : ""}`;
 };
 
-export const truncateDescription = (text: string, length?: number): string => {
-	const newText = text
-		?.split(" ")
-		.slice(0, length || 20)
-		.join(" ");
+export const truncateDescription = (text: string, length = 20): string => {
+	const words = text.split(" ");
+	const newText = words.slice(0, length).join(" ");
 
-	return `${newText}...`;
+	return `${newText}${words?.length > 20 ? "..." : ""}`;
 };

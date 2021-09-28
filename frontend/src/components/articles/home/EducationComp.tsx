@@ -2,17 +2,17 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { EducationCover } from "utils/homeUtils";
+import { IArticle } from "types/interface";
 import TitleComp from "../TitleComp";
 
-const EducationComp = ({ cover }: { cover: EducationCover }): JSX.Element => {
+const EducationComp = ({ articles }: { articles: IArticle[] }): JSX.Element => {
 	return (
 		<Wrapper className="container">
 			<TitleComp title="Education" />
-			<Link href="/articles/education">
+			<Link href={`/articles/education/${articles?.[0]?.slug}`}>
 				<a className="text-inherit text-decoration-none">
 					<img
-						src={cover?.image?.url}
+						src={articles?.[0]?.image.url}
 						alt="Education"
 						className="banner-image"
 					/>
@@ -40,7 +40,7 @@ export default EducationComp;
 const Wrapper = styled.section`
 	.banner-image {
 		width: 100%;
-		max-height: 45.8rem;
+		max-height: 40.8rem;
 		object-fit: cover;
 	}
 `;

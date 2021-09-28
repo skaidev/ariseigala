@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { apollo } from "apollo";
 import { GET_MAGAZINES } from "apollo/queries/magazineQuery";
+import dayjs from "dayjs";
 import MagazineLayout from "Layout/MagazineLayout";
 import { groupBy } from "lodash";
+import { GetStaticProps } from "next";
 import Link from "next/link";
 import React from "react";
 import Tilt from "react-tilt";
@@ -15,11 +17,9 @@ const Index = ({ magazines }: { magazines: IMagazine[] }): JSX.Element => {
 		reverse: true,
 	};
 
-	const data = groupBy(magazines, "edition");
-
 	return (
 		<MagazineLayout>
-			<div>
+			<Wrapper>
 				<main>
 					<section className="bg-dark first-wrapper py-2 text-white">
 						<div className="container mb-2 first-main d-flex flex-column-reverse flex-md-row align-items-md-center">
@@ -53,44 +53,32 @@ const Index = ({ magazines }: { magazines: IMagazine[] }): JSX.Element => {
 						</div>
 					</section>
 					<section className="py-5 " id="issues">
-						<div className="container">
-							{Object.keys(data)?.map((item, i) => (
+						<div className="container magazine-list">
+							{magazines?.map((mag, i) => (
 								<div key={i}>
-									<h1 className="mb-5 fw-bold">{item}</h1>
-									<div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-										{data[item]?.map((magazine, i) => (
-											<SingleMagazine key={i} magazine={magazine} />
-										))}
+									{/* <h1 className="mb-5 fw-bold">{ma}</h1> */}
+									<div className="single">
+										<SingleMagazine key={i} magazine={mag} />
 									</div>
 								</div>
 							))}
 						</div>
 					</section>
-
-					{/* <section className="py-5 ">
-						<div className="container">
-							<div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-								{magazines?.map((magazine, i) => (
-									<SingleMagazine key={i} magazine={magazine} />
-								))}
-							</div>
-						</div>
-					</section> */}
-					{/* <div className="container">
-						<Ads className="ads img-fluid bg-light shadow-lg"></Ads>
-					</div> */}
-					{/* <div className="d-flex mb-5 justify-content-center py-2">
-						<button className="btn border-2 border-dark px-4 fw-bold py-2">
-							Load More
-						</button>
-					</div> */}
 				</main>
-			</div>
+			</Wrapper>
 		</MagazineLayout>
 	);
 };
 
 export default Index;
+
+const Wrapper = styled.div`
+	.magazine-list {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+	}
+`;
 
 const SingleMagazine = ({ magazine }: { magazine: IMagazine }) => {
 	return (
@@ -108,12 +96,11 @@ const SingleMagazine = ({ magazine }: { magazine: IMagazine }) => {
 						className="card-img"
 					/>
 					<div className="card-body">
+						{/* Janury-Dec, 2001 */}
+						<p className="text-center fw-bold">{magazine?.edition}</p>
 						<p className="card-title mb-2 fw-bold text-center fs-4 text-uppercase">
 							Issue {magazine?.issue}
 						</p>
-						{/* <p className="text-center fs-5 georgia">
-							{dayjs(magazine?.date).format("MMMM DD, YYYY")}
-						</p> */}
 					</div>
 				</div>
 			</a>
@@ -121,7 +108,7 @@ const SingleMagazine = ({ magazine }: { magazine: IMagazine }) => {
 	);
 };
 
-export const getStaticProps = async (): Promise<{
+export const getStaticProps: GetStaticProps = async (): Promise<{
 	props: { magazines: IMagazine[] | null };
 }> => {
 	try {
@@ -130,6 +117,7 @@ export const getStaticProps = async (): Promise<{
 		});
 
 		const magazines: IMagazine[] = data?.magazines;
+
 		return {
 			props: {
 				magazines,
@@ -144,7 +132,3 @@ export const getStaticProps = async (): Promise<{
 		};
 	}
 };
-
-const Ads = styled.div`
-	height: 500px;
-`;

@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import { useQuery } from "@apollo/client";
-import { GET_ARTICLES_BY_CATEGORY } from "apollo/queries/articleQuery";
 import { ArticlesAtom } from "atoms/ArticlesAtom";
 import {
 	default as Advertisement,
@@ -21,7 +19,6 @@ import { Fragment, useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
-
 import {
 	CultureCover,
 	EducationCover,
@@ -38,7 +35,6 @@ import {
 interface IProps {
 	news: {
 		articles: IArticle[] | null;
-		cover: NewsCover | null;
 	} | null;
 	magazine: {
 		cover: MagazineCover | null;
@@ -94,25 +90,16 @@ const Home: NextPage<IProps> = ({
 	return (
 		<Fragment>
 			<ChoiceModalComp show={show} onHide={handleHide} />
-			<ArticleLayout>
+			<ArticleLayout title="Arise Igala | Articles">
 				<Wrapper className="article-home">
 					<Advertisement />
 
-					<ArticleNewsComp
-						cover={news?.cover}
-						articles={news?.articles as IArticle[]}
-					/>
+					<ArticleNewsComp articles={news?.articles as IArticle[]} />
 					<div className="line bg-warning my-5 container"></div>
 					<MagazinAd cover={magazine?.cover} />
-					<EntertainmentComp
-						cover={entertainment?.cover}
-						articles={entertainment?.articles as IArticle[]}
-					/>
-					<EducationComp cover={education?.cover as EducationCover} />
-					<CultureComp
-						cover={culture?.cover as CultureCover}
-						articles={culture?.articles as IArticle[]}
-					/>
+					<EntertainmentComp articles={entertainment?.articles as IArticle[]} />
+					<EducationComp articles={education?.articles as IArticle[]} />
+					<CultureComp articles={culture?.articles as IArticle[]} />
 					<SubscribeComp />
 					<div className="my-5">
 						<AdvertisementLandScape />

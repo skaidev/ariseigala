@@ -7,13 +7,10 @@ import { Flipbook } from "../pdfFlip/Flipbook";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-/*
- const samplePDF = "https://www.hq.nasa.gov/alsj/a17/A17_FlightPlan.pdf"; 
- */
 export default function PdfViewer({ file }: { file: string }): JSX.Element {
 	const [numPages, setNumPages] = useState(1);
-	const [pageNumber, setPageNumber] = useState(1);
-	const [content_list, setContentList] = useState(false);
+	// const [pageNumber, setPageNumber] = useState(1);
+	// const [content_list, setContentList] = useState(false);
 	const [renderstate, setRenderState] = useState(false);
 	const [rect, setRect] = useState({
 		width: 0,
@@ -23,15 +20,15 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
 	const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
 		setNumPages(numPages);
 	};
-	const numContents = () => {
-		const num_of_content = [];
-		if (numPages) {
-			for (let index = 1; index <= numPages; index++) {
-				num_of_content.push(index);
-			}
-		}
-		return num_of_content;
-	};
+	// const numContents = () => {
+	// 	const num_of_content = [];
+	// 	if (numPages) {
+	// 		for (let index = 1; index <= numPages; index++) {
+	// 			num_of_content.push(index);
+	// 		}
+	// 	}
+	// 	return num_of_content;
+	// };
 	const numOfPages = () => {
 		const num_of_pages = [];
 		if (numPages) {
@@ -42,18 +39,17 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
 		return num_of_pages;
 	};
 
-	const getRect = () => {
-		const elems = document.querySelector(".demoPage");
-		const elem_width = elems?.getBoundingClientRect().width;
-		const elem_height = elems?.getBoundingClientRect().height;
-		setRect({
-			...rect,
-			width: Number(elem_width),
-			height: Number(elem_height),
-		});
-	};
-
 	useEffect(() => {
+		const getRect = () => {
+			const elems = document.querySelector(".demoPage");
+			const elem_width = elems?.getBoundingClientRect().width;
+			const elem_height = elems?.getBoundingClientRect().height;
+			setRect({
+				...rect,
+				width: Number(elem_width),
+				height: Number(elem_height),
+			});
+		};
 		getRect();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -61,12 +57,21 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
 	return (
 		<PDFWrapper>
 			<div className="pdf-section py-3">
-				<div className="container text-center my-4">
-					<Link href="/magazine">
-						<a>
-							<img src="/images/logo.png" alt="Logo" />
-						</a>
-					</Link>
+				<div className="container my-4">
+					<nav className="navbar">
+						<Link href="/magazine">
+							<a className=" text-light text-decoration-none ">
+								<i className="fas fa-arrow-left me-2"></i>{" "}
+								<span className="fw-bold">Back</span>
+							</a>
+						</Link>
+						<Link href="/magazine">
+							<a>
+								<img src="/images/logo.png" alt="Logo" />
+							</a>
+						</Link>
+						<div></div>
+					</nav>
 				</div>
 				<div className="pdf-wrapper overflow-auto">
 					<Document
@@ -85,7 +90,7 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
 									<Page
 										pageNumber={e}
 										className="w-100 get-rect"
-										onLoadSuccess={getRect}
+										// onLoadSuccess={getRect}
 										onRenderSuccess={() => setRenderState(true)}
 										scale={1}
 										renderTextLayer={false}
@@ -118,7 +123,7 @@ const PDFWrapper = styled.div`
 			background: white;
 			height: 100%;
 			position: absolute;
-			z-index: 1000000;
+			z-index: 3;
 		}
 	}
 	.pdf-section {

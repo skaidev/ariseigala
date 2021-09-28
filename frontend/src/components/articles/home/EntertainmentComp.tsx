@@ -4,29 +4,23 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { IArticle } from "types/interface";
-
-import { EntertainmentCover } from "utils/homeUtils";
 import TitleComp from "../TitleComp";
 
 interface IProps {
-	cover: EntertainmentCover | null | undefined;
 	articles: IArticle[] | null;
 }
 
-const EntertainmentComp: React.FC<IProps> = ({
-	articles,
-	cover,
-}): JSX.Element => {
+const EntertainmentComp: React.FC<IProps> = ({ articles }): JSX.Element => {
 	return (
 		<Wrapper className="section-3 container">
 			<TitleComp title="Entertainment" />
 			<div className="home-section-flex-wrapper">
 				<div className="left">
 					<div className="inner">
-						<Link href="/articles/entertainment">
+						<Link href={`/articles/entertainment/${articles?.[0]?.slug}`}>
 							<a className="text-inherit text-decoration-none">
-								<img src={cover?.image?.url} alt="" />
-								<p className="big-head fs-3 mt-3">{cover?.title}</p>
+								<img src={articles?.[0]?.image.url} alt="" />
+								<p className="big-head fs-3 mt-3">{articles?.[0]?.title}</p>
 							</a>
 						</Link>
 					</div>

@@ -16,7 +16,7 @@ const SingleArticlePage: NextPage<{ article: IArticle | null }> = ({
 	article,
 }): JSX.Element => {
 	return (
-		<ArticleLayout>
+		<ArticleLayout title={article?.title} description={article?.description}>
 			<Wrapper>
 				<div className="container single-article-wrapper">
 					<div className="single-article-wrapper-advertisement py-3 mb-3">

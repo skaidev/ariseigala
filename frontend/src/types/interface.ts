@@ -62,6 +62,7 @@ export interface IArticle {
 
 export interface IMagazine {
 	id: string;
+	edition: string;
 	cover: {
 		url: string;
 	};

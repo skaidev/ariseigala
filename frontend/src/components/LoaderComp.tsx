@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
+import { Loader } from "rsuite";
 
 const LoaderComp = (): JSX.Element => {
 	return (
@@ -8,8 +9,8 @@ const LoaderComp = (): JSX.Element => {
 			style={{ height: "100vh" }}
 		>
 			<div>
-				<img src="/images/loader.svg" alt="loader" />
-				<p className="text-center">Getting ready...</p>
+				<Loader content="Getting ready..." />
+				{/* <p className="text-center"></p> */}
 			</div>
 		</div>
 	);

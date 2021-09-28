@@ -3,17 +3,6 @@ import { apollo } from "apollo";
 import { GET_ARTICLES_BY_CATEGORY } from "apollo/queries/articleQuery";
 import { IArticle, IMage } from "types/interface";
 
-const GET_NEWS_COVER = gql`
-	{
-		newCover {
-			title
-			image {
-				url
-			}
-		}
-	}
-`;
-
 const GET_CULTURE_COVER = gql`
 	{
 		cultureAndTourism {
@@ -96,20 +85,14 @@ const getCategory = async (cat: CatEnum) => {
 
 export const getNewsCover = async (): Promise<{
 	articles: IArticle[] | null;
-	cover: NewsCover | null;
 }> => {
 	try {
-		const { data } = await apollo.query({
-			query: GET_NEWS_COVER,
-		});
 		return {
-			cover: data?.newCover,
 			articles: await getCategory(CatEnum.News),
 		};
 	} catch (error) {
 		console.log(error);
 		return {
-			cover: null,
 			articles: null,
 		};
 	}

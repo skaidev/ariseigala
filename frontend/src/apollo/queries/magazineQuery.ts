@@ -2,10 +2,11 @@ import { gql } from "@apollo/client";
 
 export const GET_MAGAZINES = gql`
 	query {
-		magazines(sort: "date:ASC") {
+		magazines(sort: "issue:ASC") {
 			id
 			issue
 			edition
+			date
 			cover {
 				url
 			}

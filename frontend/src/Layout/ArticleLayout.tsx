@@ -16,7 +16,7 @@ const ArticleLayout = ({
 	return (
 		<Fragment>
 			<Head>
-				<title>{title}</title>
+				<title>{title || "Arise Igala Articles"}</title>
 				<meta name="description" content={description} />
 			</Head>
 			<Main id="article-layout">
