@@ -1,23 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
-import ArticleLayout from "Layout/ArticleLayout";
-import React from "react";
-import Image from "next/image";
-import Advertisement from "components/Advertisement";
-import styled from "styled-components";
-import Link from "next/link";
-import { NextPage, NextPageContext } from "next";
-import { IArticle } from "types/interface";
 import { apollo } from "apollo";
 import { GET_ARTICLES_BY_SLUG } from "apollo/queries/articleQuery";
-import { truncateTitle } from "utils/utils";
+import Advertisement from "components/Advertisement";
 import dayjs from "dayjs";
+import ArticleLayout from "Layout/ArticleLayout";
+import { NextPage, NextPageContext } from "next";
+import Link from "next/link";
+import React from "react";
 import ReactMarkdown from "react-markdown";
-import { SERVER_URI } from "utils/constants";
+import styled from "styled-components";
+import { IArticle } from "types/interface";
+import { truncateTitle } from "utils/utils";
+
 const SingleArticlePage: NextPage<{ article: IArticle | null }> = ({
 	article,
 }): JSX.Element => {
 	return (
-		<ArticleLayout>
+		<ArticleLayout title={article?.title} description={article?.description}>
 			<Wrapper>
 				<div className="container single-article-wrapper">
 					<div className="single-article-wrapper-advertisement py-3 mb-3">
@@ -63,7 +62,7 @@ const SingleArticlePage: NextPage<{ article: IArticle | null }> = ({
 					<div className="single-article-2">
 						<div className="single-article-2-img py-2">
 							<img
-								src={SERVER_URI + article?.image?.url}
+								src={article?.image?.url}
 								alt="Landscape picture"
 								width={`${100}%`}
 								height={500}

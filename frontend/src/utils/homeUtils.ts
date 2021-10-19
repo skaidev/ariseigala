@@ -3,75 +3,6 @@ import { apollo } from "apollo";
 import { GET_ARTICLES_BY_CATEGORY } from "apollo/queries/articleQuery";
 import { IArticle, IMage } from "types/interface";
 
-const GET_NEWS_COVER = gql`
-	{
-		newCover {
-			title
-			image {
-				url
-			}
-		}
-	}
-`;
-
-const GET_CULTURE_COVER = gql`
-	{
-		cultureAndTourism {
-			title
-			description
-			image {
-				url
-			}
-		}
-	}
-`;
-
-const GET_MAGAZINE_COVER = gql`
-	{
-		magazineCover {
-			cover {
-				url
-			}
-			issue
-			description
-		}
-	}
-`;
-
-const GET_ENTERTAINMENT_COVER = gql`
-	{
-		entertainmentCover {
-			image {
-				url
-			}
-			title
-		}
-	}
-`;
-
-const GET_EDUCATION_COVER = gql`
-	{
-		educationCover {
-			image {
-				url
-			}
-		}
-	}
-`;
-
-// const GET_ARTICLES_BY_CATEGORY = gql`
-// 	query ArticlesByCategory($slug: String) {
-// 		articles(where: { category: { slug: $slug } }, limit: 5) {
-// 			title
-// 			slug
-// 			image
-// 			category {
-// 				slug
-// 			}
-// 		}
-// 	}
-// `;
-
 export enum CatEnum {
 	News = "news",
 	Culture = "culture-and-tourism",
@@ -96,20 +27,14 @@ const getCategory = async (cat: CatEnum) => {
 
 export const getNewsCover = async (): Promise<{
 	articles: IArticle[] | null;
-	cover: NewsCover | null;
 }> => {
 	try {
-		const { data } = await apollo.query({
-			query: GET_NEWS_COVER,
-		});
 		return {
-			cover: data?.newCover,
 			articles: await getCategory(CatEnum.News),
 		};
 	} catch (error) {
 		console.log(error);
 		return {
-			cover: null,
 			articles: null,
 		};
 	}
@@ -117,21 +42,16 @@ export const getNewsCover = async (): Promise<{
 
 export const getEducationCover = async (): Promise<{
 	articles: IArticle[] | null;
-	cover: EducationCover | null;
 }> => {
 	try {
-		const { data } = await apollo.query({
-			query: GET_EDUCATION_COVER,
-		});
+		const articles = await getCategory(CatEnum.Education);
 
 		return {
-			cover: data?.educationCover,
-			articles: await getCategory(CatEnum.Education),
+			articles,
 		};
 	} catch (error) {
 		console.log(error);
 		return {
-			cover: null,
 			articles: null,
 		};
 	}
@@ -139,42 +59,16 @@ export const getEducationCover = async (): Promise<{
 
 export const getEntertainmentCover = async (): Promise<{
 	articles: IArticle[] | null;
-	cover: EntertainmentCover | null;
 }> => {
 	try {
-		const { data } = await apollo.query({
-			query: GET_ENTERTAINMENT_COVER,
-		});
+		const articles = await getCategory(CatEnum.Entertainment);
 
 		return {
-			cover: data?.entertainmentCover,
-			articles: await getCategory(CatEnum.Entertainment),
+			articles,
 		};
 	} catch (error) {
 		console.log(error);
 		return {
-			cover: null,
-			articles: null,
-		};
-	}
-};
-export const getMagazineCover = async (): Promise<{
-	articles: IArticle[] | null;
-	cover: MagazineCover | null;
-}> => {
-	try {
-		const { data } = await apollo.query({
-			query: GET_MAGAZINE_COVER,
-		});
-
-		return {
-			cover: data?.magazineCover,
-			articles: null,
-		};
-	} catch (error) {
-		console.log(error);
-		return {
-			cover: null,
 			articles: null,
 		};
 	}
@@ -182,20 +76,14 @@ export const getMagazineCover = async (): Promise<{
 
 export const getCultureCover = async (): Promise<{
 	articles: IArticle[] | null;
-	cover: CultureCover | null;
 }> => {
 	try {
-		const { data } = await apollo.query({
-			query: GET_CULTURE_COVER,
-		});
 		return {
-			cover: data?.cultureAndTourism,
 			articles: await getCategory(CatEnum.Culture),
 		};
 	} catch (error) {
 		console.log(error);
 		return {
-			cover: null,
 			articles: null,
 		};
 	}

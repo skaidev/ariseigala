@@ -99,7 +99,7 @@ const AddComment = ({ video }: { video: ITelevision }): JSX.Element => {
 								onClick={props.onClick}
 								// disabled={props.disabled}
 							>
-								<i className="fab fa-google me-3"></i> Login coment
+								<i className="fab fa-google me-3"></i> Login comment
 							</button>
 						)}
 					/>

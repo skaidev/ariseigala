@@ -37,6 +37,12 @@
     },
     "edition": {
       "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "title": {
+      "type": "string"
     }
   }
 }

@@ -32,6 +32,10 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "issue": {
+      "type": "integer",
+      "required": true
     }
   }
 }

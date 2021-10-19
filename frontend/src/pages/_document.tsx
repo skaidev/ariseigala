@@ -2,8 +2,8 @@ import Document, {
 	DocumentContext,
 	Html,
 	Main,
-	NextScript,
 	Head,
+	NextScript,
 } from "next/document";
 
 import React from "react";
@@ -40,12 +40,7 @@ export default class MyDocument extends Document {
 	render(): JSX.Element {
 		return (
 			<Html>
-				<Head>
-					<script
-						async
-						src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-					></script>
-				</Head>
+				<Head />
 				<body>
 					<Main />
 					<NextScript />

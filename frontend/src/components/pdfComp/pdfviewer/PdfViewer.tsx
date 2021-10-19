@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import styled from "styled-components";
@@ -5,13 +7,10 @@ import { Flipbook } from "../pdfFlip/Flipbook";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-/*
- const samplePDF = "https://www.hq.nasa.gov/alsj/a17/A17_FlightPlan.pdf"; 
- */
 export default function PdfViewer({ file }: { file: string }): JSX.Element {
 	const [numPages, setNumPages] = useState(1);
-	const [pageNumber, setPageNumber] = useState(1);
-	const [content_list, setContentList] = useState(false);
+	// const [pageNumber, setPageNumber] = useState(1);
+	// const [content_list, setContentList] = useState(false);
 	const [renderstate, setRenderState] = useState(false);
 	const [rect, setRect] = useState({
 		width: 0,
@@ -21,15 +20,15 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
 	const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
 		setNumPages(numPages);
 	};
-	const numContents = () => {
-		const num_of_content = [];
-		if (numPages) {
-			for (let index = 1; index <= numPages; index++) {
-				num_of_content.push(index);
-			}
-		}
-		return num_of_content;
-	};
+	// const numContents = () => {
+	// 	const num_of_content = [];
+	// 	if (numPages) {
+	// 		for (let index = 1; index <= numPages; index++) {
+	// 			num_of_content.push(index);
+	// 		}
+	// 	}
+	// 	return num_of_content;
+	// };
 	const numOfPages = () => {
 		const num_of_pages = [];
 		if (numPages) {
@@ -40,73 +39,40 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
 		return num_of_pages;
 	};
 
-	const getRect = () => {
-		const elems = document.querySelector(".demoPage");
-		const elem_width = elems?.getBoundingClientRect().width;
-		const elem_height = elems?.getBoundingClientRect().height;
-		setRect({
-			...rect,
-			width: Number(elem_width),
-			height: Number(elem_height),
-		});
-	};
-
 	useEffect(() => {
+		const getRect = () => {
+			const elems = document.querySelector(".demoPage");
+			const elem_width = elems?.getBoundingClientRect().width;
+			const elem_height = elems?.getBoundingClientRect().height;
+			setRect({
+				...rect,
+				width: Number(elem_width),
+				height: Number(elem_height),
+			});
+		};
 		getRect();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
 		<PDFWrapper>
-			{content_list && (
-				<div className="cover-dark animate__animated animate__slideInLeft">
-					<div className="cover-light overflow-auto animate__animated animate__zoomInRight">
-						<div className="container py-4">
-							<h3 className="mb-3 fw-bolder d-flex justify-content-between align-items-center">
-								<span>Contents</span>
-								<button
-									className="btn btn-light"
-									onClick={() => setContentList(false)}
-								>
-									<i className="fas fa-times fa-2x"></i>
-								</button>
-							</h3>
-							<ul className="list-group">
-								{numContents().map((content, i) => (
-									<li
-										className={`list-group-item d-flex align-items-center border-0 c-pointer ${
-											pageNumber == content ? "bg-secondary" : ""
-										}`}
-										key={i}
-										onClick={() => {
-											setPageNumber(content);
-											setContentList(false);
-										}}
-									>
-										<span className="fw-bold">-</span>
-										<p className="m-0 p-0 px-2 flex-fill">
-											<b className="d-block text-center fw-bolder fs-5 mb-2">
-												A in nunc purus urna nulla eu gravida quisque.{" "}
-											</b>
-											<span className="float-end pe-5">
-												Nisl, ac eget ac nibh. Vel dui auctor ultricies quisque
-												a nibh.
-											</span>
-										</p>
-										<span className="fw-bold">{content}</span>
-									</li>
-								))}
-							</ul>
-						</div>
-					</div>
-				</div>
-			)}
-			<div className="container d-flex mb-4 justify-content-between align-items-center ">
-				<button className="btn btn-dark" onClick={() => setContentList(true)}>
-					<i className="fas fa-2x fa-bars"></i>
-				</button>
-			</div>
 			<div className="pdf-section py-3">
+				<div className="container my-4">
+					<nav className="navbar">
+						<Link href="/magazine">
+							<a className=" text-light text-decoration-none ">
+								<i className="fas fa-arrow-left me-2"></i>{" "}
+								<span className="fw-bold">Back</span>
+							</a>
+						</Link>
+						<Link href="/magazine">
+							<a>
+								<img src="/images/logo.png" alt="Logo" />
+							</a>
+						</Link>
+						<div></div>
+					</nav>
+				</div>
 				<div className="pdf-wrapper overflow-auto">
 					<Document
 						file={file}
@@ -124,7 +90,7 @@ export default function PdfViewer({ file }: { file: string }): JSX.Element {
 									<Page
 										pageNumber={e}
 										className="w-100 get-rect"
-										onLoadSuccess={getRect}
+										// onLoadSuccess={getRect}
 										onRenderSuccess={() => setRenderState(true)}
 										scale={1}
 										renderTextLayer={false}
@@ -157,7 +123,7 @@ const PDFWrapper = styled.div`
 			background: white;
 			height: 100%;
 			position: absolute;
-			z-index: 1000000;
+			z-index: 3;
 		}
 	}
 	.pdf-section {
