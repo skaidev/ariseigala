@@ -11,8 +11,8 @@ interface IProps {
 }
 
 const ArticleNewsComp: React.FC<IProps> = ({ articles }): JSX.Element => {
-	if (!articles?.length)
-		return <p className="container">No article for this category</p>;
+	// if (!articles?.length)
+	// 	return <p className="container">No article for this category</p>;
 	return (
 		<Wrapper className="section-1 container ">
 			<div className="line bg-warning mt-3"></div>
@@ -31,13 +31,6 @@ const ArticleNewsComp: React.FC<IProps> = ({ articles }): JSX.Element => {
 						{articles?.slice(0, 4).map((article, i) => (
 							<Card key={i} article={article} />
 						))}
-						{/* {articles.length > 3 && (
-							<div className="text-center my-3">
-								<Link href="/articles/news">
-									<a className="btn btn-dark">Read more</a>
-								</Link>
-							</div>
-						)} */}
 					</div>
 				</div>
 			</div>

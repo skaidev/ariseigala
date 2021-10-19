@@ -22,35 +22,24 @@ import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { IArticle, IMagazine } from "types/interface";
 import {
-	CultureCover,
-	EducationCover,
-	EntertainmentCover,
 	getCultureCover,
 	getEducationCover,
 	getEntertainmentCover,
-	getMagazineCover,
 	getNewsCover,
-	MagazineCover,
 } from "utils/homeUtils";
 
 interface IProps {
 	news: {
 		articles: IArticle[] | null;
 	} | null;
-	magazine: {
-		cover: MagazineCover | null;
-		articles: IArticle[] | null;
-	} | null;
+
 	entertainment: {
-		cover: EntertainmentCover | null;
 		articles: IArticle[] | null;
 	} | null;
 	education: {
-		cover: EducationCover | null;
 		articles: IArticle[] | null;
 	} | null;
 	culture: {
-		cover: CultureCover | null;
 		articles: IArticle[] | null;
 	} | null;
 	magBanner?: IMagazine & { description: string };
@@ -125,7 +114,7 @@ export const getStaticProps = async (): Promise<{
 		const entertainment = await getEntertainmentCover();
 		const education = await getEducationCover();
 		const culture = await getCultureCover();
-		const magazine = await getMagazineCover();
+
 		const { data } = await apollo.query({
 			query: MAGAZINE_BANNER,
 		});
@@ -137,7 +126,7 @@ export const getStaticProps = async (): Promise<{
 				entertainment,
 				education,
 				culture,
-				magazine,
+
 				magBanner,
 			},
 		};
@@ -149,7 +138,6 @@ export const getStaticProps = async (): Promise<{
 				entertainment: null,
 				education: null,
 				culture: null,
-				magazine: null,
 			},
 		};
 	}

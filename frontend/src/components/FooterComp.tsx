@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { CategoryNavComp } from "./articles/ArticleHeaderComp";
+//www.facebook.com/ariseigala/
+//www.instagram.com/arise_igala/
 
 const MagazineFooter = (): JSX.Element => {
 	return (
@@ -8,11 +10,32 @@ const MagazineFooter = (): JSX.Element => {
 			<div className="d-flex justify-content-center">
 				<div>
 					<img src="/images/logo.png" alt="" className="d-block" />
-					<div className="d-flex text-warning mt-3 gap-1 justify-content-between">
-						<i className="fab fa-instagram"></i>
-						<i className="fab fa-youtube ms-1"></i>
-						<i className="fab fa-facebook ms-1"></i>
-						<i className="fab fa-twitter ms-1"></i>
+					<div className="d-flex  mt-3 gap-1 justify-content-between">
+						<a
+							href="https://instagram.com/arise_igala"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<i className="fab fa-instagram "></i>
+						</a>
+						<a
+							href="https://instagram.com/arise_igala"
+							target="_blank"
+							rel="noreferrer"
+							className="link-danger"
+						>
+							<i className="fab fa-youtube ms-1 "></i>
+						</a>
+						<a
+							href="https://facebook.com/ariseigala"
+							target="_blank"
+							rel="noreferrer"
+							// className="link-danger"
+						>
+							<i className="fab fa-facebook ms-1 "></i>
+						</a>
+
+						{/* <i className="fab fa-twitter ms-1"></i> */}
 					</div>
 				</div>
 			</div>

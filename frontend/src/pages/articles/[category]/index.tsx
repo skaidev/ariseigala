@@ -24,7 +24,7 @@ const Article: NextPage<IProps> = ({ articles }: IProps): JSX.Element => {
 	if (!articles?.length)
 		return (
 			<p className="container mt-3">
-				No Article in this category
+				No Article in this category <br />
 				<Link href="/">
 					<a>Go back home</a>
 				</Link>{" "}

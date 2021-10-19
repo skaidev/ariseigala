@@ -22,7 +22,7 @@ const AdvertisementLandScape = (): JSX.Element => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setImage(images[count]);
-			console.log(count, images.length);
+
 			if (images.length - 1 > count) {
 				setCount(count + 1);
 			} else {
@@ -71,7 +71,7 @@ export const AdvertisementPortrait = (): JSX.Element => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setImage(images[count]);
-			console.log(count, images.length);
+
 			if (images.length - 1 > count) {
 				setCount(count + 1);
 			} else {
