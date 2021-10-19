@@ -2,13 +2,12 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-
-import { MagazineCover } from "utils/homeUtils";
+import { IMagazine } from "types/interface";
 
 const MagazinAd = ({
-	cover,
+	mag,
 }: {
-	cover: MagazineCover | null | undefined;
+	mag: (IMagazine & { description: string }) | undefined;
 }): JSX.Element => {
 	return (
 		<Wrapper>
@@ -17,15 +16,15 @@ const MagazinAd = ({
 					<div className="flex-wrapper d-md-flex">
 						<div className="left ">
 							<div className="inner">
-								<img src={cover?.cover?.url} alt="" />
+								<img src={mag?.cover?.url} alt="" />
 							</div>
 						</div>
 						<div className="right">
 							<div className="inner container ">
 								<p className="fs-2 fw-bold mb-0">ARISE IGALA Magazine</p>
-								<p className="fs-2 fw-bold">ISSUE {cover?.issue}</p>
+								<p className="fs-2 fw-bold">ISSUE {mag?.issue}</p>
 
-								<p className="serif mb-3">{cover?.description}</p>
+								<p className="serif mb-3">{mag?.description}</p>
 								<Link href="/magazine">
 									<a className="btn btn-dark">Go to magazine</a>
 								</Link>

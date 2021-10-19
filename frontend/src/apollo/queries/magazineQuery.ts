@@ -25,3 +25,17 @@ export const GET_MAGAZINE = gql`
 		}
 	}
 `;
+
+export const MAGAZINE_BANNER = gql`
+	{
+		magazineBanner {
+			id
+			issue
+			title
+			description
+			cover {
+				url
+			}
+		}
+	}
+`;

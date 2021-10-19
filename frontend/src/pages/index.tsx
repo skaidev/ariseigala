@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+import { apollo } from "apollo";
+import { MAGAZINE_BANNER } from "apollo/queries/magazineQuery";
 import { ArticlesAtom } from "atoms/ArticlesAtom";
 import {
 	default as Advertisement,
@@ -18,7 +20,7 @@ import { NextPage } from "next";
 import { Fragment, useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { IArticle } from "types/interface";
+import { IArticle, IMagazine } from "types/interface";
 import {
 	CultureCover,
 	EducationCover,
@@ -29,7 +31,6 @@ import {
 	getMagazineCover,
 	getNewsCover,
 	MagazineCover,
-	NewsCover,
 } from "utils/homeUtils";
 
 interface IProps {
@@ -52,14 +53,16 @@ interface IProps {
 		cover: CultureCover | null;
 		articles: IArticle[] | null;
 	} | null;
+	magBanner?: IMagazine & { description: string };
 }
 
 const Home: NextPage<IProps> = ({
 	news,
-	magazine,
+
 	entertainment,
 	education,
 	culture,
+	magBanner,
 }): JSX.Element => {
 	const [show, setShow] = useState(Boolean(!Cookies.get("consent")));
 	const setArticles = useSetRecoilState(ArticlesAtom);
@@ -96,7 +99,7 @@ const Home: NextPage<IProps> = ({
 
 					<ArticleNewsComp articles={news?.articles as IArticle[]} />
 					<div className="line bg-warning my-5 container"></div>
-					<MagazinAd cover={magazine?.cover} />
+					<MagazinAd mag={magBanner} />
 					<EntertainmentComp articles={entertainment?.articles as IArticle[]} />
 					<EducationComp articles={education?.articles as IArticle[]} />
 					<CultureComp articles={culture?.articles as IArticle[]} />
@@ -123,6 +126,11 @@ export const getStaticProps = async (): Promise<{
 		const education = await getEducationCover();
 		const culture = await getCultureCover();
 		const magazine = await getMagazineCover();
+		const { data } = await apollo.query({
+			query: MAGAZINE_BANNER,
+		});
+		const magBanner = data?.magazineBanner;
+
 		return {
 			props: {
 				news,
@@ -130,6 +138,7 @@ export const getStaticProps = async (): Promise<{
 				education,
 				culture,
 				magazine,
+				magBanner,
 			},
 		};
 	} catch (error) {
